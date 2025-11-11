@@ -1,0 +1,212 @@
+"""
+Optimized version of Cell 8 for faster processing
+Beberapa strategi optimasi:
+1. Menggunakan 'nearest' interpolation (lebih cepat dari 'linear')
+2. Parallel processing dengan multiprocessing
+3. Batch processing
+4. Mengurangi resolusi grid (opsional)
+"""
+
+optimized_cell8_code = """
+# ============================================
+# OPTIMIZED VERSION - Cell 8: Process All Time Steps
+# ============================================
+
+import time
+from multiprocessing import Pool, cpu_count
+from functools import partial
+
+# ===== OPTION 1: Faster Interpolation Method =====
+# Ubah method dari 'linear' ke 'nearest' untuk 3-5x lebih cepat
+# Trade-off: sedikit kurang akurat, tapi masih acceptable
+INTERP_METHOD = 'nearest'  # 'nearest' (fastest), 'linear' (accurate), 'cubic' (slowest)
+
+# ===== OPTION 2: Reduce Grid Resolution =====
+# Jika masih terlalu lambat, bisa kurangi resolusi
+# TARGET_RESOLUTION = 0.1  # 0.1° ~ 11 km (lebih cepat, kurang detail)
+
+# ===== OPTION 3: Process in Chunks =====
+# Process dalam batch untuk mengurangi memory usage
+CHUNK_SIZE = 100  # Process 100 time steps per batch
+
+# ===== OPTION 4: Parallel Processing =====
+USE_PARALLEL = True  # Set False jika ingin sequential
+N_WORKERS = min(4, cpu_count())  # Jumlah CPU cores untuk parallel processing
+
+print(f"Optimization settings:")
+print(f"  Interpolation method: {INTERP_METHOD}")
+print(f"  Chunk size: {CHUNK_SIZE}")
+print(f"  Parallel processing: {USE_PARALLEL} ({N_WORKERS} workers)")
+
+# ============================================
+# Optimized Resampling Function
+# ============================================
+def resample_to_grid_fast(data_2d, points_orig, lon_target, lat_target, method=INTERP_METHOD):
+    \"\"\"
+    Optimized resampling dengan method yang lebih cepat
+    \"\"\"
+    points_target = np.column_stack((lon_target.ravel(), lat_target.ravel()))
+    values_orig = data_2d.ravel()
+    
+    valid_mask = ~np.isnan(values_orig)
+    if np.sum(valid_mask) == 0:
+        return np.full(lon_target.shape, np.nan)
+    
+    points_valid = points_orig[valid_mask]
+    values_valid = values_orig[valid_mask]
+    
+    values_interp = griddata(
+        points_valid,
+        values_valid,
+        points_target,
+        method=method,  # 'nearest' lebih cepat
+        fill_value=np.nan
+    )
+    
+    return values_interp.reshape(lon_target.shape)
+
+# ============================================
+# Process Single Time Step (for parallel)
+# ============================================
+def process_time_step(t, chl_data, sst_data_k, so_data, 
+                     points_chl, points_sst, points_so,
+                     lon_mesh, lat_mesh):
+    \"\"\"
+    Process satu time step - untuk parallel processing
+    \"\"\"
+    try:
+        # CHL
+        chl_2d = chl_data[t, :, :]
+        chl_resampled = resample_to_grid_fast(chl_2d, points_chl, lon_mesh, lat_mesh)
+        
+        # SST (convert Kelvin to Celcius)
+        sst_2d_k = sst_data_k[t, :, :]
+        sst_2d_c = sst_2d_k - 273.15
+        sst_resampled = resample_to_grid_fast(sst_2d_c, points_sst, lon_mesh, lat_mesh)
+        
+        # Salinity (surface)
+        so_2d = so_data[t, 0, :, :]
+        so_resampled = resample_to_grid_fast(so_2d, points_so, lon_mesh, lat_mesh)
+        
+        return t, chl_resampled, sst_resampled, so_resampled
+    except Exception as e:
+        print(f"Error processing time step {t}: {e}")
+        return t, None, None, None
+
+# ============================================
+# Main Processing (Optimized)
+# ============================================
+SAMPLE_SIZE = None  # Set None untuk process semua, atau angka untuk sample
+
+# Reopen files
+nc_chl = netCDF4.Dataset(CHL_FILE, 'r')
+nc_sst = netCDF4.Dataset(SST_FILE, 'r')
+nc_so = netCDF4.Dataset(SO_FILE, 'r')
+
+chl_data = nc_chl.variables['CHL']
+sst_data_k = nc_sst.variables['analysed_sst']
+so_data = nc_so.variables['so']
+
+# Get number of time steps
+n_times = len(time_chl)
+if SAMPLE_SIZE:
+    n_times = min(SAMPLE_SIZE, n_times)
+
+print(f"\\nProcessing {n_times} time steps with optimizations...")
+start_time = time.time()
+
+# Initialize arrays
+processed_chl = np.full((n_times, len(lat_grid), len(lon_grid)), np.nan)
+processed_sst = np.full((n_times, len(lat_grid), len(lon_grid)), np.nan)
+processed_so = np.full((n_times, len(lat_grid), len(lon_grid)), np.nan)
+
+# Process in chunks untuk mengurangi memory usage
+time_indices = list(range(n_times))
+
+if USE_PARALLEL and N_WORKERS > 1:
+    # ===== PARALLEL PROCESSING =====
+    print(f"Using parallel processing with {N_WORKERS} workers...")
+    
+    # Create partial function dengan fixed arguments
+    process_func = partial(
+        process_time_step,
+        chl_data=chl_data,
+        sst_data_k=sst_data_k,
+        so_data=so_data,
+        points_chl=points_chl,
+        points_sst=points_sst,
+        points_so=points_so,
+        lon_mesh=lon_mesh,
+        lat_mesh=lat_mesh
+    )
+    
+    # Process in chunks
+    for chunk_start in range(0, n_times, CHUNK_SIZE):
+        chunk_end = min(chunk_start + CHUNK_SIZE, n_times)
+        chunk_indices = time_indices[chunk_start:chunk_end]
+        
+        print(f"Processing chunk {chunk_start//CHUNK_SIZE + 1}/{(n_times-1)//CHUNK_SIZE + 1} "
+              f"(time steps {chunk_start+1}-{chunk_end})...")
+        
+        with Pool(processes=N_WORKERS) as pool:
+            results = pool.map(process_func, chunk_indices)
+        
+        # Store results
+        for t, chl_res, sst_res, so_res in results:
+            if chl_res is not None:
+                processed_chl[t, :, :] = chl_res
+                processed_sst[t, :, :] = sst_res
+                processed_so[t, :, :] = so_res
+        
+        print(f"  Chunk completed in {time.time() - start_time:.1f}s")
+    
+else:
+    # ===== SEQUENTIAL PROCESSING (Optimized) =====
+    print("Using sequential processing (optimized)...")
+    
+    for t in range(n_times):
+        if (t + 1) % 50 == 0 or t == 0:
+            elapsed = time.time() - start_time
+            rate = (t + 1) / elapsed if elapsed > 0 else 0
+            remaining = (n_times - t - 1) / rate if rate > 0 else 0
+            print(f"Progress: {t+1}/{n_times} ({100*(t+1)/n_times:.1f}%) | "
+                  f"Elapsed: {elapsed:.1f}s | ETA: {remaining:.1f}s")
+        
+        # CHL
+        chl_2d = chl_data[t, :, :]
+        processed_chl[t, :, :] = resample_to_grid_fast(chl_2d, points_chl, lon_mesh, lat_mesh)
+        
+        # SST (convert Kelvin to Celcius)
+        sst_2d_k = sst_data_k[t, :, :]
+        sst_2d_c = sst_2d_k - 273.15
+        processed_sst[t, :, :] = resample_to_grid_fast(sst_2d_c, points_sst, lon_mesh, lat_mesh)
+        
+        # Salinity (surface)
+        so_2d = so_data[t, 0, :, :]
+        processed_so[t, :, :] = resample_to_grid_fast(so_2d, points_so, lon_mesh, lat_mesh)
+
+total_time = time.time() - start_time
+print(f"\\n{'='*60}")
+print(f"Processing complete!")
+print(f"Total time: {total_time:.1f}s ({total_time/60:.1f} minutes)")
+print(f"Average: {total_time/n_times:.2f}s per time step")
+print(f"Processed data shape: {processed_chl.shape}")
+print(f"{'='*60}")
+
+# Close files
+nc_chl.close()
+nc_sst.close()
+nc_so.close()
+"""
+
+# Save to file
+with open('optimized_cell8.txt', 'w', encoding='utf-8') as f:
+    f.write(optimized_cell8_code)
+
+print("Optimized Cell 8 code saved to optimized_cell8.txt")
+print("\nTips untuk mempercepat:")
+print("1. Gunakan INTERP_METHOD = 'nearest' (3-5x lebih cepat)")
+print("2. Aktifkan USE_PARALLEL = True (2-4x lebih cepat dengan multi-core)")
+print("3. Kurangi TARGET_RESOLUTION ke 0.1° (4x lebih cepat, kurang detail)")
+print("4. Process dalam chunks untuk mengurangi memory usage")
+

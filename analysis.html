@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarineEcoPredict - Prediksi HSI</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0077b6",
+            "secondary": "#00b4d8",
+            "accent": {
+              light: "#caf0f8",
+            },
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+          },
+          fontFamily: {
+            "sans": ["Poppins", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "0.5rem",
+            "lg": "0.75rem",
+            "xl": "1rem"
+          },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-gray-800 dark:text-gray-200" data-page="analysis">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <header class="flex h-16 items-center bg-white dark:bg-gray-900/50 backdrop-blur-sm px-4 sticky top-0 z-20 border-b border-gray-200 dark:border-gray-800 gap-4">
+      <a href="index.html" class="flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+        <span class="text-lg font-bold text-gray-900 dark:text-gray-100">MarineEcoPredict</span>
+      </a>
+      <div class="ml-auto flex items-center gap-2">
+        <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-600 transition hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-900/80 dark:text-gray-300 dark:hover:bg-gray-800">
+          <span class="sr-only">Toggle theme</span>
+          <span data-theme-icon="sun" class="hidden">
+            <i data-lucide="sun" class="size-5"></i>
+          </span>
+          <span data-theme-icon="moon">
+            <i data-lucide="moon" class="size-5"></i>
+          </span>
+        </button>
+        <button class="flex size-10 items-center justify-center rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+          <i data-lucide="menu" class="size-6"></i>
+        </button>
+      </div>
+    </header>
+
+    <main class="flex-1 px-4 py-6">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100 tracking-tight mb-2">Prediksi HSI Masa Depan</h1>
+          <p class="text-gray-600 dark:text-gray-400">Prediksi nilai Habitat Suitability Index (HSI) untuk tahun-tahun mendatang berdasarkan data historis</p>
+        </div>
+
+        <!-- Prediction Controls -->
+        <div class="bg-white dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm mb-6">
+          <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Parameter Prediksi Bulanan</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Tahun:</label>
+              <select id="prediction-year" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="2025">2025</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2 md:col-span-2">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Bulan:</label>
+              <input type="range" id="month-slider" min="1" max="12" value="1" class="flex-1 h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer">
+              <span id="month-display" class="text-sm font-medium text-gray-900 dark:text-gray-100 min-w-[120px]">Januari 2025</span>
+            </div>
+          </div>
+
+          <button id="predict-btn" class="w-full md:w-auto px-6 py-3 bg-primary text-white rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center gap-2">
+            <i data-lucide="play-circle" class="size-5"></i>
+            <span>Muat Prediksi</span>
+          </button>
+        </div>
+
+        <!-- Model Information -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
+            <div class="text-xs text-blue-700 dark:text-blue-300 mb-1">Tipe Model</div>
+            <div class="text-lg font-bold text-blue-900 dark:text-blue-100" id="model-type">ARIMA</div>
+          </div>
+          <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 border border-green-200 dark:border-green-800">
+            <div class="text-xs text-green-700 dark:text-green-300 mb-1">Data Training</div>
+            <div class="text-lg font-bold text-green-900 dark:text-green-100" id="training-data">48 bulan</div>
+          </div>
+          <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4 border border-purple-200 dark:border-purple-800">
+            <div class="text-xs text-purple-700 dark:text-purple-300 mb-1">Total Grid Points</div>
+            <div class="text-lg font-bold text-purple-900 dark:text-purple-100" id="grid-points">N/A</div>
+          </div>
+        </div>
+
+        <!-- Prediction Results -->
+        <div class="bg-white dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 p-6 shadow-sm mb-6">
+          <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">Hasil Prediksi</h2>
+          
+          <!-- Prediction Map -->
+          <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-sm mb-4">
+            <div id="prediction-map" class="w-full h-full"></div>
+            
+            <!-- Legend -->
+            <div class="absolute top-4 right-4 bg-white/90 dark:bg-background-dark/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 z-[1000] min-w-[180px] max-w-[220px]">
+              <h3 class="text-xs font-bold text-gray-800 dark:text-gray-200 mb-2">HSI Prediction Legend</h3>
+              <div class="flex flex-col space-y-2">
+                <div class="relative h-32 w-full rounded border border-gray-300 dark:border-gray-600" id="prediction-legend-gradient"></div>
+                <div class="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <span>0.0</span>
+                  <span>1.0</span>
+                </div>
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">(Index 0-1)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prediction Statistics -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4">
+              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Rata-rata HSI</div>
+              <div class="text-2xl font-bold text-primary dark:text-secondary" id="avg-hsi">-</div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4">
+              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">HSI Maksimum</div>
+              <div class="text-2xl font-bold text-green-600 dark:text-green-400" id="max-hsi">-</div>
+            </div>
+            <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4">
+              <div class="text-sm text-gray-600 dark:text-gray-400 mb-1">Area Optimal</div>
+              <div class="text-2xl font-bold text-blue-600 dark:text-blue-400" id="optimal-area">-</div>
+            </div>
+          </div>
+
+          <!-- Detailed Statistics -->
+          <div id="detailed-stats" class="mb-6">
+            <!-- Will be populated by JavaScript -->
+          </div>
+
+          <!-- Trend Chart -->
+          <div class="bg-gray-50 dark:bg-gray-800/50 rounded-lg p-4">
+            <div id="trend-chart">
+              <!-- Will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl border border-blue-200 dark:border-blue-800 p-6">
+          <div class="flex items-start gap-3">
+            <i data-lucide="info" class="size-5 text-blue-600 dark:text-blue-400 mt-0.5"></i>
+            <div>
+              <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Tentang Prediksi HSI</h3>
+              <p class="text-sm text-blue-800 dark:text-blue-200 leading-relaxed">
+                Prediksi HSI menggunakan model time series untuk memperkirakan nilai Habitat Suitability Index di masa depan. 
+                Model ini dilatih menggunakan data historis dari tahun 2021-2024 dan dapat memprediksi nilai HSI untuk tahun-tahun mendatang.
+                Prediksi ini membantu dalam perencanaan dan pengelolaan ekosistem laut di Selat Sunda.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="mt-auto bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 px-4 py-3">
+      <div class="max-w-7xl mx-auto">
+        <nav class="flex justify-around items-center">
+          <a href="index.html" class="flex flex-col items-center gap-1.5 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-secondary">
+            <i data-lucide="layout-grid" class="size-6"></i>
+            <span class="text-xs font-medium">Dashboard</span>
+          </a>
+          <a href="analysis.html" class="flex flex-col items-center gap-1.5 text-primary">
+            <i data-lucide="trending-up" class="size-6"></i>
+            <span class="text-xs font-medium">Prediksi</span>
+          </a>
+          <a href="about.html" class="flex flex-col items-center gap-1.5 text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-secondary">
+            <i data-lucide="file-text" class="size-6"></i>
+            <span class="text-xs font-medium">Tentang</span>
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggleBtn = document.querySelector('[data-theme-toggle]');
+      const sunWrapper = toggleBtn?.querySelector('[data-theme-icon="sun"]');
+      const moonWrapper = toggleBtn?.querySelector('[data-theme-icon="moon"]');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      const storedTheme = localStorage.getItem('theme');
+
+      const initialDark = storedTheme ? storedTheme === 'dark' : prefersDark?.matches;
+      applyTheme(initialDark);
+
+      toggleBtn?.addEventListener('click', () => {
+        const nextIsDark = !root.classList.contains('dark');
+        applyTheme(nextIsDark);
+        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
+      });
+
+      prefersDark?.addEventListener?.('change', (event) => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(event.matches);
+        }
+      });
+
+      function applyTheme(isDark) {
+        root.classList.toggle('dark', isDark);
+        toggleBtn?.setAttribute('aria-pressed', String(isDark));
+        toggleBtn?.setAttribute('aria-label', isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap');
+        if (isDark) {
+          sunWrapper?.classList.remove('hidden');
+          moonWrapper?.classList.add('hidden');
+        } else {
+          sunWrapper?.classList.add('hidden');
+          moonWrapper?.classList.remove('hidden');
+        }
+      }
+    })();
+
+    lucide.createIcons();
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/monthlyPrediction.js"></script>
+  <script src="js/analysis-prediction.js"></script>
+</body>
+</html>

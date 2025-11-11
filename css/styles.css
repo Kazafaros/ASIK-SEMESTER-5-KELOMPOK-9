@@ -1,0 +1,159 @@
+/* Global shared styles for MarineEcoPredict */
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: max(884px, 100dvh);
+}
+
+.lucide {
+  stroke-width: 2px;
+}
+
+/* Some pages use thinner variants for certain icons */
+.lucide-thin {
+  stroke-width: 1.5;
+}
+
+.nav-link-active {
+  color: #0077b6 !important;
+  font-weight: 600;
+}
+
+.dark .nav-link-active {
+  color: #00b4d8 !important;
+}
+
+input[data-invalid="true"] {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 1px rgba(239, 68, 68, 0.35);
+}
+
+.dark input[data-invalid="true"] {
+  border-color: #fca5a5 !important;
+  box-shadow: 0 0 0 1px rgba(252, 165, 165, 0.35);
+}
+
+.form-feedback {
+  display: none;
+}
+
+.form-feedback.is-visible {
+  display: block;
+}
+
+/* Leaflet Map Styles */
+.leaflet-container {
+  background: #f6f8f8;
+  font-family: 'Poppins', sans-serif;
+}
+
+.dark .leaflet-container {
+  background: #101d22;
+}
+
+.leaflet-control {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .leaflet-control {
+  background: rgba(16, 29, 34, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f0f8ff;
+}
+
+.leaflet-popup-content-wrapper {
+  background: white;
+  color: #111618;
+}
+
+.dark .leaflet-popup-content-wrapper {
+  background: #101d22;
+  color: #f0f8ff;
+}
+
+.leaflet-control-zoom a {
+  background-color: white;
+  color: #111618;
+}
+
+.dark .leaflet-control-zoom a {
+  background-color: #101d22;
+  color: #f0f8ff;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #f6f8f8;
+}
+
+.dark .leaflet-control-zoom a:hover {
+  background-color: #1a2a32;
+}
+
+/* Custom Popup Styles */
+.custom-popup .leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 119, 182, 0.15);
+  border: 2px solid #0077b6;
+  padding: 0;
+}
+
+.dark .custom-popup .leaflet-popup-content-wrapper {
+  background: #1a2a32;
+  border-color: #00b4d8;
+}
+
+.custom-popup .leaflet-popup-tip {
+  background: white;
+  border-color: #0077b6;
+}
+
+.dark .custom-popup .leaflet-popup-tip {
+  background: #1a2a32;
+  border-color: #00b4d8;
+}
+
+.custom-popup .leaflet-popup-content {
+  margin: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.popup-content {
+  font-size: 13px;
+  color: #333;
+}
+
+.dark .popup-content {
+  color: #f0f8ff;
+}
+
+.popup-content strong {
+  font-weight: 700;
+  color: #0077b6;
+}
+
+.dark .popup-content strong {
+  color: #00b4d8;
+}
+
+/* OLAP Dashboard Styles */
+#olap-dashboard-content {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dark #olap-dashboard-content {
+  background-color: rgba(16, 29, 34, 0.5);
+}
+
+
+

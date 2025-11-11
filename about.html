@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About MarineEcoPredict</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0077b6',
+            secondary: '#00b4d8',
+            'light-accent': '#caf0f8',
+            'background-light': '#FFFFFF',
+            'background-dark': '#101d22',
+            'text-light-primary': '#023047',
+            'text-light-secondary': '#6c757d',
+            'text-dark-primary': '#f8f9fa',
+            'text-dark-secondary': '#adb5bd',
+            'border-light': '#e9ecef',
+            'border-dark': '#343a40',
+          },
+          fontFamily: {
+            sans: ["Poppins", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-light-primary dark:text-text-dark-primary" data-page="about">
+  <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark">
+      <div class="container mx-auto px-4">
+        <div class="flex h-16 items-center gap-4">
+          <a href="index.html" class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 12c-3 0-5 2.5-5 5s2.5 5 5 5c2.5 0 5-2.5 5-5s-2.5-5-5-5z"></path><path d="M12 2c3.5 0 6 3 6 6s-2.5 6-6 6c-3.5 0-6-3-6-6s2.5-6 6-6z"></path></svg>
+            <span class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">MarineEcoPredict</span>
+          </a>
+          <nav class="hidden md:flex items-center gap-6">
+            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary transition-colors hover:text-primary dark:hover:text-secondary">Home</a>
+            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium text-primary dark:text-secondary">About</a>
+            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary transition-colors hover:text-primary dark:hover:text-secondary">Predictions</a>
+            <a href="#" class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary transition-colors hover:text-primary dark:hover:text-secondary">Contact</a>
+          </nav>
+          <div class="ml-auto flex items-center gap-2">
+            <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-border-light bg-white text-text-light-secondary transition hover:bg-light-accent/60 dark:border-border-dark dark:bg-background-dark/80 dark:text-text-dark-secondary">
+              <span class="sr-only">Toggle theme</span>
+              <span data-theme-icon="sun" class="hidden">
+                <i data-lucide="sun" class="h-5 w-5"></i>
+              </span>
+              <span data-theme-icon="moon">
+                <i data-lucide="moon" class="h-5 w-5"></i>
+              </span>
+            </button>
+            <button class="md:hidden rounded-md p-2">
+              <i data-lucide="menu" class="h-6 w-6 text-text-light-primary dark:text-text-dark-primary"></i>
+              <span class="sr-only">Toggle menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <div class="@container">
+        <div class="@[480px]:px-4 @[480px]:py-3 p-4">
+          <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden @[480px]:rounded-lg min-h-[218px] rounded-lg" data-alt="A vibrant underwater coral reef teeming with colorful fish and marine life." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDPhdWfZI0_dR5-6Ryt_pvhswHNtz7bFqQFm7GL9CjcOy3_Gw2ndg0L2pTLZIsGjuQkybA0ioPb7-VAaCJEcKpKELdaA3-AYs1L3dMjhtNErYXBXX3ulDcyHCLUW9IVlwQfLspdKFZl0Nl_nCwvNAL_2sZebuw_SpYjjbS7xcySIeoo8bb8dN6D0JyEmBOC5gNf4kL1ke7AZHg2ZqCEKXYzu-5ry78iGYuX3GWKVJVyj4UkMeAGSJPEt3iVwOdB7KP5DScOMwm0fLcX");'></div>
+        </div>
+      </div>
+
+      <div class="flex flex-col p-4 gap-4">
+        <div class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-background-dark shadow-sm">
+          <details class="group" open>
+            <summary class="flex cursor-pointer list-none items-center justify-between p-4">
+              <h3 class="text-base font-semibold leading-normal text-text-light-primary dark:text-text-dark-primary">Our Purpose</h3>
+              <div class="text-text-light-primary dark:text-text-dark-primary transition-transform group-open:rotate-180">
+                <i data-lucide="chevron-down" class="h-5 w-5"></i>
+              </div>
+            </summary>
+            <div class="px-4 pb-4">
+              <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-relaxed">
+                Our mission is to predict the carrying capacity of marine ecosystems to support conservation efforts and ensure the long-term health of our oceans. We aim to provide actionable insights for sustainable marine resource management.
+              </p>
+            </div>
+          </details>
+        </div>
+
+        <div class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-background-dark shadow-sm">
+          <details class="group">
+            <summary class="flex cursor-pointer list-none items-center justify-between p-4">
+              <h3 class="text-base font-semibold leading-normal text-text-light-primary dark:text-text-dark-primary">Our Methodology</h3>
+              <div class="text-text-light-primary dark:text-text-dark-primary transition-transform group-open:rotate-180">
+                <i data-lucide="chevron-down" class="h-5 w-5"></i>
+              </div>
+            </summary>
+            <div class="px-4 pb-4">
+              <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-relaxed">
+                We utilize a robust scientific approach, integrating the Habitat Suitability Index (HSI) with advanced machine learning models. By analyzing satellite data, we can accurately assess environmental factors and predict ecosystem health and capacity.
+              </p>
+            </div>
+          </details>
+        </div>
+      </div>
+
+      <h2 class="text-text-light-primary dark:text-text-dark-primary text-2xl font-bold leading-tight px-4 pb-3 pt-5">Meet the Team</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4">
+        <div class="flex flex-col gap-3 text-center items-center">
+          <div class="w-full max-w-[120px]">
+            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Headshot of Dr. Anya Sharma" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSSC98aWxyTnBAhY7pFUD8h4mhrYq4XOy2Lh6ZW_P8fIpXXxcVcmMLYQgYv8azIR7uNLULcsu8PG3WQ4H8ncKdadVMKCtssjPzD5P7bVCY77mK6KOsGlL2kN99UsjrZsTWI9-4NEEpSyKfgQmKm3YcSfOHcOWLXDHpv1XxElZ8aVFMJmraUPM1WENyiwFAvFaMfjDqDqCpyGwz2gD_cnqFEC898prQ-hkE3xk1SeA1dKXQQ1EQfr7J0-50yU7ooeZ6SCSUbB8z9vW9");'></div>
+          </div>
+          <div>
+            <p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Dr. Anya Sharma</p>
+            <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Lead Scientist</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3 text-center items-center">
+          <div class="w-full max-w-[120px]">
+            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Headshot of Ben Carter" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCk-zYZlao8gNv2907UVy3l7nOGr1ifBTixaS0HsuXhOnU3PkaNOqXnuaxN973IiW4GZsDdV24XGxxbg6AjQLs7vmxHW-7u4819ClnjnSFiRSEjwlIrJ4GQfG5PkGPytRGHkGpFQosKy5B__t8G7j_LIYg9vKiCNUKfGNbxqhjkz6Gj8Hcd7zANUc0UKP5wazST3er-6iNs1xCUO32P0GMIuRh8V-zzzm6_MfMvqk4GvTf0PBtNjZqJiPmv4CaA6Z-fuP4_EwhQgNmc");'></div>
+          </div>
+          <div>
+            <p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Ben Carter</p>
+            <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Data Engineer</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3 text-center items-center">
+          <div class="w-full max-w-[120px]">
+            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Headshot of Chloe Davis" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDURKwSE2VNbU6pBKxOARbEoef99IovP7UGrFsL9IF-CaAQvOGQOUcjhbANnt752rASNJFI3sGwQk-GrtYwacfSpzvMNE4VOd37aPDc9GE87WVOBu9Z2bmjhsGK6GQGXNDDClVd4c6yTsXDU1-H2t5lG3aonUp9pfJPsSDRA-3UULq_za3sYVN41-eVcJRXwmCwJJigPlAYaZgewbwAmfuwqsjrTZwSKUb-EvO4G0UTL6vTzBaRCc1dLIjTbOuo5pHjMgMGCNgdGLwk");'></div>
+          </div>
+          <div>
+            <p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Chloe Davis</p>
+            <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">UX/UI Designer</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3 text-center items-center">
+          <div class="w-full max-w-[120px]">
+            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Headshot of Leo Martinez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAy1IcxFtVKhZI8owViQSVDFHS5__Zf03BE62Zls4Sr5JXiHujNRjRdsIEXbZlXBPSABjY-ib4jRspHdJJnPAi14lui4EHBCIQMGeHiZwEEQgxZt4KHl7BOuSN1SdMXhFV98fiovbfCsJowHi5cMJgRWNBWVZfTSprlxLAZC4biWQ_Vj35eW8My5jz-Qs0BlaDPzz-tolCTi0LLXNeyhFmseFlU799ZfijzNwaV1SZugTlbCb3HDbXcNJrCXaC1cQSJq2-372fbc4qq");'></div>
+          </div>
+          <div>
+            <p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Leo Martinez</p>
+            <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Marine Biologist</p>
+          </div>
+        </div>
+      </div>
+
+      <h2 class="text-text-light-primary dark:text-text-dark-primary text-2xl font-bold leading-tight px-4 pb-3 pt-5">Data Sources</h2>
+      <div class="grid grid-cols-3 gap-4 p-4 items-center">
+        <a href="#" class="flex justify-center p-2 rounded-lg transition-colors hover:bg-light-accent/50">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQWbJprQqS7t_ZphKLgxCYYIGF3sJU6rDDPrM2XQhcoe9mEQzTlcEK4zQvM1JsAlp9px2aeatA1YQN3P0ILDumltgCIlbu8GHtDXFJvL3Ndbodsdy87MBJMMd6w1eR4e6P2q_F3Gmcd9fL4oHKmuZplslVy02v9nTrDvT41WpVzvuckcODs3UYEX9n1z2Nj7ufkUl_UxZYf9rP79pLfM_tsokzLSY4oBcrnysR0qiFdzGtpB0AXS8VmvXeYp80nGXqR2jOsr1polTG" class="h-10 object-contain dark:brightness-0 dark:invert" data-alt="Copernicus logo" />
+        </a>
+        <a href="#" class="flex justify-center p-2 rounded-lg transition-colors hover:bg-light-accent/50">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXcmSdzVKZBeuzLD1DcEqT36lTjp7XZt878SuoIXtg4X0RdweZ7eke2I2D1IFENI0C_b6RPgbbWxTr3t_hgDY4m6qU3EZTgykmC0XXxIN4HRJW5S5BZxrlwJCsuBorpW1ER5Rs2dGXK0v-0rpXbioGzcsIcPjzW_7ya-VnvuByiQtR3qbsRB-i_EvhzyaYMuTrv5yjuFlcKIf_TiA20s4nVj0aPE3DMnX0X-e0Tw9_ja1CN3NyycE841v5xbHPCHxZn26wdaCzRYFa" class="h-12 object-contain dark:brightness-0 dark:invert" data-alt="BMKG logo" />
+        </a>
+        <a href="#" class="flex justify-center p-2 rounded-lg transition-colors hover:bg-light-accent/50">
+          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfGl2BNoTy7y7gIA1bOfX0pIoFQfY3r50ZfzXEXg4tvOquSp_SPLCMG6pkG_-JuEbg52lAucLOPs-kG52wsXDhiP7ndeJX1_TmuYJSFTYtBkSDo9mLF6aa6vf3DiF7Gd1NUjmulPQ8rfZVtMQtBXU0CPoKWWUYyshjR2ZT8e2YJxD3HekxTSdWsSY9ibqU0I_V8xGaCP7Z_5YxsHyoc_wubPoBIpqFRReWmF8xzGvCk9ohg3ceRTe7vhPZAT68MInx_M9mCMhXAe_q" class="h-12 object-contain" data-alt="NASA OceanColor logo" />
+        </a>
+      </div>
+    </main>
+
+    <footer class="bg-light-accent dark:bg-gray-900 mt-10">
+      <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-6 md:space-y-0">
+          <div class="flex flex-col items-center md:items-start">
+            <div class="flex items-center gap-2 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 12c-3 0-5 2.5-5 5s2.5 5 5 5c2.5 0 5-2.5 5-5s-2.5-5-5-5z"></path><path d="M12 2c3.5 0 6 3 6 6s-2.5 6-6 6c-3.5 0-6-3-6-6s2.5-6 6-6z"></path></svg>
+              <span class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">MarineEcoPredict</span>
+            </div>
+            <p class="text-sm text-text-light-secondary dark:text-text-dark-secondary">Predicting the future of our oceans.</p>
+          </div>
+
+          <div class="flex justify-center space-x-4">
+            <a href="#" class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-secondary">
+              <i data-lucide="twitter" class="h-5 w-5"></i>
+              <span class="sr-only">Twitter</span>
+            </a>
+            <a href="#" class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-secondary">
+              <i data-lucide="facebook" class="h-5 w-5"></i>
+              <span class="sr-only">Facebook</span>
+            </a>
+            <a href="#" class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-secondary">
+              <i data-lucide="instagram" class="h-5 w-5"></i>
+              <span class="sr-only">Instagram</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-primary/20 dark:border-secondary/20 text-center text-xs text-text-light-secondary dark:text-text-dark-secondary">
+          <p>© 2024 MarineEcoPredict. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggleBtn = document.querySelector('[data-theme-toggle]');
+      const sunWrapper = toggleBtn?.querySelector('[data-theme-icon="sun"]');
+      const moonWrapper = toggleBtn?.querySelector('[data-theme-icon="moon"]');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      const storedTheme = localStorage.getItem('theme');
+      const initialDark = storedTheme ? storedTheme === 'dark' : prefersDark?.matches;
+      applyTheme(initialDark);
+
+      toggleBtn?.addEventListener('click', () => {
+        const nextIsDark = !root.classList.contains('dark');
+        applyTheme(nextIsDark);
+        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
+      });
+
+      prefersDark?.addEventListener?.('change', (event) => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(event.matches);
+        }
+      });
+
+      function applyTheme(isDark) {
+        root.classList.toggle('dark', isDark);
+        toggleBtn?.setAttribute('aria-pressed', String(isDark));
+        toggleBtn?.setAttribute('aria-label', isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap');
+        if (isDark) {
+          sunWrapper?.classList.remove('hidden');
+          moonWrapper?.classList.add('hidden');
+        } else {
+          sunWrapper?.classList.add('hidden');
+          moonWrapper?.classList.remove('hidden');
+        }
+      }
+    })();
+
+    (function () {
+      const currentPage = document.body.dataset.page;
+      if (!currentPage) return;
+      document.querySelectorAll('[data-nav-link]').forEach((link) => {
+        if (link.dataset.nav === currentPage) {
+          link.classList.add('nav-link-active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('nav-link-active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    })();
+
+    lucide.createIcons();
+  </script>
+</body>
+</html>
+
+

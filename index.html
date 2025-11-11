@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarineEcoPredict - Predicting the Future of Our Oceans</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0077b6",
+            "secondary": "#00b4d8",
+            "light-accent": "#caf0f8",
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+            "text-light": "#111618",
+            "text-dark": "#f0f8ff",
+            "text-muted-light": "#617f89",
+            "text-muted-dark": "#94a3b8"
+          },
+          fontFamily: {
+            "sans": ["Poppins", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-light dark:text-text-dark" data-page="index">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex h-16 items-center gap-4 border-b border-black/10 dark:border-white/10">
+          <a href="index.html" class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-lg font-bold text-text-light dark:text-text-dark">MarineEcoPredict</span>
+          </a>
+          <nav class="hidden lg:flex lg:items-center lg:gap-6">
+            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium text-text-muted-light transition-colors hover:text-primary dark:text-text-muted-dark dark:hover:text-secondary">Dashboard</a>
+            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium text-text-muted-light transition-colors hover:text-primary dark:text-text-muted-dark dark:hover:text-secondary">Prediksi</a>
+            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium text-text-muted-light transition-colors hover:text-primary dark:text-text-muted-dark dark:hover:text-secondary">Tentang</a>
+            <a href="#" class="text-sm font-medium text-text-muted-light transition-colors hover:text-primary dark:text-text-muted-dark dark:hover:text-secondary">Kontak</a>
+          </nav>
+          <div class="ml-auto flex items-center gap-2">
+            <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text-muted-light transition hover:bg-white dark:border-white/10 dark:bg-background-dark/80 dark:text-text-muted-dark">
+              <span class="sr-only">Toggle theme</span>
+              <span data-theme-icon="sun" class="hidden">
+                <i data-lucide="sun" class="size-5"></i>
+              </span>
+              <span data-theme-icon="moon">
+                <i data-lucide="moon" class="size-5"></i>
+              </span>
+            </button>
+            <button class="flex items-center justify-center rounded-md p-2 lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-menu h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+              <span class="sr-only">Open menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow">
+      <div class="@container">
+        <div class="@[480px]:p-4">
+          <div class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4 text-center" style='background-image: linear-gradient(rgba(16, 29, 34, 0.4) 0%, rgba(16, 29, 34, 0.7) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCvUXhhipGWQ0dKvxbyuNCwSs9pa7eq1jp6ntCRtgVl0gxQh8lsafPJAvF3D--9er6Q4BWKeP3vwXF-HC5nIPUs-QvonnxsVasrOR_qiGobKN_rY8ECQ48DJ_Tnx4pd-hZ3W65W8ckqyZ_8Ba3z9Cf-mP5jMxTZeyjaXLmc8b93SNDrdHoTlYX9ORTUgIFmHj9uit4mCG65PVLVq_ddNTdY2Ku2A7ZO7edXumg22bPnNGVuSge-6ZR58Aq1pYrwwqhSyQF9W_pOolgt");'>
+            <div class="flex flex-col gap-2">
+              <h1 class="text-white text-4xl font-bold leading-tight tracking-tight @[480px]:text-5xl @[480px]:leading-tight">
+                Predicting the Future of Our Oceans
+              </h1>
+              <h2 class="text-white/90 text-base font-normal leading-normal @[480px]:text-lg max-w-lg mx-auto">
+                Forecasting marine ecosystem health and carrying capacity with advanced predictive modeling and real-time data analysis.
+              </h2>
+            </div>
+            <a href="analysis.html" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-semibold leading-normal @[480px]:text-base hover:bg-opacity-90 transition-colors">
+              <span class="truncate">Mulai Prediksi</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4 pt-8">
+        <div class="flex flex-col gap-4">
+          <h2 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-tight">Analisis Data Historis: Selat Sunda</h2>
+          
+          <!-- Map Controls -->
+          <div class="mb-4 flex flex-wrap gap-3 items-center justify-center bg-white dark:bg-background-dark p-4 rounded-lg border border-black/10 dark:border-white/10">
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Layer:</label>
+              <select id="layer-select" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="hsi">HSI</option>
+                <option value="sst">SST</option>
+                <option value="chlor_a">Chlorophyll-a</option>
+                <option value="salinity">Salinity</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Colormap:</label>
+              <select id="colormap-select" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="viridis">Viridis</option>
+                <option value="plasma">Plasma</option>
+                <option value="inferno">Inferno</option>
+                <option value="magma">Magma</option>
+                <option value="turbo">Turbo</option>
+                <option value="jet">Jet</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Year:</label>
+              <select id="year-select" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-2">
+              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Month:</label>
+              <select id="month-select" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- Map Container -->
+          <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-800 border border-black/10 dark:border-white/10">
+            <div id="sunda-strait-map" class="w-full h-full"></div>
+            
+            <!-- Map Interaction Info -->
+            <div class="absolute bottom-4 left-4 bg-white/90 dark:bg-background-dark/90 backdrop-blur-sm p-2 px-3 rounded-lg shadow-md border border-gray-200 dark:border-gray-800 z-[999] text-xs text-gray-600 dark:text-gray-400">
+              💡 Klik pada peta untuk melihat detail data di dashboard
+            </div>
+            
+            <!-- Legend -->
+            <div class="absolute top-4 right-4 bg-white/90 dark:bg-background-dark/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 z-[1000] min-w-[180px] max-w-[220px]">
+              <h3 class="text-xs font-bold text-gray-800 dark:text-gray-200 mb-2" id="legend-title">HSI Legend</h3>
+              <div id="legend-content">
+                <!-- Gradient legend will be generated here -->
+                <div class="flex flex-col space-y-2">
+                  <div class="relative h-32 w-full rounded border border-gray-300 dark:border-gray-600" id="legend-gradient"></div>
+                  <div class="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                    <span id="legend-min">0.0</span>
+                    <span id="legend-max">1.0</span>
+                  </div>
+                  <div class="text-xs text-gray-500 dark:text-gray-400 mt-1" id="legend-unit">(Index 0-1)</div>
+                  <!-- Interpretation guide -->
+                  <div class="border-t border-gray-200 dark:border-gray-700 pt-2 mt-2" id="legend-interpretation">
+                    <div class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Interpretasi:</div>
+                    <div class="space-y-1" id="legend-categories"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OLAP Dashboard Below Map -->
+      <div class="container mx-auto px-4 pt-6">
+        <div class="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-6">
+          <h3 class="text-primary text-xl font-bold leading-tight mb-4">📊 Dashboard Analisis OLAP</h3>
+          
+          <!-- OLAP Controls -->
+          <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Dimensi Waktu</label>
+              <select id="olap-time-dimension" class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="monthly">Bulanan</option>
+                <option value="yearly">Tahunan</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Pilih Layer</label>
+              <select id="olap-layer-select" class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="hsi">HSI (Habitat Suitability)</option>
+                <option value="sst">SST (Sea Surface Temp)</option>
+                <option value="chlor_a">Chlorophyll-a</option>
+                <option value="salinity">Salinity</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Agregasi</label>
+              <select id="olap-aggregation" class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="mean">Rata-rata</option>
+                <option value="min">Minimum</option>
+                <option value="max">Maksimum</option>
+                <option value="std">Std Dev</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Jenis Visualisasi</label>
+              <select id="olap-visualization" class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <option value="overview">Overview</option>
+                <option value="timeseries">Time Series</option>
+                <option value="comparison">Perbandingan Layer</option>
+                <option value="statistics">Statistik</option>
+              </select>
+            </div>
+          </div>
+          
+          <!-- OLAP Content Area -->
+          <div id="olap-dashboard-content" class="min-h-[300px] bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+            <div class="flex items-center justify-center h-full text-gray-500 dark:text-gray-400">
+              <p>Pilih lokasi pada peta untuk memulai analisis OLAP...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container mx-auto p-4">
+        <div class="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-6">
+          <h3 class="text-primary text-xl font-bold leading-tight mb-2">Habitat Suitability &amp; Daya Dukung</h3>
+          <p class="text-text-muted-light dark:text-text-muted-dark text-sm leading-relaxed mb-4">
+            Habitat Suitability Index (HSI) adalah alat penting untuk mengevaluasi kualitas habitat laut. Dengan memprediksi daya dukung laut, kita dapat memastikan keberlanjutan sumber daya, mengelola aktivitas perikanan secara efektif, dan melindungi keanekaragaman hayati dari dampak perubahan iklim dan aktivitas manusia.
+          </p>
+          <button class="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-secondary/10 text-secondary text-sm font-semibold leading-normal hover:bg-secondary/20 transition-colors">
+            <span class="truncate">Pelajari Lebih Lanjut</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="container mx-auto px-4 pb-3 pt-8">
+        <h2 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-tight">Core Features</h2>
+      </div>
+
+      <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="flex flex-1 flex-col gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-line-chart h-8 w-8 text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+            <div class="flex flex-col gap-1">
+              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Real-time Data Analysis</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">Process live marine data from various sources to provide the most current ecological insights.</p>
+            </div>
+          </div>
+          <div class="flex flex-1 flex-col gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-bot h-8 w-8 text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
+            <div class="flex flex-col gap-1">
+              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Predictive Modeling</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">Utilize advanced algorithms and machine learning to forecast future ecosystem changes.</p>
+            </div>
+          </div>
+          <div class="flex flex-1 flex-col gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-shield-check h-8 w-8 text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
+            <div class="flex flex-col gap-1">
+              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Ecosystem Health Index</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">A simplified scoring system for easy interpretation and monitoring of marine environmental health.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="w-full mt-16 bg-white dark:bg-gray-900 border-t border-black/10 dark:border-white/10">
+      <div class="container mx-auto max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="md:flex md:justify-between">
+          <div class="mb-6 md:mb-0">
+            <a href="#" class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-8 w-8" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">MarineEcoPredict</span>
+            </a>
+          </div>
+          <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+            <div>
+              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Sumber Daya</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li class="mb-4"><a href="#" class="hover:underline">Dokumentasi</a></li>
+                <li><a href="#" class="hover:underline">API</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li class="mb-4"><a href="#" class="hover:underline">Github</a></li>
+                <li><a href="#" class="hover:underline">Discord</a></li>
+              </ul>
+            </div>
+            <div>
+              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li class="mb-4"><a href="#" class="hover:underline">Privacy Policy</a></li>
+                <li><a href="#" class="hover:underline">Terms &amp; Conditions</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div class="sm:flex sm:items-center sm:justify-between">
+          <span class="text-sm text-text-muted-light sm:text-center dark:text-text-muted-dark">© 2024 <a href="#" class="hover:underline">MarineEcoPredict™</a>. All Rights Reserved.</span>
+          <div class="flex mt-4 sm:justify-center sm:mt-0">
+            <a href="#" class="text-text-muted-light hover:text-gray-900 dark:hover:text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-facebook w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              <span class="sr-only">Facebook page</span>
+            </a>
+            <a href="#" class="text-text-muted-light hover:text-gray-900 dark:hover:text-white ms-5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-twitter w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 1.4 2.8 3.2 3 5.2-9.7 1.2-12.4-6.2-16-11.2C2.7 2.7-1 6.1 1 10.6c-1.3-.4-2.5-1-3.5-2 0 4.1 2.5 6.4 5.5 7.5-.6.5-1.5.8-2.5.8C3 16.1 2 15.6 1 15s2 3.6 5 4.3c-2.3 1.8-5.3 2.7-8.5 2.7-1.1 0-2.1-.1-3.1-.4 3.8 2.5 8.3 4.1 13.5 4.1 11.5 0 17.5-9.5 17.5-17.5 0-.3 0-.5-.1-.8.9-.7 1.8-1.5 2.5-2.5Z"></path></svg>
+              <span class="sr-only">Twitter page</span>
+            </a>
+            <a href="#" class="text-text-muted-light hover:text-gray-900 dark:hover:text-white ms-5">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-github w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+              <span class="sr-only">GitHub account</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggleBtn = document.querySelector('[data-theme-toggle]');
+      const sunWrapper = toggleBtn?.querySelector('[data-theme-icon="sun"]');
+      const moonWrapper = toggleBtn?.querySelector('[data-theme-icon="moon"]');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      const storedTheme = localStorage.getItem('theme');
+
+      const initialDark = storedTheme ? storedTheme === 'dark' : prefersDark?.matches;
+      applyTheme(initialDark);
+
+      toggleBtn?.addEventListener('click', () => {
+        const nextIsDark = !root.classList.contains('dark');
+        applyTheme(nextIsDark);
+        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
+      });
+
+      prefersDark?.addEventListener?.('change', (event) => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(event.matches);
+        }
+      });
+
+      function applyTheme(isDark) {
+        root.classList.toggle('dark', isDark);
+        toggleBtn?.setAttribute('aria-pressed', String(isDark));
+        toggleBtn?.setAttribute('aria-label', isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap');
+        if (isDark) {
+          sunWrapper?.classList.remove('hidden');
+          moonWrapper?.classList.add('hidden');
+        } else {
+          sunWrapper?.classList.add('hidden');
+          moonWrapper?.classList.remove('hidden');
+        }
+      }
+    })();
+
+    (function () {
+      const currentPage = document.body.dataset.page;
+      if (!currentPage) return;
+      document.querySelectorAll('[data-nav-link]').forEach((link) => {
+        if (link.dataset.nav === currentPage) {
+          link.classList.add('nav-link-active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('nav-link-active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    })();
+
+    lucide.createIcons();
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/olap-dashboard.js"></script>
+  <script src="js/index-interactive.js"></script>
+  <script>
+    // Initialize map and controls for historical analysis
+    document.addEventListener('DOMContentLoaded', async () => {
+      const mapContainer = document.getElementById('sunda-strait-map');
+      if (!mapContainer) return;
+
+      const apiClient = new HSIApiClient();
+      const mapManager = new HSIMapManager('sunda-strait-map', {
+        defaultLayer: 'hsi',
+        defaultColormap: 'viridis'
+      });
+
+      window.sundaStraitMap = mapManager;
+
+      // Load available data and set default year-month
+      try {
+        const available = await apiClient.getAvailableData();
+        if (available.available && available.available.length > 0) {
+          // Set default to latest month
+          const latest = available.available[available.available.length - 1];
+          const yearSelect = document.getElementById('year-select');
+          const monthSelect = document.getElementById('month-select');
+          
+          if (yearSelect) yearSelect.value = latest.year;
+          if (monthSelect) monthSelect.value = latest.month;
+          
+          // Load initial map
+          const timeStr = `${latest.year}${String(latest.month).padStart(2, '0')}`;
+          await mapManager.loadLayer('hsi', timeStr);
+          // Update legend after data loaded
+          updateLegendGradient('hsi');
+        }
+      } catch (error) {
+        console.error('Error loading available data:', error);
+      }
+
+      // Layer selector
+      const layerSelect = document.getElementById('layer-select');
+      if (layerSelect) {
+        layerSelect.addEventListener('change', (e) => {
+          const year = parseInt(document.getElementById('year-select').value);
+          const month = parseInt(document.getElementById('month-select').value);
+          const timeStr = `${year}${String(month).padStart(2, '0')}`;
+          mapManager.loadLayer(e.target.value, timeStr);
+          updateLegendTitle(e.target.value);
+        });
+      }
+
+      // Colormap selector
+      const colormapSelect = document.getElementById('colormap-select');
+      if (colormapSelect) {
+        colormapSelect.addEventListener('change', (e) => {
+          mapManager.setColormap(e.target.value);
+          updateLegendGradient(mapManager.currentLayer);
+        });
+      }
+      
+      // Initialize legend gradient
+      setTimeout(() => {
+        if (mapManager) {
+          updateLegendGradient('hsi');
+        }
+      }, 100);
+
+      // Year-Month selectors
+      const yearSelect = document.getElementById('year-select');
+      const monthSelect = document.getElementById('month-select');
+      
+      function updateMapFromSelectors() {
+        if (yearSelect && monthSelect) {
+          const year = parseInt(yearSelect.value);
+          const month = parseInt(monthSelect.value);
+          const timeStr = `${year}${String(month).padStart(2, '0')}`;
+          mapManager.loadLayer(mapManager.currentLayer, timeStr).catch(error => {
+            console.error('Error loading map:', error);
+          });
+        }
+      }
+      
+      if (yearSelect) {
+        yearSelect.addEventListener('change', updateMapFromSelectors);
+      }
+      if (monthSelect) {
+        monthSelect.addEventListener('change', updateMapFromSelectors);
+      }
+
+      function updateLegendTitle(layer) {
+        const legendTitle = document.getElementById('legend-title');
+        if (legendTitle) {
+          const layerNames = {
+            'hsi': 'HSI Legend',
+            'sst': 'SST Legend (°C)',
+            'chlor_a': 'Chlorophyll-a Legend (mg/m³)',
+            'salinity': 'Salinity Legend (PSU)'
+          };
+          legendTitle.textContent = layerNames[layer] || 'Legend';
+        }
+        updateLegendGradient(layer);
+      }
+
+      // Helper function to get colormap color
+      function getColormapColor(value, colormapName) {
+        const colormap = COLORMAPS[colormapName] || COLORMAPS.viridis;
+        const colors = colormap.colors;
+        
+        if (value <= 0) return colors[0];
+        if (value >= 1) return colors[colors.length - 1];
+        
+        const index = value * (colors.length - 1);
+        const lower = Math.floor(index);
+        const upper = Math.ceil(index);
+        const fraction = index - lower;
+        
+        function interpolateColor(color1, color2, fraction) {
+          const hex1 = color1.replace('#', '');
+          const hex2 = color2.replace('#', '');
+          
+          const r1 = parseInt(hex1.substring(0, 2), 16);
+          const g1 = parseInt(hex1.substring(2, 4), 16);
+          const b1 = parseInt(hex1.substring(4, 6), 16);
+          
+          const r2 = parseInt(hex2.substring(0, 2), 16);
+          const g2 = parseInt(hex2.substring(2, 4), 16);
+          const b2 = parseInt(hex2.substring(4, 6), 16);
+          
+          const r = Math.round(r1 + (r2 - r1) * fraction);
+          const g = Math.round(g1 + (g2 - g1) * fraction);
+          const b = Math.round(b1 + (b2 - b1) * fraction);
+          
+          return `#${[r, g, b].map(x => x.toString(16).padStart(2, '0')).join('')}`;
+        }
+        
+        return interpolateColor(colors[lower], colors[upper], fraction);
+      }
+
+      function updateLegendGradient(layer) {
+        const gradientEl = document.getElementById('legend-gradient');
+        const minEl = document.getElementById('legend-min');
+        const maxEl = document.getElementById('legend-max');
+        const unitEl = document.getElementById('legend-unit');
+        const categoriesEl = document.getElementById('legend-categories');
+        
+        if (!gradientEl) return;
+        
+        const range = VALUE_RANGES[layer] || VALUE_RANGES.hsi;
+        const colormapName = mapManager ? mapManager.currentColormap : 'viridis';
+        
+        const steps = 100;
+        let gradientStops = '';
+        for (let i = 0; i <= steps; i++) {
+          const value = i / steps;
+          const color = getColormapColor(value, colormapName);
+          gradientStops += `${color} ${(i / steps) * 100}%, `;
+        }
+        
+        gradientEl.style.background = `linear-gradient(to top, ${gradientStops.slice(0, -2)})`;
+        
+        let minValue = '', maxValue = '', unit = '';
+        const categories = [];
+        
+        if (layer === 'hsi') {
+          minValue = '0.0';
+          maxValue = '1.0';
+          unit = '(Index 0-1)';
+          categories.push(
+            { range: '0.75 - 1.0', label: 'Tinggi', color: getColormapColor(0.875, colormapName), meaning: 'Sangat sesuai untuk habitat' },
+            { range: '0.45 - 0.75', label: 'Sedang', color: getColormapColor(0.6, colormapName), meaning: 'Cukup sesuai untuk habitat' },
+            { range: '0.0 - 0.45', label: 'Rendah', color: getColormapColor(0.225, colormapName), meaning: 'Kurang sesuai untuk habitat' }
+          );
+        } else if (layer === 'sst') {
+          minValue = '25°C';
+          maxValue = '31°C';
+          unit = '(Suhu Permukaan Laut)';
+          categories.push(
+            { range: '27-29°C', label: 'Optimal', color: getColormapColor(0.5, colormapName), meaning: 'Suhu optimal untuk habitat' },
+            { range: '25-27°C', label: 'Dingin', color: getColormapColor(0.25, colormapName), meaning: 'Suhu relatif dingin' },
+            { range: '29-31°C', label: 'Hangat', color: getColormapColor(0.75, colormapName), meaning: 'Suhu relatif hangat' }
+          );
+        } else if (layer === 'chlor_a') {
+          minValue = '0.1';
+          maxValue = '3.0';
+          unit = '(mg/m³)';
+          categories.push(
+            { range: '0.5-2.0', label: 'Normal', color: getColormapColor(0.5, colormapName), meaning: 'Konsentrasi klorofil normal' },
+            { range: '0.1-0.5', label: 'Rendah', color: getColormapColor(0.25, colormapName), meaning: 'Konsentrasi klorofil rendah' },
+            { range: '2.0-3.0', label: 'Tinggi', color: getColormapColor(0.75, colormapName), meaning: 'Konsentrasi klorofil tinggi' }
+          );
+        } else if (layer === 'salinity') {
+          minValue = '31';
+          maxValue = '36';
+          unit = '(PSU - Practical Salinity Unit)';
+          categories.push(
+            { range: '33-34', label: 'Optimal', color: getColormapColor(0.5, colormapName), meaning: 'Salinitas optimal untuk habitat' },
+            { range: '31-33', label: 'Rendah', color: getColormapColor(0.25, colormapName), meaning: 'Salinitas relatif rendah' },
+            { range: '34-36', label: 'Tinggi', color: getColormapColor(0.75, colormapName), meaning: 'Salinitas relatif tinggi' }
+          );
+        } else {
+          minValue = range.min.toFixed(1);
+          maxValue = range.max.toFixed(1);
+          unit = '';
+        }
+        
+        if (minEl) minEl.textContent = minValue;
+        if (maxEl) maxEl.textContent = maxValue;
+        if (unitEl) unitEl.textContent = unit;
+        
+        if (categoriesEl && categories.length > 0) {
+          categoriesEl.innerHTML = categories.map(cat => `
+            <div class="flex items-start gap-2 py-1">
+              <div class="w-4 h-4 rounded-sm mt-0.5 flex-shrink-0" style="background-color: ${cat.color}"></div>
+              <div class="flex-1">
+                <div class="text-xs font-medium text-gray-700 dark:text-gray-300">
+                  ${cat.label} (${cat.range})
+                </div>
+                <div class="text-xs text-gray-500 dark:text-gray-400 text-[10px] leading-tight">
+                  ${cat.meaning}
+                </div>
+              </div>
+            </div>
+          `).join('');
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+
+
