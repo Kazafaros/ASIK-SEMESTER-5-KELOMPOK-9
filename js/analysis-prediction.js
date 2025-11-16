@@ -8,6 +8,9 @@ let mapManager = null;
 let currentYear = 2025;
 let currentMonth = 1;
 let allMonths = [];
+let trendChart = null;
+let allYearsData = {}; // Store data for all years: { year: { month: stats } }
+let yearlyTrendChart = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Initialize clients
@@ -30,15 +33,37 @@ document.addEventListener('DOMContentLoaded', async () => {
             return;
         }
 
-        // Load available months
-        const available = await predictionClient.getAvailableMonths();
-        allMonths = available.months || [];
-        currentYear = available.year || 2025;
-
-        // Populate year selector
-        const yearSelect = document.getElementById('prediction-year');
-        if (yearSelect) {
-            yearSelect.value = currentYear;
+        // Load available months and years
+        const availableResponse = await predictionClient.getAvailableMonths();
+        const available = availableResponse.data || availableResponse;
+        
+        // Handle both old format (single year) and new format (multiple years)
+        if (available.available_years) {
+            // New format with multiple years
+            const availableYears = available.available_years || [];
+            currentYear = availableYears[availableYears.length - 1] || 2025; // Default to latest year
+            
+            // Populate year selector with all available years
+            const yearSelect = document.getElementById('prediction-year');
+            if (yearSelect) {
+                yearSelect.innerHTML = ''; // Clear existing options
+                for (const year of availableYears) {
+                    const option = document.createElement('option');
+                    option.value = year;
+                    option.textContent = year;
+                    yearSelect.appendChild(option);
+                }
+                yearSelect.value = currentYear;
+            }
+        } else {
+            // Old format with single year
+            allMonths = available.months || [];
+            currentYear = available.year || 2025;
+            
+            const yearSelect = document.getElementById('prediction-year');
+            if (yearSelect) {
+                yearSelect.value = currentYear;
+            }
         }
 
         // Populate month slider
@@ -55,8 +80,19 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Load initial prediction
         await loadPrediction(currentYear, 1);
 
-        // Load yearly statistics
-        await loadYearlyStats(currentYear);
+        // Load yearly statistics for all available years
+        const availableYearsEl = document.getElementById('prediction-year');
+        if (availableYearsEl) {
+            const years = Array.from(availableYearsEl.options).map(opt => parseInt(opt.value));
+            for (const year of years) {
+                await loadAllYearsData(year);
+            }
+        }
+
+        // Display combined trend chart with all years (if needed)
+        displayCombinedTrendChart();
+        // Also render a compact yearly-average chart
+        displayYearlyAverageChart();
 
     } catch (error) {
         console.error('Error initializing prediction UI:', error);
@@ -73,6 +109,34 @@ document.addEventListener('DOMContentLoaded', async () => {
                 await loadPrediction(year, month);
             } catch (error) {
                 showError('Gagal memuat prediksi: ' + error.message);
+            }
+        });
+    }
+
+    // Year selector change handler
+    const yearSelect = document.getElementById('prediction-year');
+    if (yearSelect) {
+        yearSelect.addEventListener('change', async (e) => {
+            try {
+                const year = parseInt(e.target.value);
+                currentYear = year;
+                currentMonth = 1;
+                
+                // Reset month slider to 1
+                const monthSlider = document.getElementById('month-slider');
+                if (monthSlider) {
+                    monthSlider.value = 1;
+                }
+                
+                // Load prediction for first month of selected year
+                await loadPrediction(year, 1);
+                
+                // Load yearly statistics for the selected year
+                await loadYearlyStats(year);
+                
+                console.log(`Switched to year ${year}`);
+            } catch (error) {
+                showError('Gagal memuat data untuk tahun ini: ' + error.message);
             }
         });
     }
@@ -159,6 +223,14 @@ async function loadPrediction(year, month) {
         // Update legend
         updateLegendGradient();
 
+        // Update trend chart highlight for the selected month/year
+        try {
+            displayCombinedTrendChart();
+        } catch (err) {
+            // Non-fatal: chart update failed
+            console.warn('Failed to refresh trend chart:', err);
+        }
+
     } catch (error) {
         console.error('Error loading prediction:', error);
         showError('Gagal memuat prediksi untuk bulan ini');
@@ -240,63 +312,367 @@ function displayStatistics(stats) {
 }
 
 /**
- * Load yearly statistics
+ * Load and store yearly statistics for a specific year
  */
-async function loadYearlyStats(year) {
+async function loadAllYearsData(year) {
     try {
-        const yearlyStats = await predictionClient.getYearlyStats(year);
+        const yearlyStatsResponse = await predictionClient.getYearlyStats(year);
+        const yearlyStats = yearlyStatsResponse.data || yearlyStatsResponse;
         const monthlyStats = yearlyStats.monthly_stats || {};
 
-        // Create trend chart data
-        const months = [];
-        const means = [];
-        const maxs = [];
-        const mins = [];
+        allYearsData[year] = {};
 
         for (let m = 1; m <= 12; m++) {
             const stats = monthlyStats[m];
             if (stats && stats.statistics) {
-                months.push(m);
-                means.push(stats.statistics.mean);
-                maxs.push(stats.statistics.max);
-                mins.push(stats.statistics.min);
+                allYearsData[year][m] = {
+                    mean: stats.statistics.mean,
+                    max: stats.statistics.max,
+                    min: stats.statistics.min,
+                    count: stats.statistics.count,
+                    median: stats.statistics.median || stats.statistics.mean,
+                    std: stats.statistics.std || 0
+                };
             }
         }
 
-        // Display trend chart
-        displayTrendChart(months, means, maxs, mins);
-
+        console.log(`Loaded yearly data for ${year}`);
     } catch (error) {
-        console.error('Error loading yearly stats:', error);
+        console.error(`Error loading yearly stats for ${year}:`, error);
     }
 }
 
 /**
- * Display trend chart
+ * Display combined trend chart for all years (2025-2028)
  */
-function displayTrendChart(months, means, maxs, mins) {
-    const chartDiv = document.getElementById('trend-chart');
+function displayCombinedTrendChart() {
+    const chartDiv = document.getElementById("trend-chart");
     if (!chartDiv) return;
 
-    // Simple ASCII chart or use Chart.js if available
-    let html = '<div class="text-sm font-mono">';
-    html += '<div class="mb-2">Trend HSI Bulanan 2025</div>';
-    
-    for (let i = 0; i < months.length; i++) {
-        const month = months[i];
-        const mean = means[i];
-        const barLength = Math.round(mean * 50);
-        const bar = '█'.repeat(barLength);
-        
-        html += `<div class="flex items-center gap-2">
-            <span class="w-8">${String(month).padStart(2, '0')}</span>
-            <span class="flex-1">${bar}</span>
-            <span class="w-12 text-right">${mean.toFixed(3)}</span>
-        </div>`;
+    // Find or create canvas container
+    let chartContainer = chartDiv.querySelector('.chart-container');
+    if (!chartContainer) {
+        chartContainer = document.createElement('div');
+        chartContainer.className = 'chart-container';
+        chartDiv.appendChild(chartContainer);
     }
-    
+
+    // Ensure a canvas exists inside chart-container
+    let canvas = document.getElementById("trend-canvas");
+    if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.id = 'trend-canvas';
+        chartContainer.appendChild(canvas);
+    }
+
+    // Attach toggle handler for the values panel (only once)
+    const toggleBtn = document.getElementById("trend-toggle");
+    if (toggleBtn && !toggleBtn.dataset.bound) {
+        toggleBtn.addEventListener('click', () => {
+            const vals = document.getElementById("trend-values");
+            if (!vals) return;
+            vals.classList.toggle('hidden');
+            toggleBtn.textContent = vals.classList.contains('hidden') ? 'Tampilkan' : 'Sembunyikan';
+        });
+        toggleBtn.dataset.bound = '1';
+    }
+
+    // Build timeline data for all years
+    const monthNames = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const labels = [];
+    const means = [];
+    const maxs = [];
+    const mins = [];
+    const yearMonthPairs = []; // Store year/month for reference
+
+    const years = Object.keys(allYearsData).map(Number).sort((a, b) => a - b);
+
+    for (const year of years) {
+        for (let m = 1; m <= 12; m++) {
+            const data = allYearsData[year]?.[m];
+            if (data) {
+                labels.push(`${monthNames[m]}'${String(year).slice(2)}`); // "Jan'25"
+                means.push(data.mean);
+                maxs.push(data.max);
+                mins.push(data.min);
+                yearMonthPairs.push({ year, month: m });
+            }
+        }
+    }
+
+    // Prepare dataset arrays
+    const meanData = means.map(v => (v === undefined || v === null) ? null : Number(v));
+    const maxData = maxs.map(v => (v === undefined || v === null) ? null : Number(v));
+    const minData = mins.map(v => (v === undefined || v === null) ? null : Number(v));
+
+    // Build point radius array to highlight the currentMonth of currentYear
+        // micro point radii to reduce overall chart height (small radii)
+        const pointRadii = meanData.map((_, idx) => {
+        const pair = yearMonthPairs[idx];
+        return (pair.year === currentYear && pair.month === currentMonth) ? 4 : 1.5;
+    });
+
+    // Build point colors: highlight current selection
+    const pointColors = meanData.map((_, idx) => {
+        const pair = yearMonthPairs[idx];
+        return (pair.year === currentYear && pair.month === currentMonth) 
+            ? 'rgba(255, 193, 7, 1)' // Yellow highlight
+            : 'rgba(0, 119, 182, 1)'; // Normal blue
+    });
+
+    // If chart exists, update its data
+    if (trendChart) {
+        trendChart.data.labels = labels;
+        trendChart.data.datasets[0].data = maxData;
+        trendChart.data.datasets[1].data = minData;
+        trendChart.data.datasets[2].data = meanData;
+        trendChart.data.datasets[2].pointRadius = pointRadii;
+        trendChart.data.datasets[2].pointBackgroundColor = pointColors;
+        trendChart.update();
+        updateTrendValues(yearMonthPairs);
+        return;
+    }
+
+    // Create new Chart.js chart
+    const ctx = canvas.getContext("2d");
+    trendChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Max HSI',
+                    data: maxData,
+                    borderColor: 'rgba(0,123,255,0.0)',
+                    backgroundColor: 'rgba(0,0,0,0)',
+                    pointRadius: 0,
+                    tension: 0.3,
+                    fill: false,
+                },
+                {
+                    label: 'Min HSI',
+                    data: minData,
+                    borderColor: 'rgba(0,0,0,0)',
+                    backgroundColor: 'rgba(0,123,255,0.15)',
+                    fill: '-1', // fill to previous dataset (max)
+                    pointRadius: 0,
+                    tension: 0.3,
+                },
+                {
+                    label: 'Mean HSI',
+                    data: meanData,
+                    borderColor: 'rgba(0,119,182,1)',
+                    backgroundColor: 'rgba(0,119,182,0.08)',
+                    pointBackgroundColor: pointColors,
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: pointRadii,
+                    showLine: true,
+                    tension: 0.3,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
+                plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.8)',
+                    padding: 3,
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: 'rgba(255,255,255,0.12)',
+                    borderWidth: 1,
+                    titleFont: { size: 9 },
+                    bodyFont: { size: 8 },
+                    callbacks: {
+                        title: function(context) {
+                            if (context.length === 0) return '';
+                            const idx = context[0].dataIndex;
+                            const pair = yearMonthPairs[idx];
+                            const monthNames = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                                               'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                            return `${monthNames[pair.month]} ${pair.year}`;
+                        },
+                        label: function(context) {
+                            const v = context.raw;
+                            if (v === null) return 'N/A';
+                            const idx = context.dataIndex;
+                            const pair = yearMonthPairs[idx];
+                            const data = allYearsData[pair.year]?.[pair.month];
+                            
+                            if (context.datasetIndex === 2) { // Mean line
+                                return [
+                                    `Mean: ${Number(v).toFixed(4)}`,
+                                    `Max: ${data?.max?.toFixed(4) || 'N/A'}`,
+                                    `Min: ${data?.min?.toFixed(4) || 'N/A'}`,
+                                ];
+                            }
+                            return '';
+                        }
+                    }
+                }
+            },
+            layout: { padding: { top: 0, bottom: 0, left: 0, right: 0 } },
+            scales: {
+                    x: {
+                    grid: { 
+                        display: true,
+                        drawBorder: true,
+                        color: 'rgba(0,0,0,0.02)',
+                        drawTicks: false
+                    },
+                    ticks: {
+                        font: { size: 8 },
+                        maxRotation: 45,
+                        minRotation: 45,
+                        autoSkip: true,
+                        padding: 2
+                    }
+                },
+                y: {
+                    min: 0,
+                    max: 1,
+                    grid: {
+                        color: 'rgba(0,0,0,0.03)'
+                    },
+                    ticks: {
+                        stepSize: 0.2,
+                        font: { size: 7 },
+                        callback: function(v) {
+                            return v.toFixed(1);
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    updateTrendValues(yearMonthPairs);
+}
+
+/**
+ * Display a compact chart that shows average HSI per available year
+ */
+function displayYearlyAverageChart() {
+    const container = document.getElementById('yearly-trend-chart');
+    if (!container) return;
+
+    const canvas = document.getElementById('yearly-trend-canvas');
+    if (!canvas) return;
+
+    const years = Object.keys(allYearsData).map(Number).sort((a, b) => a - b);
+    if (years.length === 0) return;
+
+    const labels = [];
+    const averages = [];
+
+    for (const y of years) {
+        const months = allYearsData[y] || {};
+        const vals = Object.keys(months).map(m => months[m]?.mean).filter(v => v !== undefined && v !== null);
+        if (vals.length === 0) continue;
+        const sum = vals.reduce((s, v) => s + Number(v), 0);
+        const avg = sum / vals.length;
+        labels.push(String(y));
+        averages.push(Number(avg.toFixed(4)));
+    }
+
+    if (labels.length === 0) return;
+
+    // If existing chart, update
+    if (yearlyTrendChart) {
+        yearlyTrendChart.data.labels = labels;
+        yearlyTrendChart.data.datasets[0].data = averages;
+        yearlyTrendChart.update();
+        return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    yearlyTrendChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Rata-rata HSI',
+                data: averages,
+                backgroundColor: 'rgba(3,169,244,0.85)',
+                borderColor: 'rgba(3,169,244,1)',
+                borderWidth: 1,
+                barThickness: 18,
+                maxBarThickness: 24,
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { ticks: { font: { size: 11 } }, grid: { display: false } },
+                y: { min: 0, max: 1, ticks: { stepSize: 0.2, font: { size: 10 }, callback: v => v.toFixed(1) }, grid: { color: 'rgba(0,0,0,0.03)' } }
+            }
+        }
+    });
+}
+
+/**
+ * Display detailed values table below the chart
+ */
+function updateTrendValues(yearMonthPairs) {
+    const valuesDiv = document.getElementById("trend-values");
+    if (!valuesDiv) return;
+
+    // Build a micro HTML table for current year (compact)
+    const monthNames = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    let html = '<div class="font-semibold mb-1 text-gray-800 dark:text-gray-200 text-xs">Nilai Bulan ' + currentYear + ':</div>';
+    html += '<div class="grid grid-cols-6 gap-1">';
+
+    for (let m = 1; m <= 12; m++) {
+        const data = allYearsData[currentYear]?.[m];
+        if (data) {
+            const isHighlighted = m === currentMonth;
+            const bgClass = isHighlighted ? 'bg-yellow-100 dark:bg-yellow-900/40 border-yellow-400' : 'bg-gray-50 dark:bg-gray-800/50';
+            html += `
+                <div class="p-0.5 rounded border text-center ${bgClass} cursor-pointer hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors" 
+                     onclick="setMonth(${m})" title="${monthNames[m]} - Mean: ${data.mean.toFixed(3)}, Max: ${data.max.toFixed(3)}, Min: ${data.min.toFixed(3)}">
+                    <div class="text-xs font-bold text-gray-700 dark:text-gray-300">${monthNames[m]}</div>
+                    <div class="text-xs font-bold text-primary">${data.mean.toFixed(3)}</div>
+                    <div class="text-xs text-gray-500 dark:text-gray-400">
+                        <span class="text-green-600 dark:text-green-400">${data.max.toFixed(2)}</span>/<span class="text-red-600 dark:text-red-400">${data.min.toFixed(2)}</span>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
     html += '</div>';
-    chartDiv.innerHTML = html;
+    valuesDiv.innerHTML = html;
+}
+
+/**
+ * Helper to set current month
+ */
+function setMonth(month) {
+    currentMonth = month;
+    const monthSlider = document.getElementById('month-slider');
+    if (monthSlider) {
+        monthSlider.value = month;
+        // Trigger change event
+        monthSlider.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+}
+
+/**
+ * Load yearly statistics (kept for backward compatibility)
+ */
+async function loadYearlyStats(year) {
+    // This is now handled by loadAllYearsData during initialization
+    // But kept for compatibility if needed elsewhere
+    return;
 }
 
 /**

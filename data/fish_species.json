@@ -1,0 +1,499 @@
+{
+  "fishSpecies": [
+    {
+      "id": "TG001",
+      "scientificName": "Euthynnus affinis",
+      "commonName": "Tongkol Komo",
+      "indonesianName": "Tongkol",
+      "family": "Scombridae",
+      "category": "pelagic",
+      "hsiPreference": {
+        "min": 0.75,
+        "optimal": 0.90,
+        "distribution": "Highly migratory pelagic fish"
+      },
+      "temperatureRange": {
+        "min": 24,
+        "optimal": 28,
+        "max": 32,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 30,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 50,
+        "max": 250,
+        "unit": "m",
+        "zone": "epipelagic"
+      },
+      "dietaryHabits": "Carnivorous - small fish, crustaceans",
+      "reproductionType": "Spawning in open water",
+      "economicValue": "High commercial importance",
+      "source": "FAO FishBase, Ministry of Marine Affairs Indonesia"
+    },
+    {
+      "id": "CK001",
+      "scientificName": "Rastrelliger kanagurta",
+      "commonName": "Indian Mackerel",
+      "indonesianName": "Cakalang",
+      "family": "Scombridae",
+      "category": "pelagic",
+      "hsiPreference": {
+        "min": 0.70,
+        "optimal": 0.85,
+        "distribution": "Coastal and offshore pelagic"
+      },
+      "temperatureRange": {
+        "min": 24,
+        "optimal": 28,
+        "max": 31,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 30,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 40,
+        "max": 100,
+        "unit": "m",
+        "zone": "coastal pelagic"
+      },
+      "dietaryHabits": "Planktivorous - copepods, small fish larvae",
+      "reproductionType": "Multiple spawnings per year",
+      "economicValue": "High commercial importance",
+      "source": "FAO FishBase, BRKP"
+    },
+    {
+      "id": "TB001",
+      "scientificName": "Sardinella lemuru",
+      "commonName": "Bali Sardinella",
+      "indonesianName": "Tembang",
+      "family": "Clupeidae",
+      "category": "pelagic",
+      "hsiPreference": {
+        "min": 0.65,
+        "optimal": 0.82,
+        "distribution": "Pelagic schooling fish"
+      },
+      "temperatureRange": {
+        "min": 20,
+        "optimal": 25,
+        "max": 29,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 30,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 30,
+        "max": 80,
+        "unit": "m",
+        "zone": "epipelagic"
+      },
+      "dietaryHabits": "Planktivorous - zooplankton, small copepods",
+      "reproductionType": "Multiple annual spawnings",
+      "economicValue": "High commercial importance",
+      "source": "FAO FishBase, Research Institute for Marine Fisheries"
+    },
+    {
+      "id": "LY001",
+      "scientificName": "Decapterus macrosoma",
+      "commonName": "Large-headed Scad",
+      "indonesianName": "Layang",
+      "family": "Carangidae",
+      "category": "pelagic",
+      "hsiPreference": {
+        "min": 0.68,
+        "optimal": 0.83,
+        "distribution": "Pelagic schooling fish"
+      },
+      "temperatureRange": {
+        "min": 22,
+        "optimal": 27,
+        "max": 31,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 30,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 60,
+        "max": 150,
+        "unit": "m",
+        "zone": "mesopelagic"
+      },
+      "dietaryHabits": "Omnivorous - fish larvae, copepods, small fish",
+      "reproductionType": "Multiple spawnings",
+      "economicValue": "High commercial importance",
+      "source": "FAO FishBase, BRKP"
+    },
+    {
+      "id": "KB001",
+      "scientificName": "Rastrelliger brachysoma",
+      "commonName": "Short Mackerel",
+      "indonesianName": "Kembung",
+      "family": "Scombridae",
+      "category": "pelagic",
+      "hsiPreference": {
+        "min": 0.72,
+        "optimal": 0.87,
+        "distribution": "Coastal pelagic"
+      },
+      "temperatureRange": {
+        "min": 24,
+        "optimal": 28,
+        "max": 32,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 30,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 45,
+        "max": 100,
+        "unit": "m",
+        "zone": "coastal"
+      },
+      "dietaryHabits": "Planktivorous - copepods, fish larvae",
+      "reproductionType": "Year-round spawning",
+      "economicValue": "Very high commercial importance",
+      "source": "FAO FishBase, DKP Indonesia"
+    },
+    {
+      "id": "TG002",
+      "scientificName": "Scomberomorus commerson",
+      "commonName": "Narrow-barred Spanish Mackerel",
+      "indonesianName": "Tenggiri",
+      "family": "Scombridae",
+      "category": "demersal",
+      "hsiPreference": {
+        "min": 0.50,
+        "optimal": 0.70,
+        "distribution": "Coastal demersal-pelagic"
+      },
+      "temperatureRange": {
+        "min": 22,
+        "optimal": 26,
+        "max": 29,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 28,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 80,
+        "max": 150,
+        "unit": "m",
+        "zone": "coastal demersal"
+      },
+      "dietaryHabits": "Carnivorous - small fish, shrimp",
+      "reproductionType": "Batch spawning",
+      "economicValue": "High commercial value",
+      "source": "FAO FishBase, Ministry of Marine Affairs"
+    },
+    {
+      "id": "PR001",
+      "scientificName": "Dasyatis kuhlii",
+      "commonName": "Bluespotted Ray",
+      "indonesianName": "Pari",
+      "family": "Dasyatidae",
+      "category": "demersal",
+      "hsiPreference": {
+        "min": 0.45,
+        "optimal": 0.65,
+        "distribution": "Benthic-demersal"
+      },
+      "temperatureRange": {
+        "min": 20,
+        "optimal": 25,
+        "max": 28,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 25,
+        "optimal": 32,
+        "max": 35,
+        "unit": "ppt",
+        "type": "euryhaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 40,
+        "max": 100,
+        "unit": "m",
+        "zone": "sublittoral"
+      },
+      "dietaryHabits": "Benthivorous - mollusks, crustaceans, worms",
+      "reproductionType": "Viviparous",
+      "economicValue": "Moderate commercial importance",
+      "source": "FAO FishBase, BRKP"
+    },
+    {
+      "id": "KP001",
+      "scientificName": "Epinephelus coioides",
+      "commonName": "Orange-spotted Grouper",
+      "indonesianName": "Kerapu Tikus",
+      "family": "Serranidae",
+      "category": "demersal",
+      "hsiPreference": {
+        "min": 0.50,
+        "optimal": 0.68,
+        "distribution": "Reef-associated demersal"
+      },
+      "temperatureRange": {
+        "min": 24,
+        "optimal": 28,
+        "max": 30,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 30,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 10,
+        "typical": 50,
+        "max": 200,
+        "unit": "m",
+        "zone": "reef"
+      },
+      "dietaryHabits": "Carnivorous - fish, crustaceans",
+      "reproductionType": "Hermaphroditic spawning aggregations",
+      "economicValue": "High commercial and aquaculture value",
+      "source": "FAO FishBase, Ministry of Marine Affairs"
+    },
+    {
+      "id": "BB001",
+      "scientificName": "Parastromateus niger",
+      "commonName": "Black Pomfret",
+      "indonesianName": "Bawal Hitam",
+      "family": "Carangidae",
+      "category": "demersal",
+      "hsiPreference": {
+        "min": 0.55,
+        "optimal": 0.71,
+        "distribution": "Pelagic-demersal"
+      },
+      "temperatureRange": {
+        "min": 24,
+        "optimal": 28,
+        "max": 31,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 30,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 60,
+        "max": 80,
+        "unit": "m",
+        "zone": "coastal"
+      },
+      "dietaryHabits": "Carnivorous - fish, mollusks",
+      "reproductionType": "Multiple spawnings",
+      "economicValue": "High commercial importance",
+      "source": "FAO FishBase, BRKP"
+    },
+    {
+      "id": "UP001",
+      "scientificName": "Penaeus monodon",
+      "commonName": "Giant Tiger Prawn",
+      "indonesianName": "Udang Windu",
+      "family": "Penaeidae",
+      "category": "benthic",
+      "hsiPreference": {
+        "min": 0.35,
+        "optimal": 0.55,
+        "distribution": "Benthic - muddy substrates"
+      },
+      "temperatureRange": {
+        "min": 20,
+        "optimal": 26,
+        "max": 28,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 15,
+        "optimal": 28,
+        "max": 35,
+        "unit": "ppt",
+        "type": "euryhaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 40,
+        "max": 100,
+        "unit": "m",
+        "zone": "sublittoral"
+      },
+      "dietaryHabits": "Omnivorous - detritus, mollusks, algae",
+      "reproductionType": "Planktonic larval development",
+      "economicValue": "Very high commercial and aquaculture value",
+      "source": "FAO FishBase, BRKP"
+    },
+    {
+      "id": "KP002",
+      "scientificName": "Holothuroidea",
+      "commonName": "Sea Cucumber",
+      "indonesianName": "Teripang",
+      "family": "Holothuriidae",
+      "category": "benthic",
+      "hsiPreference": {
+        "min": 0.30,
+        "optimal": 0.50,
+        "distribution": "Benthic - sandy/muddy substrates"
+      },
+      "temperatureRange": {
+        "min": 18,
+        "optimal": 23,
+        "max": 26,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 28,
+        "optimal": 33,
+        "max": 35,
+        "unit": "ppt",
+        "type": "stenohaline"
+      },
+      "depthRange": {
+        "min": 20,
+        "typical": 80,
+        "max": 150,
+        "unit": "m",
+        "zone": "sublittoral-bathyal"
+      },
+      "dietaryHabits": "Detritivorous - organic matter, benthic bacteria",
+      "reproductionType": "Broadcast spawning",
+      "economicValue": "High commercial value (traditional medicine)",
+      "source": "FAO FishBase, Ministry of Marine Affairs"
+    },
+    {
+      "id": "BR001",
+      "scientificName": "Bivalvia",
+      "commonName": "Bivalves (Clams, Mussels)",
+      "indonesianName": "Kerang",
+      "family": "Various",
+      "category": "benthic",
+      "hsiPreference": {
+        "min": 0.25,
+        "optimal": 0.45,
+        "distribution": "Benthic - attached to substrates"
+      },
+      "temperatureRange": {
+        "min": 18,
+        "optimal": 22,
+        "max": 25,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 20,
+        "optimal": 30,
+        "max": 35,
+        "unit": "ppt",
+        "type": "euryhaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 50,
+        "max": 100,
+        "unit": "m",
+        "zone": "intertidal-sublittoral"
+      },
+      "dietaryHabits": "Filter feeders - phytoplankton, zooplankton",
+      "reproductionType": "Broadcast spawning",
+      "economicValue": "Moderate commercial importance (aquaculture)",
+      "source": "FAO FishBase, BRKP"
+    },
+    {
+      "id": "CP001",
+      "scientificName": "Portunus pelagicus",
+      "commonName": "Blue Swimming Crab",
+      "indonesianName": "Kepiting Bakau/Rajungan",
+      "family": "Portunidae",
+      "category": "benthic",
+      "hsiPreference": {
+        "min": 0.40,
+        "optimal": 0.60,
+        "distribution": "Benthic - mangrove-seagrass"
+      },
+      "temperatureRange": {
+        "min": 20,
+        "optimal": 27,
+        "max": 30,
+        "unit": "°C"
+      },
+      "salinityRange": {
+        "min": 20,
+        "optimal": 32,
+        "max": 35,
+        "unit": "ppt",
+        "type": "euryhaline"
+      },
+      "depthRange": {
+        "min": 0,
+        "typical": 40,
+        "max": 80,
+        "unit": "m",
+        "zone": "coastal benthic"
+      },
+      "dietaryHabits": "Omnivorous - crustaceans, mollusks, algae",
+      "reproductionType": "Multiple spawnings per year",
+      "economicValue": "Very high commercial importance",
+      "source": "FAO FishBase, Ministry of Marine Affairs"
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "lastUpdated": "2025-11-15",
+    "totalSpecies": 12,
+    "coverage": "Indonesian marine waters - Strait of Sunda focus",
+    "sources": [
+      "FAO FishBase Database",
+      "Ministry of Marine Affairs and Fisheries Indonesia (DKP RI)",
+      "Research and Development Institute for Marine Fisheries (BRKP)",
+      "Published scientific literature on Indonesian ichthyofauna",
+      "Conservation International Indonesia"
+    ],
+    "notes": "Data berdasarkan publikasi ilmiah dan database internasional. Parameter biologi (suhu, salinitas, kedalaman) dari FishBase dan publikasi penelitian lokal."
+  }
+}

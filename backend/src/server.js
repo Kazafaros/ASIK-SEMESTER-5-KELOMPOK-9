@@ -65,13 +65,24 @@ async function startServer() {
         console.log(`✅ Loaded metadata: ${metadata.total_months} months available`);
         console.log(`   Date range: ${metadata.data_range.start} to ${metadata.data_range.end}`);
 
-        app.listen(PORT, () => {
+        app.listen(PORT, async () => {
             console.log(`\n🚀 Server running on http://localhost:${PORT}`);
             console.log(`📊 API endpoints available:`);
             console.log(`   GET /api/health`);
             console.log(`   GET /api/hsi/available`);
             console.log(`   GET /api/hsi?year=2021&month=1`);
             console.log(`   GET /api/metadata`);
+            
+            // Open index.html in default browser
+            try {
+                const { default: open } = await import('open');
+                const indexPath = path.join(__dirname, '../../index.html');
+                console.log(`\n🌐 Opening browser to index.html...`);
+                await open(`file://${indexPath}`);
+            } catch (err) {
+                const indexPath = path.join(__dirname, '../../index.html');
+                console.log(`⚠️  Could not open browser automatically. Please open: file://${indexPath}`);
+            }
         });
     } catch (error) {
         console.error('❌ Failed to start server:', error.message);

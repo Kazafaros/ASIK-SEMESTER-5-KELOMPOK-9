@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0077b6" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>MarineEcoPredict - Dokumentasi & Bantuan</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0077b6",
+            "secondary": "#00b4d8",
+            "light-accent": "#caf0f8",
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+            "text-light": "#111618",
+            "text-dark": "#f0f8ff",
+            "text-muted-light": "#617f89",
+            "text-muted-dark": "#94a3b8"
+          },
+          fontFamily: {
+            "sans": ["Poppins", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-light dark:text-text-dark" data-page="help">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex h-16 items-center gap-4 border-b border-black/10 dark:border-white/10">
+          <a href="index.html" class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-lg font-bold text-text-light dark:text-text-dark">MarineEcoPredict</span>
+          </a>
+          <nav class="hidden lg:flex lg:items-center lg:gap-6 site-nav">
+            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium site-nav-link">Beranda</a>
+            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium site-nav-link">Analisis</a>
+            <a href="comparison.html" data-nav="comparison" data-nav-link class="text-sm font-medium site-nav-link">Perbandingan</a>
+            <a href="history.html" data-nav="history" data-nav-link class="text-sm font-medium site-nav-link">Riwayat</a>
+            <a href="biogeography.html" data-nav="biogeography" data-nav-link class="text-sm font-medium site-nav-link">Biogeografi</a>
+            <a href="help.html" data-nav="help" data-nav-link class="text-sm font-medium site-nav-link">Bantuan</a>
+            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium site-nav-link">Tentang</a>
+          </nav>
+          <div class="ml-auto flex items-center gap-2">
+            <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text-muted-light transition hover:bg-white dark:border-white/10 dark:bg-background-dark/80 dark:text-text-muted-dark">
+              <span class="sr-only">Toggle theme</span>
+              <span data-theme-icon="sun" class="hidden">
+                <i data-lucide="sun" class="size-5"></i>
+              </span>
+              <span data-theme-icon="moon">
+                <i data-lucide="moon" class="size-5"></i>
+              </span>
+            </button>
+            <button class="flex items-center justify-center rounded-md p-2 lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-menu h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+              <span class="sr-only">Open menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-4xl">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-text-light dark:text-text-dark mb-2">Dokumentasi & Bantuan</h1>
+        <p class="text-text-muted-light dark:text-text-muted-dark">Panduan lengkap penggunaan MarineEcoPredict</p>
+      </div>
+
+      <div class="space-y-6">
+        <section class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="book-open" class="size-6 text-primary"></i>
+            Panduan Penggunaan
+          </h2>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">1. Memulai Analisis</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark mb-2">
+                Untuk memulai analisis HSI, ikuti langkah-langkah berikut:
+              </p>
+              <ol class="list-decimal list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark ml-4">
+                <li>Buka halaman <a href="analysis.html" class="text-primary hover:underline">Analisis</a></li>
+                <li>Isi semua parameter lingkungan</li>
+                <li>Atau gunakan data contoh untuk mengisi dengan data preset</li>
+                <li>Lihat hasil prediksi, chart, dan peta visualisasi</li>
+              </ol>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">2. Memahami Hasil</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark mb-2">
+                Setelah analisis selesai, Anda akan melihat:
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark ml-4">
+                <li>Nilai 0-1 yang menunjukkan kualitas habitat (≥0.75 = High, 0.45-0.75 = Medium, &lt;0.45 = Low)</li>
+                <li>Daya dukung ekosistem berdasarkan HSI Score</li>
+                <li>Grafik yang menunjukkan kontribusi setiap parameter terhadap HSI</li>
+                <li>Peta interaktif dengan heatmap HSI di area Selat Sunda</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">3. Perbandingan Skenario</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark mb-2">
+                Gunakan fitur <a href="comparison.html" class="text-primary hover:underline">Perbandingan</a> untuk membandingkan hingga 3 skenario berbeda:
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark ml-4">
+                <li>Buat 2-3 skenario dengan parameter berbeda</li>
+                <li>Klik <strong>Bandingkan</strong> untuk melihat perbandingan visual</li>
+                <li>Analisis grafik dan tabel perbandingan untuk mengambil keputusan</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="info" class="size-6 text-primary"></i>
+            Parameter Lingkungan
+          </h2>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Suhu Permukaan Laut (SST)</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                <strong>Rentang:</strong> 18-32 °C<br>
+                <strong>Unit:</strong> Derajat Celsius (°C)<br>
+                <strong>Deskripsi:</strong> Suhu permukaan laut mempengaruhi metabolisme organisme laut dan distribusi spesies. Suhu yang terlalu tinggi atau rendah dapat mengurangi kesesuaian habitat.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Klorofil-a</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                <strong>Rentang:</strong> 0.1-3 mg/m³<br>
+                <strong>Unit:</strong> Milligram per meter kubik (mg/m³)<br>
+                <strong>Optimal:</strong> ~1.2 mg/m³<br>
+                <strong>Deskripsi:</strong> Indikator produktivitas primer dan ketersediaan makanan. Nilai optimal menunjukkan ekosistem yang produktif.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Salinitas</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                <strong>Rentang:</strong> 30-37 PSU<br>
+                <strong>Unit:</strong> Practical Salinity Unit (PSU)<br>
+                <strong>Optimal:</strong> ~34 PSU<br>
+                <strong>Deskripsi:</strong> Konsentrasi garam terlarut dalam air laut. Salinitas mempengaruhi osmoregulasi organisme laut.
+              </p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Kedalaman</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark">
+                <strong>Rentang:</strong> 10-150 m<br>
+                <strong>Unit:</strong> Meter (m)<br>
+                <strong>Optimal:</strong> ~60 m<br>
+                <strong>Deskripsi:</strong> Kedalaman air mempengaruhi penetrasi cahaya, tekanan, dan distribusi organisme. Kedalaman optimal mendukung keanekaragaman hayati.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="fish" class="size-6 text-primary"></i>
+            Fitur Biogeografi
+          </h2>
+          <p class="text-text-muted-light dark:text-text-muted-dark mb-4">
+            Fitur Biogeografi membantu Anda memprediksi jenis ikan dan organisme laut yang sesuai dengan kondisi lingkungan tertentu berdasarkan data real dari 12 spesies ikan Indonesia dengan parameter biologis.
+          </p>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Cara Menggunakan</h3>
+              <ol class="list-decimal list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark ml-4">
+                <li>Buka halaman <a href="biogeography.html" class="text-primary hover:underline">Biogeografi</a></li>
+                <li>Masukkan HSI Score (0-1) dan parameter lingkungan:
+                  <ul class="list-disc list-inside ml-4 mt-1">
+                    <li>Suhu Permukaan Laut (°C)</li>
+                    <li>Salinitas (ppt)</li>
+                    <li>Kedalaman (m)</li>
+                  </ul>
+                </li>
+                <li>Isi area lokasi</li>
+                <li>Klik Prediksi Spesies Ikan untuk melihat hasil</li>
+                <li>Lihat daftar ikan yang sesuai dengan score kesesuaian (0-100%)</li>
+              </ol>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Interpretasi Hasil</h3>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark ml-4">
+                <li><strong>Score ≥ 80%  </strong> Sangat sesuai - Kondisi optimal untuk spesies ini</li>
+                <li><strong>Score 60-80% </strong> Cukup sesuai - Kondisi masih mendukung pertumbuhan</li>
+                <li><strong>Score &lt;60% </strong> Kurang sesuai - Kondisi marginal untuk spesies ini</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Database Spesies Ikan</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark mb-2">Biogeografi menggunakan database 12 spesies ikan Indonesia dengan parameter real:</p>
+              <ul class="list-disc list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark ml-4">
+                <li><strong>Pelagis (HIGH HSI) </strong> Tongkol, Cakalang, Tembang, Layang, Kembung</li>
+                <li><strong>Demersal (MEDIUM HSI) </strong> Tenggiri, Pari, Kerapu, Bawal Hitam</li>
+                <li><strong>Bentik (LOW HSI) </strong> Udang Windu, Teripang, Kerang, Rajungan</li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Sumber Data</h3>
+              <ul class="list-disc list-inside space-y-1 text-text-muted-light dark:text-text-muted-dark ml-4 mt-1">
+                <li>FAO FishBase</li>
+                <li>KKP</li>
+                <li>BRKP</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="help-circle" class="size-6 text-primary"></i>
+            FAQ 
+          </h2>
+          <div class="space-y-4">
+            <details class="group">
+            <summary class="font-semibold text-text-light dark:text-text-dark cursor-pointer py-2">Apa itu HSI (Habitat Suitability Index)?</summary>
+            <p class="text-text-muted-light dark:text-text-muted-dark mt-2 ml-4">
+              HSI adalah indeks yang mengukur kesesuaian habitat untuk organisme laut berdasarkan parameter lingkungan. Nilai HSI berkisar dari 0 (tidak sesuai) hingga 1 (sangat sesuai).
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-semibold text-text-light dark:text-text-dark cursor-pointer py-2">Bagaimana cara interpretasi HSI Score?</summary>
+            <p class="text-text-muted-light dark:text-text-muted-dark mt-2 ml-4">
+              <strong>High (≥0.75)</strong> Habitat sangat sesuai, daya dukung tinggi<br>
+              <strong>Medium (0.45-0.75)</strong> Habitat cukup sesuai, daya dukung sedang<br>
+              <strong>Low (&lt;0.45)</strong> Habitat kurang sesuai, daya dukung rendah
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-semibold text-text-light dark:text-text-dark cursor-pointer py-2">Dari mana data parameter diambil?</summary>
+            <p class="text-text-muted-light dark:text-text-muted-dark mt-2 ml-4">
+              Data dapat diinput manual atau menggunakan data contoh. Untuk aplikasi nyata, data dapat diambil dari data spasial di Copernicus, NOAA, BMKG, atau pengukuran langsung di lapangan.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-semibold text-text-light dark:text-text-dark cursor-pointer py-2">Apakah hasil prediksi akurat?</summary>
+            <p class="text-text-muted-light dark:text-text-muted-dark mt-2 ml-4">
+              Prediksi HSI menggunakan model yang mempertimbangkan berbagai parameter. Akurasi bergantung pada kualitas data input. Model ini dirancang untuk memberikan estimasi awal dan harus divalidasi dengan data lapangan.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-semibold text-text-light dark:text-text-dark cursor-pointer py-2">Bagaimana cara export hasil analisis?</summary>
+            <p class="text-text-muted-light dark:text-text-muted-dark mt-2 ml-4">
+              Setelah analisis selesai, klik tombol <strong>Excel</strong>" di card hasil untuk mengekspor. File Excel akan otomatis terunduh dengan nama berdasarkan tanggal. File Excel berisi beberapa Ringkasan, Parameter Input, Kontribusi Parameter, dan Detail Perhitungan.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-semibold text-text-light dark:text-text-dark cursor-pointer py-2">Apakah data saya tersimpan?</summary>
+            <p class="text-text-muted-light dark:text-text-muted-dark mt-2 ml-4">
+              Ya, semua prediksi otomatis tersimpan di browser localStorage anda dan dapat dilihat di halaman <a href="history.html" class="text-primary hover:underline">Riwayat</a>. Data hanya tersimpan lokal di browser Anda.
+            </p>
+          </details>
+          <details class="group">
+            <summary class="font-semibold text-text-light dark:text-text-dark cursor-pointer py-2">Bagaimana rumus perhitungan HSI Score?</summary>
+            <div class="text-text-muted-light dark:text-text-muted-dark mt-2 ml-4 space-y-3">
+              <p>
+                HSI dihitung menggunakan <strong>Weighted Average Method</strong> dengan memberi bobot berbeda untuk setiap parameter:
+              </p>
+              <div class="bg-black/5 dark:bg-white/5 p-3 rounded text-sm font-mono">
+                <div>• Suhu Permukaan Laut (SST): <strong>30%</strong></div>
+                <div>• Klorofil-a: <strong>25%</strong></div>
+                <div>• Salinitas: <strong>25%</strong></div>
+                <div>• Kedalaman: <strong>20%</strong></div>
+              </div>
+              <p>
+                Setiap parameter dinormalisasi ke skala 0-1 berdasarkan nilai optimalnya, kemudian dikalikan dengan bobotnya, dan dijumlahkan untuk menghasilkan HSI Score final (0-1).
+              </p>
+            </div>
+          </details>
+          </div>
+        </section>
+
+        <section class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="calculator" class="size-6 text-primary"></i>
+            Rumus & Metode Perhitungan HSI
+          </h2>
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Metode Weighted Average</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark mb-3">
+                Platform ini menggunakan <strong>Weighted Average Method</strong> untuk menghitung HSI Score. Metode ini memberikan bobot berbeda untuk setiap parameter lingkungan berdasarkan pengaruhnya terhadap kesesuaian habitat.
+              </p>
+              <div class="bg-gradient-to-r from-blue-50 to-blue-50/30 dark:from-blue-900/20 dark:to-blue-900/5 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+                <h4 class="font-semibold text-text-light dark:text-text-dark mb-2">Bobot Parameter</h4>
+                <div class="space-y-2 text-sm">
+                  <div class="flex justify-between items-center">
+                    <span>Suhu Permukaan Laut (SST)</span>
+                    <span class="font-bold text-primary">30%</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Klorofil-a (CHL)</span>
+                    <span class="font-bold text-primary">25%</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Salinitas</span>
+                    <span class="font-bold text-primary">25%</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span>Kedalaman</span>
+                    <span class="font-bold text-primary">20%</span>
+                  </div>
+                  <div class="border-t border-blue-300 dark:border-blue-700 pt-2 mt-2 flex justify-between items-center font-bold">
+                    <span>Total</span>
+                    <span class="text-primary">100%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Langkah-Langkah Perhitungan</h3>
+              <ol class="list-decimal list-inside space-y-2 text-text-muted-light dark:text-text-muted-dark ml-2">
+                <li><strong>Normalisasi Parameter</strong> Setiap parameter dikonversi ke skala 0-1 berdasarkan nilai optimalnya</li>
+                <li><strong>Weighted Sum</strong> Setiap nilai normalisasi dikalikan dengan bobotnya kemudian dijumlahkan</li>
+                <li><strong>HSI Final</strong> Hasil penjumlahan dibagi total bobot menghasilkan HSI Score (0-1)</li>
+              </ol>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-3">Langkah-Langkah Perhitungan Detail</h3>
+              <div class="space-y-3">
+                <div class="border-l-4 border-primary bg-blue-50/50 dark:bg-blue-900/10 p-3 rounded">
+                  <h4 class="font-semibold text-text-light dark:text-text-dark text-sm mb-1">Langkah 1: Normalisasi Parameter</h4>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">
+                    Setiap parameter dikonversi ke skala 0-1. Untuk parameter dengan nilai optimal (Chlorophyll-a, Salinity, Depth), semakin dekat ke nilai optimal, semakin tinggi skornya. Untuk SST, digunakan range optimal 27-29°C yang memberikan nilai maksimal.
+                  </p>
+                </div>
+                <div class="border-l-4 border-primary bg-blue-50/50 dark:bg-blue-900/10 p-3 rounded">
+                  <h4 class="font-semibold text-text-light dark:text-text-dark text-sm mb-1">Langkah 2: Kalkulasi Weighted Sum</h4>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark mb-2">
+                    Setiap nilai normalisasi dikalikan dengan bobot parameter-nya, kemudian dijumlahkan:
+                  </p>
+                  <div class="bg-black/5 dark:bg-white/5 p-2 rounded text-xs font-mono text-text-light dark:text-text-dark">
+                    WeightedSum = (SST × 0.30) + (CHL × 0.25) + (SAL × 0.25) + (DEP × 0.20)
+                  </div>
+                </div>
+                <div class="border-l-4 border-primary bg-blue-50/50 dark:bg-blue-900/10 p-3 rounded">
+                  <h4 class="font-semibold text-text-light dark:text-text-dark text-sm mb-1">Langkah 3: HSI Score Final</h4>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark">
+                    HSI = WeightedSum (karena total bobot = 1.0)
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-3">Contoh Perhitungan Lengkap</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark text-sm mb-3">
+                Berikut contoh perhitungan HSI dengan parameter yang optimal:
+              </p>
+              <div class="bg-amber-50 dark:bg-amber-900/10 p-4 rounded-lg border border-amber-200 dark:border-amber-800 space-y-2 text-sm">
+                <div class="font-semibold text-text-light dark:text-text-dark mb-2">Data Input:</div>
+                <div class="grid grid-cols-2 gap-2 text-text-muted-light dark:text-text-muted-dark text-xs">
+                  <div>• SST: 28°C (optimal)</div>
+                  <div>• CHL: 1.2 mg/m³ (optimal)</div>
+                  <div>• Salinity: 34 PSU (optimal)</div>
+                  <div>• Depth: 60 m (optimal)</div>
+                </div>
+                <div class="border-t border-amber-300 dark:border-amber-700 pt-2 mt-2 font-semibold text-text-light dark:text-text-dark text-xs">Nilai Normalisasi:</div>
+                <div class="bg-black/5 dark:bg-white/5 p-2 rounded text-xs font-mono text-text-light dark:text-text-dark space-y-1">
+                  <div>SST normalized = 0.9 (dalam range optimal)</div>
+                  <div>CHL normalized = 1.0 (tepat di optimal)</div>
+                  <div>SAL normalized = 1.0 (tepat di optimal)</div>
+                  <div>DEP normalized = 1.0 (tepat di optimal)</div>
+                </div>
+                <div class="border-t border-amber-300 dark:border-amber-700 pt-2 mt-2 font-semibold text-text-light dark:text-text-dark text-xs">Hasil Perhitungan:</div>
+                <div class="bg-black/5 dark:bg-white/5 p-2 rounded text-xs font-mono text-text-light dark:text-text-dark space-y-1">
+                  <div>WeightedSum = (0.9 × 0.30) + (1.0 × 0.25) + (1.0 × 0.25) + (1.0 × 0.20)</div>
+                  <div>WeightedSum = 0.27 + 0.25 + 0.25 + 0.20 = 0.97</div>
+                  <div class="font-bold mt-1">HSI = 0.97 → <span class="text-green-600 dark:text-green-400">HIGH</span> (Habitat Sangat Sesuai)</div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-3">Penjelasan Normalisasi Parameter</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark text-sm mb-3">
+                Setiap parameter memiliki metode normalisasi berbeda berdasarkan karakteristiknya:
+              </p>
+              <div class="space-y-3">
+                <div class="bg-gray-50 dark:bg-gray-900/20 p-3 rounded border-l-2 border-blue-400">
+                  <h4 class="font-semibold text-text-light dark:text-text-dark text-sm mb-2">SST (Suhu Permukaan Laut)</h4>
+                  <ul class="list-disc list-inside text-xs text-text-muted-light dark:text-text-muted-dark space-y-1">
+                    <li><strong>Range:</strong> 18-32°C</li>
+                    <li><strong>Optimal:</strong> 27-29°C (memberikan normalized ~0.9-1.0)</li>
+                    <li><strong>Metode:</strong> Semakin mendekati range optimal, nilai normalisasi semakin tinggi</li>
+                  </ul>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-900/20 p-3 rounded border-l-2 border-blue-400">
+                  <h4 class="font-semibold text-text-light dark:text-text-dark text-sm mb-2">Chlorophyll-a (Produktivitas Primer)</h4>
+                  <ul class="list-disc list-inside text-xs text-text-muted-light dark:text-text-muted-dark space-y-1">
+                    <li><strong>Range:</strong> 0.1-3.0 mg/m³</li>
+                    <li><strong>Optimal:</strong> 1.2 mg/m³ (normalized = 1.0)</li>
+                    <li><strong>Formula:</strong> normalized = max(0, 1 - |nilai - optimal| / optimal_range)</li>
+                  </ul>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-900/20 p-3 rounded border-l-2 border-blue-400">
+                  <h4 class="font-semibold text-text-light dark:text-text-dark text-sm mb-2">Salinity (Salinitas)</h4>
+                  <ul class="list-disc list-inside text-xs text-text-muted-light dark:text-text-muted-dark space-y-1">
+                    <li><strong>Range:</strong> 30-37 PSU</li>
+                    <li><strong>Optimal:</strong> 34 PSU (normalized = 1.0)</li>
+                    <li><strong>Formula:</strong> normalized = max(0, 1 - |nilai - optimal| / optimal_range)</li>
+                  </ul>
+                </div>
+                <div class="bg-gray-50 dark:bg-gray-900/20 p-3 rounded border-l-2 border-blue-400">
+                  <h4 class="font-semibold text-text-light dark:text-text-dark text-sm mb-2">Depth (Kedalaman)</h4>
+                  <ul class="list-disc list-inside text-xs text-text-muted-light dark:text-text-muted-dark space-y-1">
+                    <li><strong>Range:</strong> 10-150 m</li>
+                    <li><strong>Optimal:</strong> 60 m (normalized = 1.0)</li>
+                    <li><strong>Formula:</strong> normalized = max(0, 1 - |nilai - optimal| / optimal_range)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            
+            <div>
+              <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-3">Kategori HSI Score & Interpretasi</h3>
+              <div class="space-y-2">
+                <div class="flex items-center gap-3 p-3 bg-green-50 dark:bg-green-900/20 rounded border border-green-200 dark:border-green-800">
+                  <div class="w-5 h-5 rounded bg-green-500 flex-shrink-0"></div>
+                  <div>
+                    <strong class="text-green-700 dark:text-green-400">HIGH (≥0.75)</strong>
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Habitat sangat sesuai, daya dukung tinggi, kondisi optimal untuk organisme laut</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-200 dark:border-yellow-800">
+                  <div class="w-5 h-5 rounded bg-yellow-500 flex-shrink-0"></div>
+                  <div>
+                    <strong class="text-yellow-700 dark:text-yellow-400">MEDIUM (0.45-0.75)</strong>
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Habitat cukup sesuai, daya dukung sedang, beberapa parameter kurang optimal</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 p-3 bg-red-50 dark:bg-red-900/20 rounded border border-red-200 dark:border-red-800">
+                  <div class="w-5 h-5 rounded bg-red-500 flex-shrink-0"></div>
+                  <div>
+                    <strong class="text-red-700 dark:text-red-400">LOW (&lt;0.45)</strong>
+                    <p class="text-xs text-text-muted-light dark:text-text-muted-dark">Habitat kurang sesuai, daya dukung rendah, banyak parameter di bawah optimal</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-50 dark:bg-blue-900/10 p-4 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h4 class="font-semibold text-text-light dark:text-text-dark mb-2">� Catatan Penting</h4>
+              <ul class="list-disc list-inside text-xs text-text-muted-light dark:text-text-muted-dark space-y-1">
+                <li><strong>Validasi</strong> Hasil prediksi HSI harus divalidasi dengan data lapangan untuk memastikan akurasi</li>
+                <li><strong>Kontekstual</strong> Nilai optimal dapat berbeda untuk spesies atau ekosistem yang berbeda</li>
+                <li><strong>Dinamis</strong> Parameter dan bobot dapat disesuaikan berdasarkan penelitian terbaru</li>
+                <li><strong>Komprehensif</strong> HSI hanya salah satu indikator; analisis ekosistem memerlukan pendekatan multi-disiplin</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="lightbulb" class="size-6 text-primary"></i>
+            Tips 
+          </h2>
+          <div class="space-y-3 text-text-muted-light dark:text-text-muted-dark">
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="size-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"></i>
+              <p><strong>Gunakan data yang valid,</strong> Pastikan semua parameter berada dalam rentang yang ditentukan untuk hasil yang akurat.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="size-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"></i>
+              <p><strong>Bandingkan skenario,</strong> Gunakan fitur perbandingan untuk menganalisis berbagai kondisi dan mengambil keputusan terbaik.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="size-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"></i>
+              <p><strong>Simpan hasil,</strong> Export hasil analisis penting sebagai PDF untuk dokumentasi dan presentasi.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="size-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"></i>
+              <p><strong>Monitor trend,</strong> Gunakan dashboard statistik untuk melihat trend HSI Score berdasarkan rentan waktu yang ditentukan.</p>
+            </div>
+            <div class="flex items-start gap-3">
+              <i data-lucide="check-circle" class="size-5 text-green-600 dark:text-green-400 mt-0.5 flex-shrink-0"></i>
+              <p><strong>Perhatikan rekomendasi,</strong> Sistem akan memberikan peringatan dan rekomendasi jika HSI Score rendah atau parameter tidak optimal.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="w-full mt-16 bg-white dark:bg-gray-900 border-t border-black/10 dark:border-white/10">
+      <div class="container mx-auto max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="text-center mb-8">
+          <a href="index.html" class="flex items-center justify-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-8 w-8" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-2xl font-semibold text-text-light dark:text-white">MarineEcoPredict</span>
+          </a>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark">Memprediksi masa depan lautan kami melalui analisis ekosistem laut tingkat lanjut.</p>
+        </div>
+        <div class="flex justify-center mb-8">
+          <div class="grid grid-cols-2 gap-12 sm:gap-20">
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Sumber Daya</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li><a href="help.html" class="hover:underline">Dokumentasi</a></li>
+              </ul>
+            </div>
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li><a href="https://github.com/faiqmuammar4" class="hover:underline">Github</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div class="text-center">
+          <span class="text-sm text-text-muted-light dark:text-text-muted-dark">© 2024 MarineEcoPredict™. All Rights Reserved.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggleBtn = document.querySelector('[data-theme-toggle]');
+      const sunWrapper = toggleBtn?.querySelector('[data-theme-icon="sun"]');
+      const moonWrapper = toggleBtn?.querySelector('[data-theme-icon="moon"]');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      const storedTheme = localStorage.getItem('theme');
+      const initialDark = storedTheme ? storedTheme === 'dark' : prefersDark?.matches;
+      applyTheme(initialDark);
+
+      toggleBtn?.addEventListener('click', () => {
+        const nextIsDark = !root.classList.contains('dark');
+        applyTheme(nextIsDark);
+        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
+      });
+
+      prefersDark?.addEventListener?.('change', (event) => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(event.matches);
+        }
+      });
+
+      function applyTheme(isDark) {
+        root.classList.toggle('dark', isDark);
+        toggleBtn?.setAttribute('aria-pressed', String(isDark));
+        toggleBtn?.setAttribute('aria-label', isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap');
+        if (isDark) {
+          sunWrapper?.classList.remove('hidden');
+          moonWrapper?.classList.add('hidden');
+        } else {
+          sunWrapper?.classList.add('hidden');
+          moonWrapper?.classList.remove('hidden');
+        }
+      }
+    })();
+
+    (function () {
+      const currentPage = document.body.dataset.page;
+      if (!currentPage) return;
+      document.querySelectorAll('[data-nav-link]').forEach((link) => {
+        if (link.dataset.nav === currentPage) {
+          link.classList.add('nav-link-active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('nav-link-active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    })();
+
+    lucide.createIcons();
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
+

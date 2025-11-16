@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0077b6" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>MarineEcoPredict - Perbandingan Skenario</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0077b6",
+            "secondary": "#00b4d8",
+            "light-accent": "#caf0f8",
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+            "text-light": "#111618",
+            "text-dark": "#f0f8ff",
+            "text-muted-light": "#617f89",
+            "text-muted-dark": "#94a3b8"
+          },
+          fontFamily: {
+            "sans": ["Poppins", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-light dark:text-text-dark" data-page="comparison">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex h-16 items-center gap-4 border-b border-black/10 dark:border-white/10">
+          <a href="index.html" class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-lg font-bold text-text-light dark:text-text-dark">MarineEcoPredict</span>
+          </a>
+          <nav class="hidden lg:flex lg:items-center lg:gap-6 site-nav">
+            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium site-nav-link">Beranda</a>
+            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium site-nav-link">Analisis</a>
+            <a href="comparison.html" data-nav="comparison" data-nav-link class="text-sm font-medium site-nav-link">Perbandingan</a>
+            <a href="history.html" data-nav="history" data-nav-link class="text-sm font-medium site-nav-link">Riwayat</a>
+            <a href="biogeography.html" data-nav="biogeography" data-nav-link class="text-sm font-medium site-nav-link">Biogeografi</a>
+            <a href="help.html" data-nav="help" data-nav-link class="text-sm font-medium site-nav-link">Bantuan</a>
+            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium site-nav-link">Tentang</a>
+          </nav>
+          <div class="ml-auto flex items-center gap-2">
+            <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text-muted-light transition hover:bg-white dark:border-white/10 dark:bg-background-dark/80 dark:text-text-muted-dark">
+              <span class="sr-only">Toggle theme</span>
+              <span data-theme-icon="sun" class="hidden">
+                <i data-lucide="sun" class="size-5"></i>
+              </span>
+              <span data-theme-icon="moon">
+                <i data-lucide="moon" class="size-5"></i>
+              </span>
+            </button>
+            <button class="flex items-center justify-center rounded-md p-2 lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-menu h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+              <span class="sr-only">Open menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-text-light dark:text-text-dark mb-2">Perbandingan Skenario</h1>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6" data-scenarios-container>
+        <!-- Scenario cards will be inserted here -->
+      </div>
+
+      <div class="mb-6 flex items-center justify-between">
+        <button type="button" data-add-scenario class="flex items-center gap-2 rounded-lg border border-primary/40 bg-primary/5 px-4 py-2 text-primary text-sm font-medium transition hover:bg-primary/10 dark:border-secondary/40 dark:bg-secondary/10 dark:text-secondary dark:hover:bg-secondary/20">
+          <i data-lucide="plus" class="size-4"></i>
+          Tambah Skenario
+        </button>
+        <button type="button" data-compare-scenarios class="hidden flex items-center gap-2 rounded-lg bg-primary px-5 py-2 text-white text-sm font-semibold transition hover:bg-primary/90">
+          <i data-lucide="git-compare" class="size-4"></i>
+          Bandingkan
+        </button>
+      </div>
+
+      <div id="comparisonResults" class="hidden">
+        <div class="card mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-xl font-bold text-text-light dark:text-text-dark">Hasil Perbandingan</h2>
+            <button type="button" onclick="saveComparisonToHistory()" class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white text-sm font-semibold transition hover:bg-primary/90">
+              <i data-lucide="save" class="size-4"></i>
+              Simpan ke Riwayat
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" data-comparison-stats>
+            <!-- Comparison stats -->
+          </div>
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-3">Grafik Perbandingan HSI</h3>
+            <div class="chart-container">
+              <canvas id="comparisonChart"></canvas>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-3">Perbandingan Parameter</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="border-b border-gray-200 dark:border-gray-700">
+                    <th class="text-left py-3 px-4 text-text-muted-light dark:text-text-muted-dark font-semibold">Parameter</th>
+                    <th class="text-center py-3 px-4 text-text-muted-light dark:text-text-muted-dark font-semibold" data-scenario-header-1>Skenario 1</th>
+                    <th class="text-center py-3 px-4 text-text-muted-light dark:text-text-muted-dark font-semibold" data-scenario-header-2>Skenario 2</th>
+                    <th class="text-center py-3 px-4 text-text-muted-light dark:text-text-muted-dark font-semibold" data-scenario-header-3>Skenario 3</th>
+                  </tr>
+                </thead>
+                <tbody data-comparison-table>
+                  <!-- Comparison table rows -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="w-full mt-16 bg-white dark:bg-gray-900 border-t border-black/10 dark:border-white/10">
+      <div class="container mx-auto max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="text-center mb-8">
+          <h3 class="text-2xl font-semibold text-text-light dark:text-white mb-2">MarineEcoPredict</h3>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark">Predicting the future of our oceans through advanced marine ecosystem analysis.</p>
+        </div>
+        <div class="flex justify-center mb-8">
+          <div class="grid grid-cols-2 gap-12 sm:gap-20">
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Sumber Daya</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li><a href="help.html" class="hover:underline">Dokumentasi</a></li>
+              </ul>
+            </div>
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li><a href="https://github.com/faiqmuammar4" class="hover:underline">Github</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div class="text-center">
+          <span class="text-sm text-text-muted-light dark:text-text-muted-dark">© 2024 MarineEcoPredict™. All Rights Reserved.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggleBtn = document.querySelector('[data-theme-toggle]');
+      const sunWrapper = toggleBtn?.querySelector('[data-theme-icon="sun"]');
+      const moonWrapper = toggleBtn?.querySelector('[data-theme-icon="moon"]');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      const storedTheme = localStorage.getItem('theme');
+      const initialDark = storedTheme ? storedTheme === 'dark' : prefersDark?.matches;
+      applyTheme(initialDark);
+
+      toggleBtn?.addEventListener('click', () => {
+        const nextIsDark = !root.classList.contains('dark');
+        applyTheme(nextIsDark);
+        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
+      });
+
+      prefersDark?.addEventListener?.('change', (event) => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(event.matches);
+        }
+      });
+
+      function applyTheme(isDark) {
+        root.classList.toggle('dark', isDark);
+        toggleBtn?.setAttribute('aria-pressed', String(isDark));
+        toggleBtn?.setAttribute('aria-label', isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap');
+        if (isDark) {
+          sunWrapper?.classList.remove('hidden');
+          moonWrapper?.classList.add('hidden');
+        } else {
+          sunWrapper?.classList.add('hidden');
+          moonWrapper?.classList.remove('hidden');
+        }
+      }
+    })();
+
+    (function () {
+      const currentPage = document.body.dataset.page;
+      if (!currentPage) return;
+      document.querySelectorAll('[data-nav-link]').forEach((link) => {
+        if (link.dataset.nav === currentPage) {
+          link.classList.add('nav-link-active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('nav-link-active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    })();
+
+    // Comparison functionality
+    const ranges = {
+      'sea-temp': { label: 'Suhu Permukaan Laut (SST)', min: 18, max: 32, unit: '°C', weight: 0.3, higherIsBetter: false },
+      'chlorophyll': { label: 'Klorofil-a', min: 0.1, max: 3, unit: 'mg/m³', weight: 0.25, higherIsBetter: true, optimal: 1.2 },
+      'salinity': { label: 'Salinitas', min: 30, max: 37, unit: 'PSU', weight: 0.25, higherIsBetter: false, optimal: 34 },
+      'depth': { label: 'Kedalaman', min: 10, max: 150, unit: 'm', weight: 0.2, higherIsBetter: true, optimal: 60 }
+    };
+
+    // Multiple preset data examples for different scenarios
+    const presetDataExamples = [
+      {
+        name: 'Optimal',
+        values: {
+          'sea-temp': 27.4,
+          'chlorophyll': 1.2,
+          'salinity': 34.0,
+          'depth': 60
+        }
+      },
+      {
+        name: 'Normal',
+        values: {
+          'sea-temp': 28.5,
+          'chlorophyll': 0.9,
+          'salinity': 33.5,
+          'depth': 70
+        }
+      },
+      {
+        name: 'Suboptimal',
+        values: {
+          'sea-temp': 29.8,
+          'chlorophyll': 0.6,
+          'salinity': 32.0,
+          'depth': 85
+        }
+      }
+    ];
+
+    let scenarios = [];
+    let comparisonChart = null;
+
+    function calculateHSI(values, configs) {
+      let totalWeight = 0;
+      let weightedSum = 0;
+
+      Object.entries(values).forEach(([key, value]) => {
+        const config = configs[key];
+        const weight = config.weight ?? 0.2;
+        totalWeight += weight;
+
+        let normalized;
+        if (config.optimal !== undefined) {
+          const optimalRange = (config.max - config.min) / 2;
+          const distance = Math.abs(value - config.optimal);
+          normalized = Math.max(0, 1 - distance / optimalRange);
+        } else {
+          normalized = (value - config.min) / (config.max - config.min);
+          normalized = Math.min(1, Math.max(0, normalized));
+          if (config.higherIsBetter === false) {
+            normalized = 1 - normalized;
+          }
+        }
+
+        weightedSum += normalized * weight;
+      });
+
+      return totalWeight ? weightedSum / totalWeight : 0;
+    }
+
+    function interpretHSI(hsi) {
+      if (hsi >= 0.75) return { label: 'High', color: 'text-green-600 dark:text-green-400', bg: 'bg-green-100 dark:bg-green-500/20' };
+      if (hsi >= 0.45) return { label: 'Medium', color: 'text-yellow-500 dark:text-yellow-400', bg: 'bg-yellow-100 dark:bg-yellow-500/20' };
+      return { label: 'Low', color: 'text-red-500 dark:text-red-400', bg: 'bg-red-100 dark:bg-red-500/20' };
+    }
+
+    function createScenarioCard(index) {
+      const cardId = `scenario-${index}`;
+      return `
+        <div class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6" data-scenario-card="${index}">
+          <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-text-light dark:text-text-dark">Skenario ${index + 1}</h3>
+            ${index > 0 ? `<button type="button" onclick="removeScenario(${index})" class="text-text-muted-light hover:text-red-500 dark:text-text-muted-dark dark:hover:text-red-400"><i data-lucide="x" class="size-5"></i></button>` : ''}
+          </div>
+          <div class="space-y-4">
+            ${Object.entries(ranges).map(([key, config]) => `
+              <div>
+                <label class="text-sm font-medium text-text-light dark:text-text-dark mb-1 block">${config.label} (${config.unit})</label>
+                <input type="number" id="${cardId}-${key}" name="${key}" step="0.1" min="${config.min}" max="${config.max}" 
+                  placeholder="${config.min}-${config.max}" 
+                  class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 h-10 px-3 text-sm focus:ring-2 focus:ring-primary" />
+                <span class="text-xs text-text-muted-light dark:text-text-muted-dark">Rentang: ${config.min} - ${config.max} ${config.unit}</span>
+              </div>
+            `).join('')}
+            <div class="space-y-2">
+              <label class="text-xs font-medium text-text-muted-light dark:text-text-muted-dark">Data Contoh:</label>
+              <select onchange="fillPresetFromExample(${index}, this.value)" class="w-full rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 h-9 px-3 text-sm focus:ring-2 focus:ring-primary">
+                <option value="">Pilih data contoh...</option>
+                ${presetDataExamples.map((preset, idx) => `<option value="${idx}">${preset.name}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function addScenario() {
+      if (scenarios.length >= 3) {
+        alert('Maksimal 3 skenario dapat dibandingkan');
+        return;
+      }
+      scenarios.push({ index: scenarios.length });
+      renderScenarios();
+    }
+
+    function removeScenario(index) {
+      scenarios = scenarios.filter((_, i) => i !== index).map((s, i) => ({ index: i }));
+      renderScenarios();
+      hideComparison();
+    }
+
+    function fillPreset(index) {
+      // Use first preset as default
+      const preset = presetDataExamples[0];
+      if (preset) {
+        Object.entries(preset.values).forEach(([key, value]) => {
+          const input = document.querySelector(`#scenario-${index}-${key}`);
+          if (input) input.value = value;
+        });
+      }
+    }
+
+    function fillPresetFromExample(index, presetIndex) {
+      if (presetIndex === '' || !presetDataExamples[presetIndex]) return;
+      const preset = presetDataExamples[presetIndex];
+      Object.entries(preset.values).forEach(([key, value]) => {
+        const input = document.querySelector(`#scenario-${index}-${key}`);
+        if (input) input.value = value;
+      });
+    }
+
+    function renderScenarios() {
+      const container = document.querySelector('[data-scenarios-container]');
+      if (!container) return;
+
+      container.innerHTML = scenarios.map((_, i) => createScenarioCard(i)).join('');
+      lucide.createIcons();
+
+      const compareBtn = document.querySelector('[data-compare-scenarios]');
+      if (compareBtn) {
+        compareBtn.classList.toggle('hidden', scenarios.length < 2);
+      }
+    }
+
+    function compareScenarios() {
+      if (scenarios.length < 2) {
+        alert('Minimal 2 skenario untuk perbandingan');
+        return;
+      }
+
+      const results = scenarios.map((scenario, idx) => {
+        const metrics = {};
+        Object.keys(ranges).forEach(key => {
+          const input = document.querySelector(`#scenario-${idx}-${key}`);
+          const value = input?.value ? Number(input.value) : NaN;
+          if (!isNaN(value)) {
+            metrics[key] = value;
+          }
+        });
+
+        const hsiScore = calculateHSI(metrics, ranges);
+        const interpretation = interpretHSI(hsiScore);
+
+        return {
+          index: idx + 1,
+          name: `Skenario ${idx + 1}`,
+          metrics,
+          hsiScore,
+          interpretation
+        };
+      }).filter(r => Object.keys(r.metrics).length > 0);
+
+      if (results.length < 2) {
+        alert('Pastikan semua skenario memiliki data yang valid');
+        return;
+      }
+
+      // Store results for saving
+      currentComparisonResults = results;
+      displayComparison(results);
+    }
+
+    function displayComparison(results) {
+      const resultsDiv = document.getElementById('comparisonResults');
+      if (resultsDiv) resultsDiv.classList.remove('hidden');
+
+      // Update stats
+      const statsDiv = document.querySelector('[data-comparison-stats]');
+      if (statsDiv) {
+        statsDiv.innerHTML = results.map(r => `
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+            <h4 class="text-sm font-semibold text-text-muted-light dark:text-text-muted-dark mb-2">${r.name}</h4>
+            <p class="text-2xl font-bold ${r.interpretation.color}">${r.hsiScore.toFixed(2)}</p>
+            <span class="text-xs px-2 py-1 rounded ${r.interpretation.bg} ${r.interpretation.color}">${r.interpretation.label}</span>
+          </div>
+        `).join('');
+      }
+
+      // Update chart
+      const ctx = document.getElementById('comparisonChart');
+      if (ctx) {
+        if (comparisonChart) comparisonChart.destroy();
+        
+        const isDark = document.documentElement.classList.contains('dark');
+        comparisonChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: results.map(r => r.name),
+            datasets: [{
+              label: 'HSI Score',
+              data: results.map(r => r.hsiScore),
+              backgroundColor: results.map(r => 
+                r.hsiScore >= 0.75 ? (isDark ? 'rgba(34, 197, 94, 0.6)' : 'rgba(34, 197, 94, 0.6)') :
+                r.hsiScore >= 0.45 ? (isDark ? 'rgba(234, 179, 8, 0.6)' : 'rgba(234, 179, 8, 0.6)') :
+                (isDark ? 'rgba(239, 68, 68, 0.6)' : 'rgba(239, 68, 68, 0.6)')
+              ),
+              borderColor: results.map(r => 
+                r.hsiScore >= 0.75 ? '#22c55e' :
+                r.hsiScore >= 0.45 ? '#eab308' : '#ef4444'
+              ),
+              borderWidth: 2,
+              borderRadius: 6
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                backgroundColor: isDark ? 'rgba(17, 24, 39, 0.95)' : 'rgba(255, 255, 255, 0.95)',
+                titleColor: isDark ? '#e5e7eb' : '#111827',
+                bodyColor: isDark ? '#d1d5db' : '#374151'
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 1,
+                ticks: {
+                  color: isDark ? '#9ca3af' : '#6b7280'
+                },
+                grid: {
+                  color: isDark ? 'rgba(75, 85, 99, 0.3)' : 'rgba(229, 231, 235, 0.8)'
+                }
+              },
+              x: {
+                ticks: {
+                  color: isDark ? '#9ca3af' : '#6b7280'
+                },
+                grid: { display: false }
+              }
+            }
+          }
+        });
+      }
+
+      // Update table
+      const tableBody = document.querySelector('[data-comparison-table]');
+      if (tableBody) {
+        tableBody.innerHTML = Object.entries(ranges).map(([key, config]) => {
+          const cells = results.map(r => {
+            const value = r.metrics[key] || '-';
+            return `<td class="text-center py-3 px-4 text-text-light dark:text-text-dark">${value !== '-' ? value + ' ' + config.unit : '-'}</td>`;
+          }).join('');
+          return `
+            <tr class="border-b border-gray-200 dark:border-gray-700">
+              <td class="py-3 px-4 text-text-light dark:text-text-dark font-medium">${config.label}</td>
+              ${cells}
+            </tr>
+          `;
+        }).join('');
+      }
+
+      // Update headers and hide unused columns
+      for (let i = 1; i <= 3; i++) {
+        const header = document.querySelector(`[data-scenario-header-${i}]`);
+        if (header) {
+          if (i <= results.length) {
+            header.textContent = results[i - 1].name;
+            header.closest('th').style.display = '';
+          } else {
+            header.closest('th').style.display = 'none';
+          }
+        }
+      }
+      
+      // Hide unused table cells
+      const tableRows = document.querySelectorAll('[data-comparison-table] tr');
+      tableRows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        cells.forEach((cell, idx) => {
+          if (idx > 0 && idx > results.length) {
+            cell.style.display = 'none';
+          } else {
+            cell.style.display = '';
+          }
+        });
+      });
+    }
+
+    function hideComparison() {
+      const resultsDiv = document.getElementById('comparisonResults');
+      if (resultsDiv) resultsDiv.classList.add('hidden');
+    }
+
+    // Store current comparison results for saving
+    let currentComparisonResults = null;
+
+    function saveComparisonToHistory() {
+      if (!currentComparisonResults || currentComparisonResults.length < 2) {
+        alert('Tidak ada hasil perbandingan untuk disimpan');
+        return;
+      }
+
+      try {
+        // Get existing history
+        const history = JSON.parse(localStorage.getItem('hsiHistory') || '[]');
+        
+        // Create comparison history item
+        const comparisonItem = {
+          id: 'comparison-' + Date.now(),
+          type: 'comparison',
+          timestamp: new Date().toISOString(),
+          scenarios: currentComparisonResults.map(r => ({
+            name: r.name,
+            hsiScore: r.hsiScore,
+            metrics: r.metrics,
+            interpretation: r.interpretation
+          })),
+          bestScenario: currentComparisonResults.reduce((best, current) => 
+            current.hsiScore > best.hsiScore ? current : best
+          ),
+          totalScenarios: currentComparisonResults.length
+        };
+
+        // Add to history
+        history.unshift(comparisonItem);
+        
+        // Keep only last 100 items
+        if (history.length > 100) {
+          history.splice(100);
+        }
+
+        // Save to localStorage
+        localStorage.setItem('hsiHistory', JSON.stringify(history));
+
+        // Show success message
+        const saveBtn = document.querySelector('button[onclick="saveComparisonToHistory()"]');
+        if (saveBtn) {
+          const originalText = saveBtn.innerHTML;
+          saveBtn.innerHTML = '<i data-lucide="check" class="size-4"></i> Tersimpan!';
+          saveBtn.classList.add('bg-green-500');
+          saveBtn.classList.remove('bg-primary');
+          saveBtn.disabled = true;
+          
+          setTimeout(() => {
+            saveBtn.innerHTML = originalText;
+            saveBtn.classList.remove('bg-green-500');
+            saveBtn.classList.add('bg-primary');
+            saveBtn.disabled = false;
+            lucide.createIcons();
+          }, 2000);
+        }
+
+        lucide.createIcons();
+      } catch (error) {
+        console.error('Error saving comparison:', error);
+        alert('Gagal menyimpan perbandingan ke riwayat');
+      }
+    }
+
+    // Make functions global
+    window.addScenario = addScenario;
+    window.removeScenario = removeScenario;
+    window.fillPreset = fillPreset;
+    window.fillPresetFromExample = fillPresetFromExample;
+    window.compareScenarios = compareScenarios;
+    window.saveComparisonToHistory = saveComparisonToHistory;
+
+    // Event listeners
+    document.querySelector('[data-add-scenario]')?.addEventListener('click', addScenario);
+    document.querySelector('[data-compare-scenarios]')?.addEventListener('click', compareScenarios);
+
+    // Initialize with 2 scenarios
+    addScenario();
+    addScenario();
+
+    lucide.createIcons();
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
+

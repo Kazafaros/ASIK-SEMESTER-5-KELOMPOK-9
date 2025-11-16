@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0077b6" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Prediksi Biogeografi Ikan - MarineEcoPredict</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0077b6",
+            "secondary": "#00b4d8",
+            "light-accent": "#caf0f8",
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+            "text-light": "#111618",
+            "text-dark": "#f0f8ff",
+            "text-muted-light": "#617f89",
+            "text-muted-dark": "#94a3b8"
+          },
+          fontFamily: {
+            "sans": ["Poppins", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-light dark:text-text-dark" data-page="biogeography">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex h-16 items-center gap-4 border-b border-black/10 dark:border-white/10">
+          <a href="index.html" class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-lg font-bold text-text-light dark:text-text-dark">MarineEcoPredict</span>
+          </a>
+          <nav class="hidden lg:flex lg:items-center lg:gap-6 site-nav">
+            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium site-nav-link">Beranda</a>
+            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium site-nav-link">Analisis</a>
+            <a href="comparison.html" data-nav="comparison" data-nav-link class="text-sm font-medium site-nav-link">Perbandingan</a>
+            <a href="history.html" data-nav="history" data-nav-link class="text-sm font-medium site-nav-link">Riwayat</a>
+            <a href="biogeography.html" data-nav="biogeography" data-nav-link class="text-sm font-medium site-nav-link">Biogeografi</a>
+            <a href="help.html" data-nav="help" data-nav-link class="text-sm font-medium site-nav-link">Bantuan</a>
+            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium site-nav-link">Tentang</a>
+          </nav>
+          <div class="ml-auto flex items-center gap-2">
+            <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text-muted-light transition hover:bg-white dark:border-white/10 dark:bg-background-dark/80 dark:text-text-muted-dark">
+              <span class="sr-only">Toggle theme</span>
+              <span data-theme-icon="sun" class="hidden">
+                <i data-lucide="sun" class="size-5"></i>
+              </span>
+              <span data-theme-icon="moon">
+                <i data-lucide="moon" class="size-5"></i>
+              </span>
+            </button>
+            <button class="flex items-center justify-center rounded-md p-2 lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-menu h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+              <span class="sr-only">Open menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8 max-w-6xl">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-text-light dark:text-text-dark mb-2 flex items-center gap-3">
+          <i data-lucide="fish" class="size-8 text-primary"></i>
+          Prediksi Biogeografi Ikan
+        </h1>
+        <p class="text-text-muted-light dark:text-text-muted-dark">Identifikasi jenis ikan yang cocok hidup di daerah tertentu berdasarkan HSI Score dan kondisi lingkungan</p>
+      </div>
+
+      <div class="space-y-6">
+        <!-- INPUT SECTION -->
+        <div class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="input" class="size-6 text-primary"></i>
+            Input Parameter Lingkungan
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
+            <div>
+              <label class="block text-sm font-semibold text-text-light dark:text-text-dark mb-2">HSI Score</label>
+              <input type="number" id="hsiScore" min="0" max="1" step="0.01" placeholder="0.75" class="w-full px-3 py-2 border border-black/10 dark:border-white/10 rounded-lg bg-white dark:bg-gray-800 text-text-light dark:text-text-dark">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-text-light dark:text-text-dark mb-2">Suhu (°C)</label>
+              <input type="number" id="temperature" min="15" max="35" step="0.1" placeholder="28" class="w-full px-3 py-2 border border-black/10 dark:border-white/10 rounded-lg bg-white dark:bg-gray-800 text-text-light dark:text-text-dark">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-text-light dark:text-text-dark mb-2">Salinitas (ppt)</label>
+              <input type="number" id="salinity" min="0" max="40" step="0.1" placeholder="33" class="w-full px-3 py-2 border border-black/10 dark:border-white/10 rounded-lg bg-white dark:bg-gray-800 text-text-light dark:text-text-dark">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-text-light dark:text-text-dark mb-2">Kedalaman (m)</label>
+              <input type="number" id="depth" min="0" max="200" step="1" placeholder="20" class="w-full px-3 py-2 border border-black/10 dark:border-white/10 rounded-lg bg-white dark:bg-gray-800 text-text-light dark:text-text-dark">
+            </div>
+            <div>
+              <label class="block text-sm font-semibold text-text-light dark:text-text-dark mb-2">Area/Lokasi</label>
+              <input type="text" id="areaName" placeholder="Selat Sunda" class="w-full px-3 py-2 border border-black/10 dark:border-white/10 rounded-lg bg-white dark:bg-gray-800 text-text-light dark:text-text-dark">
+            </div>
+          </div>
+
+          <button id="predictBtn" class="px-6 py-2 bg-primary hover:bg-blue-600 text-white rounded-lg font-semibold transition">
+            <i data-lucide="search" class="inline size-4 mr-2"></i>
+            Prediksi Ikan yang Cocok
+          </button>
+        </div>
+
+        <!-- PREDICTION RESULT -->
+        <div id="predictionResult" class="hidden bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="list" class="size-6 text-primary"></i>
+            Hasil Prediksi Jenis Ikan
+          </h2>
+
+          <!-- Area & Conditions Summary -->
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-3 mb-6">
+            <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border border-blue-200 dark:border-blue-800">
+              <p class="text-xs text-text-muted-light dark:text-text-muted-dark font-semibold mb-1">Area</p>
+              <p id="displayArea" class="text-sm font-bold text-primary">-</p>
+            </div>
+            <div class="bg-cyan-50 dark:bg-cyan-900/20 p-3 rounded-lg border border-cyan-200 dark:border-cyan-800">
+              <p class="text-xs text-text-muted-light dark:text-text-muted-dark font-semibold mb-1">HSI Score</p>
+              <p id="displayHSI" class="text-sm font-bold text-cyan-600">-</p>
+            </div>
+            <div class="bg-amber-50 dark:bg-amber-900/20 p-3 rounded-lg border border-amber-200 dark:border-amber-800">
+              <p class="text-xs text-text-muted-light dark:text-text-muted-dark font-semibold mb-1">Suhu</p>
+              <p id="displayTemp" class="text-sm font-bold text-amber-600">-</p>
+            </div>
+            <div class="bg-purple-50 dark:bg-purple-900/20 p-3 rounded-lg border border-purple-200 dark:border-purple-800">
+              <p class="text-xs text-text-muted-light dark:text-text-muted-dark font-semibold mb-1">Salinitas</p>
+              <p id="displaySal" class="text-sm font-bold text-purple-600">-</p>
+            </div>
+            <div class="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800">
+              <p class="text-xs text-text-muted-light dark:text-text-muted-dark font-semibold mb-1">Kedalaman</p>
+              <p id="displayDepth" class="text-sm font-bold text-green-600">-</p>
+            </div>
+          </div>
+
+          <!-- Fish Species Cards -->
+          <div id="fishSpeciesContainer" class="space-y-4 mb-6">
+            <!-- Fish cards will be generated here -->
+          </div>
+
+          <!-- Habitat Classification -->
+          <div class="bg-gradient-to-r from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20 p-6 rounded-lg border border-primary/20 dark:border-primary/30 mb-6">
+            <h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-2 flex items-center gap-2">
+              <i data-lucide="info" class="size-5 text-primary"></i>
+              Klasifikasi Habitat
+            </h3>
+            <p id="habitatInfo" class="text-text-muted-light dark:text-text-muted-dark leading-relaxed"></p>
+          </div>
+
+          <!-- Recommendations -->
+          <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-lg border border-blue-200 dark:border-blue-800">
+            <h3 class="text-lg font-bold text-text-light dark:text-text-dark mb-3 flex items-center gap-2">
+              <i data-lucide="lightbulb" class="size-5 text-blue-600"></i>
+              Rekomendasi Pengelolaan
+            </h3>
+            <ul id="recommendationsList" class="space-y-2 text-sm text-text-muted-light dark:text-text-muted-dark"></ul>
+          </div>
+        </div>
+
+        <!-- REFERENCE DATA -->
+        <div class="bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6">
+          <h2 class="text-xl font-bold text-text-light dark:text-text-dark mb-4 flex items-center gap-2">
+            <i data-lucide="database" class="size-6 text-primary"></i>
+            Referensi Data Ikan
+          </h2>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Temperature Reference -->
+            <div class="p-4 bg-amber-50 dark:bg-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+              <h3 class="font-bold text-text-light dark:text-text-dark mb-3 flex items-center gap-2">
+                <i data-lucide="thermometer" class="size-5 text-amber-600"></i>
+                Toleransi Suhu
+              </h3>
+              <div class="space-y-2 text-sm">
+                <p><strong>Ikan Tropis:</strong> 24-32°C optimal</p>
+                <p><strong>Ikan Sub-tropis:</strong> 18-28°C optimal</p>
+                <p><strong>Ikan Pelagis:</strong> 20-30°C optimal</p>
+              </div>
+            </div>
+
+            <!-- Salinity Reference -->
+            <div class="p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
+              <h3 class="font-bold text-text-light dark:text-text-dark mb-3 flex items-center gap-2">
+                <i data-lucide="waves" class="size-5 text-blue-600"></i>
+                Toleransi Salinitas
+              </h3>
+              <div class="space-y-2 text-sm">
+                <p><strong>Euryhaline:</strong> 0-40 ppt (fleksibel)</p>
+                <p><strong>Stenohaline:</strong> 30-35 ppt (laut)</p>
+                <p><strong>Anadromous:</strong> Adaptif sungai-laut</p>
+              </div>
+            </div>
+
+            <!-- Depth Reference -->
+            <div class="p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg border border-purple-200 dark:border-purple-800">
+              <h3 class="font-bold text-text-light dark:text-text-dark mb-3 flex items-center gap-2">
+                <i data-lucide="arrow-down" class="size-5 text-purple-600"></i>
+                Zona Kedalaman
+              </h3>
+              <div class="space-y-2 text-sm">
+                <p><strong>Litoral:</strong> 0-50m (cahaya penuh)</p>
+                <p><strong>Sublitoral:</strong> 50-200m (penumbra)</p>
+                <p><strong>Batial:</strong> 200m+ (gelap)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="w-full mt-16 bg-white dark:bg-gray-900 border-t border-black/10 dark:border-white/10">
+      <div class="container mx-auto max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="text-center mb-8">
+          <a href="index.html" class="flex items-center justify-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-8 w-8" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-2xl font-semibold text-text-light dark:text-white">MarineEcoPredict</span>
+          </a>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark">Memprediksi masa depan lautan kami melalui analisis ekosistem laut tingkat lanjut.</p>
+        </div>
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div class="text-center">
+          <span class="text-sm text-text-muted-light dark:text-text-muted-dark">© 2024 MarineEcoPredict™. All Rights Reserved.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Theme toggle
+    (function () {
+      const root = document.documentElement;
+      const toggleBtn = document.querySelector('[data-theme-toggle]');
+      const sunWrapper = toggleBtn?.querySelector('[data-theme-icon="sun"]');
+      const moonWrapper = toggleBtn?.querySelector('[data-theme-icon="moon"]');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      const storedTheme = localStorage.getItem('theme');
+      const initialDark = storedTheme ? storedTheme === 'dark' : prefersDark?.matches;
+      applyTheme(initialDark);
+
+      toggleBtn?.addEventListener('click', () => {
+        const nextIsDark = !root.classList.contains('dark');
+        applyTheme(nextIsDark);
+        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
+      });
+
+      function applyTheme(isDark) {
+        root.classList.toggle('dark', isDark);
+        toggleBtn?.setAttribute('aria-pressed', String(isDark));
+        if (isDark) {
+          sunWrapper?.classList.remove('hidden');
+          moonWrapper?.classList.add('hidden');
+        } else {
+          sunWrapper?.classList.add('hidden');
+          moonWrapper?.classList.remove('hidden');
+        }
+      }
+    })();
+
+    // Nav highlight
+    (function () {
+      const currentPage = document.body.dataset.page;
+      if (!currentPage) return;
+      document.querySelectorAll('[data-nav-link]').forEach((link) => {
+        if (link.dataset.nav === currentPage) {
+          link.classList.add('nav-link-active');
+        }
+      });
+    })();
+
+    lucide.createIcons();
+
+    // Load fish database
+    let fishDatabase = {};
+    async function loadFishDatabase() {
+      try {
+        const response = await fetch('./data/fish_species.json');
+        const data = await response.json();
+        
+        // Organize fish by HSI preference
+        fishDatabase.high = data.fishSpecies.filter(f => f.hsiPreference.min >= 0.70);
+        fishDatabase.medium = data.fishSpecies.filter(f => f.hsiPreference.min >= 0.45 && f.hsiPreference.min < 0.70);
+        fishDatabase.low = data.fishSpecies.filter(f => f.hsiPreference.min < 0.45);
+        fishDatabase.all = data.fishSpecies;
+      } catch (error) {
+        console.error('Error loading fish database:', error);
+      }
+    }
+
+    // Load database on page load
+    loadFishDatabase();
+
+    document.getElementById('predictBtn').addEventListener('click', async function() {
+      const hsiScore = parseFloat(document.getElementById('hsiScore').value);
+      const temperature = parseFloat(document.getElementById('temperature').value);
+      const salinity = parseFloat(document.getElementById('salinity').value);
+      const depth = parseFloat(document.getElementById('depth').value);
+      const areaName = document.getElementById('areaName').value || 'Area Analisis';
+
+      if (isNaN(hsiScore) || hsiScore < 0 || hsiScore > 1) {
+        alert('Masukkan HSI Score antara 0-1');
+        return;
+      }
+
+      // Show result section
+      document.getElementById('predictionResult').classList.remove('hidden');
+
+      // Display input values
+      document.getElementById('displayArea').textContent = areaName;
+      document.getElementById('displayHSI').textContent = hsiScore.toFixed(2);
+      document.getElementById('displayTemp').textContent = temperature.toFixed(1) + '°C';
+      document.getElementById('displaySal').textContent = salinity.toFixed(1) + ' ppt';
+      document.getElementById('displayDepth').textContent = depth.toFixed(0) + ' m';
+
+      // Determine HSI category and get relevant fish
+      let category = '';
+      let fishes = [];
+      let habitatDesc = '';
+
+      if (hsiScore >= 0.75) {
+        category = 'TINGGI';
+        fishes = fishDatabase.high || [];
+        habitatDesc = `Dengan HSI Score ${hsiScore.toFixed(2)} (TINGGI), wilayah ${areaName} memiliki habitat yang sangat optimal untuk berbagai jenis ikan pelagis. Kondisi lingkungan mendukung produktivitas tinggi dengan keragaman spesies yang besar. Daerah ini sangat cocok untuk aktivitas perikanan tangkap dengan potensi hasil yang maksimal.`;
+      } else if (hsiScore >= 0.50) {
+        category = 'SEDANG';
+        fishes = fishDatabase.medium || [];
+        habitatDesc = `Dengan HSI Score ${hsiScore.toFixed(2)} (SEDANG), wilayah ${areaName} menunjukkan kondisi habitat yang cukup baik untuk sebagian jenis ikan demersal dan pelagis. Habitat dapat mendukung komunitas ikan dengan diversitas sedang. Pengelolaan berkelanjutan diperlukan untuk mempertahankan produktivitas.`;
+      } else {
+        category = 'RENDAH';
+        fishes = fishDatabase.low || [];
+        habitatDesc = `Dengan HSI Score ${hsiScore.toFixed(2)} (RENDAH), wilayah ${areaName} memiliki kondisi habitat terbatas dengan dominasi organisme bentik. Produktivitas rendah dengan keragaman spesies minimal. Area ini memerlukan perhatian khusus untuk konservasi dan pemulihan ekosistem.`;
+      }
+
+      // Generate fish cards dengan data real
+      const container = document.getElementById('fishSpeciesContainer');
+      container.innerHTML = '';
+
+      fishes.forEach((fish, index) => {
+        const matchScore = calculateMatchScore(fish, temperature, salinity, depth, hsiScore);
+        const borderColor = matchScore >= 0.8 ? 'border-green-500' : matchScore >= 0.6 ? 'border-yellow-500' : 'border-orange-500';
+        const bgColor = matchScore >= 0.8 ? 'bg-green-50 dark:bg-green-900/20' : matchScore >= 0.6 ? 'bg-yellow-50 dark:bg-yellow-900/20' : 'bg-orange-50 dark:bg-orange-900/20';
+        const textColor = matchScore >= 0.8 ? 'text-green-700 dark:text-green-300' : matchScore >= 0.6 ? 'text-yellow-700 dark:text-yellow-300' : 'text-orange-700 dark:text-orange-300';
+
+        const tempRange = `${fish.temperatureRange.min}-${fish.temperatureRange.max}`;
+        const salRange = `${fish.salinityRange.min}-${fish.salinityRange.max}`;
+        const depthRange = `${fish.depthRange.min}-${fish.depthRange.max}`;
+        
+        // Determine category type with emoji
+        const categoryEmoji = fish.category === 'pelagic' ? '🌊' : fish.category === 'demersal' ? '🏜️' : '🪨';
+        const categoryName = fish.category === 'pelagic' ? 'Pelagis' : fish.category === 'demersal' ? 'Demersal' : 'Bentik';
+
+        const card = document.createElement('div');
+        card.className = `p-4 rounded-lg border-l-4 ${borderColor} ${bgColor} transition-all hover:shadow-md`;
+        card.innerHTML = `
+          <div class="space-y-3">
+            <!-- Header dengan nama dan tipe -->
+            <div class="flex items-start justify-between">
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="text-lg">${categoryEmoji}</span>
+                  <h3 class="font-bold text-lg text-text-light dark:text-text-dark">${fish.indonesianName}</h3>
+                </div>
+                <p class="text-xs text-text-muted-light dark:text-text-muted-dark italic mb-1">${fish.scientificName}</p>
+                <div class="flex flex-wrap gap-2 mb-2">
+                  <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">${categoryName}</span>
+                  <span class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300">Famili: ${fish.family}</span>
+                </div>
+              </div>
+              <div class="ml-4 text-center">
+                <div class="text-3xl">🐟</div>
+              </div>
+            </div>
+
+            <!-- Parameter Lingkungan -->
+            <div class="bg-white/50 dark:bg-black/20 rounded p-2">
+              <p class="text-xs font-semibold text-text-light dark:text-text-dark mb-2">📊 Parameter Optimal:</p>
+              <div class="grid grid-cols-2 md:grid-cols-2 gap-2 text-xs">
+                <div class="bg-orange-100 dark:bg-orange-900/30 rounded p-2">
+                  <span class="font-semibold text-orange-700 dark:text-orange-300">🌡️ Suhu:</span><br>
+                  ${tempRange}°C (Optimal: ${fish.temperatureRange.optimal}°C)
+                </div>
+                <div class="bg-cyan-100 dark:bg-cyan-900/30 rounded p-2">
+                  <span class="font-semibold text-cyan-700 dark:text-cyan-300">🧂 Salinitas:</span><br>
+                  ${salRange} ppt (Optimal: ${fish.salinityRange.optimal} ppt)
+                </div>
+                <div class="bg-indigo-100 dark:bg-indigo-900/30 rounded p-2">
+                  <span class="font-semibold text-indigo-700 dark:text-indigo-300">📏 Kedalaman:</span><br>
+                  ${depthRange} m (Tipikal: ${fish.depthRange.typical} m)
+                </div>
+                <div class="bg-green-100 dark:bg-green-900/30 rounded p-2">
+                  <span class="font-semibold text-green-700 dark:text-green-300">📈 HSI Min:</span><br>
+                  ${fish.hsiPreference.min} (Optimal: ${fish.hsiPreference.optimal})
+                </div>
+              </div>
+            </div>
+
+            <!-- Informasi Biologi -->
+            <div class="bg-white/50 dark:bg-black/20 rounded p-2 text-xs space-y-1">
+              <p><strong>🍽️ Makanan:</strong> ${fish.dietaryHabits}</p>
+              <p><strong>🥚 Reproduksi:</strong> ${fish.reproductionType}</p>
+              <p><strong>💰 Nilai Ekonomi:</strong> ${fish.economicValue}</p>
+            </div>
+
+            <!-- Match Score -->
+            <div class="space-y-1">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-semibold text-text-light dark:text-text-dark">Kesesuaian Habitat:</span>
+                <span class="${textColor} font-bold text-sm">${(matchScore * 100).toFixed(0)}%</span>
+              </div>
+              <div class="flex-1 bg-gray-300 dark:bg-gray-600 rounded-full h-3">
+                <div class="bg-primary h-3 rounded-full transition-all" style="width: ${matchScore * 100}%"></div>
+              </div>
+              <p class="text-xs text-text-muted-light dark:text-text-muted-dark">
+                ${matchScore >= 0.8 ? '✅ Sangat Sesuai - Habitat optimal' : matchScore >= 0.6 ? '⚠️ Cukup Sesuai - Mendukung pertumbuhan' : '⚠️ Kurang Sesuai - Kondisi marginal'}
+              </p>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Update habitat classification
+      document.getElementById('habitatInfo').textContent = habitatDesc;
+
+      // Generate recommendations
+      const recommendations = [];
+      if (hsiScore >= 0.75) {
+        recommendations.push('✅ Buka area untuk perikanan komersial dengan kuota penuh');
+        recommendations.push('✅ Implementasikan sistem monitoring berkala untuk menjaga keberlanjutan');
+        recommendations.push('✅ Pertimbangkan pengembangan wisata bahari dan reef tourism');
+        recommendations.push('✅ Tetap lakukan penelitian untuk optimasi hasil tangkapan');
+      } else if (hsiScore >= 0.50) {
+        recommendations.push('⚠️ Tetapkan zona perikanan berkelanjutan dengan pembatasan kuota');
+        recommendations.push('⚠️ Lakukan monitoring rutin setiap bulan untuk mendeteksi perubahan');
+        recommendations.push('⚠️ Implementasikan sistem rotasi penangkapan untuk pemulihan stok');
+        recommendations.push('⚠️ Pertimbangkan area ini sebagai zona breeding ground yang dilindungi sebagian');
+      } else {
+        recommendations.push('🛑 Tetapkan area sebagai zona konservasi untuk pemulihan ekosistem');
+        recommendations.push('🛑 Hentikan aktivitas perikanan komersial sementara');
+        recommendations.push('🛑 Implementasikan program restorasi habitat intensif');
+        recommendations.push('🛑 Pantau perbaikan kondisi HSI setiap 3-6 bulan');
+      }
+
+      const recList = document.getElementById('recommendationsList');
+      recList.innerHTML = recommendations.map(rec => `<li>• ${rec}</li>`).join('');
+    });
+
+    // Calculate match score berdasarkan parameter biologis REAL dari database
+    function calculateMatchScore(fish, temp, sal, depth, hsi) {
+      let score = 0;
+      let count = 0;
+
+      // Temperature match
+      if (temp >= fish.temperatureRange.min && temp <= fish.temperatureRange.max) {
+        score += 1;
+      } else if (temp >= fish.temperatureRange.min - 2 && temp <= fish.temperatureRange.max + 2) {
+        score += 0.7;
+      } else {
+        score += 0.3;
+      }
+      count++;
+
+      // Salinity match
+      if (sal >= fish.salinityRange.min && sal <= fish.salinityRange.max) {
+        score += 1;
+      } else if (sal >= fish.salinityRange.min - 1 && sal <= fish.salinityRange.max + 1) {
+        score += 0.7;
+      } else {
+        score += 0.3;
+      }
+      count++;
+
+      // Depth match
+      if (depth >= fish.depthRange.min && depth <= fish.depthRange.max) {
+        score += 1;
+      } else if (depth >= fish.depthRange.min && depth <= fish.depthRange.max + 50) {
+        score += 0.7;
+      } else {
+        score += 0.3;
+      }
+      count++;
+
+      // HSI preference match
+      if (hsi >= fish.hsiPreference.min && hsi <= (fish.hsiPreference.optimal || 1.0)) {
+        score += 1;
+      } else if (hsi >= fish.hsiPreference.min - 0.1) {
+        score += 0.7;
+      } else {
+        score += 0.3;
+      }
+      count++;
+
+      return score / count;
+    }
+  </script>
+</body>
+</html>

@@ -47,11 +47,14 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
             <span class="text-lg font-bold text-text-light dark:text-text-dark">MarineEcoPredict</span>
           </a>
-          <nav class="hidden lg:flex lg:items-center lg:gap-6">
-            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium text-text-muted-light transition-colors hover:text-primary dark:text-text-muted-dark dark:hover:text-secondary">Dashboard</a>
-            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium text-text-muted-light transition-colors hover:text-primary dark:text-text-muted-dark dark:hover:text-secondary">Prediksi</a>
-            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium text-text-muted-light transition-colors hover:text-primary dark:text-text-muted-dark dark:hover:text-secondary">Tentang</a>
-            <a href="#" class="text-sm font-medium text-text-muted-light transition-colors hover:text-primary dark:text-text-muted-dark dark:hover:text-secondary">Kontak</a>
+          <nav class="hidden lg:flex lg:items-center lg:gap-6 site-nav">
+            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium site-nav-link">Beranda</a>
+            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium site-nav-link">Analisis</a>
+            <a href="comparison.html" data-nav="comparison" data-nav-link class="text-sm font-medium site-nav-link">Perbandingan</a>
+            <a href="history.html" data-nav="history" data-nav-link class="text-sm font-medium site-nav-link">Riwayat</a>
+            <a href="biogeography.html" data-nav="biogeography" data-nav-link class="text-sm font-medium site-nav-link">Biogeografi</a>
+            <a href="help.html" data-nav="help" data-nav-link class="text-sm font-medium site-nav-link">Bantuan</a>
+            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium site-nav-link">Tentang</a>
           </nav>
           <div class="ml-auto flex items-center gap-2">
             <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text-muted-light transition hover:bg-white dark:border-white/10 dark:bg-background-dark/80 dark:text-text-muted-dark">
@@ -78,10 +81,10 @@
           <div class="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat @[480px]:gap-8 @[480px]:rounded-lg items-center justify-center p-4 text-center" style='background-image: linear-gradient(rgba(16, 29, 34, 0.4) 0%, rgba(16, 29, 34, 0.7) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuCvUXhhipGWQ0dKvxbyuNCwSs9pa7eq1jp6ntCRtgVl0gxQh8lsafPJAvF3D--9er6Q4BWKeP3vwXF-HC5nIPUs-QvonnxsVasrOR_qiGobKN_rY8ECQ48DJ_Tnx4pd-hZ3W65W8ckqyZ_8Ba3z9Cf-mP5jMxTZeyjaXLmc8b93SNDrdHoTlYX9ORTUgIFmHj9uit4mCG65PVLVq_ddNTdY2Ku2A7ZO7edXumg22bPnNGVuSge-6ZR58Aq1pYrwwqhSyQF9W_pOolgt");'>
             <div class="flex flex-col gap-2">
               <h1 class="text-white text-4xl font-bold leading-tight tracking-tight @[480px]:text-5xl @[480px]:leading-tight">
-                Predicting the Future of Our Oceans
+                Memprediksi Masa Depan Lautan Kita
               </h1>
               <h2 class="text-white/90 text-base font-normal leading-normal @[480px]:text-lg max-w-lg mx-auto">
-                Forecasting marine ecosystem health and carrying capacity with advanced predictive modeling and real-time data analysis.
+                Memperkirakan kesehatan ekosistem laut dengan pemodelan prediktif dan analisis data real-time.
               </h2>
             </div>
             <a href="analysis.html" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 @[480px]:h-12 @[480px]:px-5 bg-primary text-white text-sm font-semibold leading-normal @[480px]:text-base hover:bg-opacity-90 transition-colors">
@@ -93,82 +96,102 @@
 
       <div class="container mx-auto px-4 pt-8">
         <div class="flex flex-col gap-4">
-          <h2 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-tight">Analisis Data Historis: Selat Sunda</h2>
+          <h2 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-tight">Analisis Data Historis di Selat Sunda</h2>
           
           <!-- Map Controls -->
-          <div class="mb-4 flex flex-wrap gap-3 items-center justify-center bg-white dark:bg-background-dark p-4 rounded-lg border border-black/10 dark:border-white/10">
-            <div class="flex items-center gap-2">
-              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Layer:</label>
-              <select id="layer-select" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-                <option value="hsi">HSI</option>
-                <option value="sst">SST</option>
-                <option value="chlor_a">Chlorophyll-a</option>
-                <option value="salinity">Salinity</option>
-              </select>
+          <div class="mb-4 flex flex-wrap gap-3 items-center justify-between bg-white dark:bg-background-dark p-4 rounded-lg border border-black/10 dark:border-white/10">
+            <div class="flex flex-wrap gap-3 items-center">
+              <div class="flex items-center gap-2">
+                <label class="text-sm font-medium muted">Parameter:</label>
+                <select id="layer-select" class="form-control">
+                  <option value="hsi">HSI</option>
+                  <option value="sst">SST</option>
+                  <option value="chlor_a">Chlorophyll-a</option>
+                  <option value="salinity">Salinity</option>
+                </select>
+              </div>
+              <div class="flex items-center gap-2">
+                <label class="text-sm font-medium muted">Warna Peta:</label>
+                <select id="colormap-select" class="form-control">
+                  <option value="viridis">Viridis</option>
+                  <option value="plasma">Plasma</option>
+                  <option value="inferno">Inferno</option>
+                  <option value="magma">Magma</option>
+                  <option value="turbo">Turbo</option>
+                  <option value="jet">Jet</option>
+                </select>
+              </div>
+              <div class="flex items-center gap-2">
+                <label class="text-sm font-medium muted">Tahun:</label>
+                <select id="year-select" class="form-control">
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                </select>
+              </div>
+              <div class="flex items-center gap-2">
+                <label class="text-sm font-medium muted">Bulan:</label>
+                <select id="month-select" class="form-control">
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+              </div>
             </div>
-            <div class="flex items-center gap-2">
-              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Colormap:</label>
-              <select id="colormap-select" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-                <option value="viridis">Viridis</option>
-                <option value="plasma">Plasma</option>
-                <option value="inferno">Inferno</option>
-                <option value="magma">Magma</option>
-                <option value="turbo">Turbo</option>
-                <option value="jet">Jet</option>
-              </select>
-            </div>
-            <div class="flex items-center gap-2">
-              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Year:</label>
-              <select id="year-select" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-              </select>
-            </div>
-            <div class="flex items-center gap-2">
-              <label class="text-sm font-medium text-gray-700 dark:text-gray-300">Month:</label>
-              <select id="month-select" class="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-                <option value="1">January</option>
-                <option value="2">February</option>
-                <option value="3">March</option>
-                <option value="4">April</option>
-                <option value="5">May</option>
-                <option value="6">June</option>
-                <option value="7">July</option>
-                <option value="8">August</option>
-                <option value="9">September</option>
-                <option value="10">October</option>
-                <option value="11">November</option>
-                <option value="12">December</option>
-              </select>
+            
+            <!-- Download Button - Outside Map -->
+            <div class="relative">
+              <button id="download-data-btn" class="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-white text-sm font-semibold transition hover:bg-primary/90 shadow-lg">
+                <i data-lucide="download" class="size-4"></i>
+                <span>Unduh Data</span>
+              </button>
+              <div id="download-dropdown" class="hidden absolute top-full right-0 mt-2 bg-white dark:bg-background-dark rounded-lg border border-black/10 dark:border-white/10 shadow-xl min-w-[220px] overflow-hidden z-50">
+                <button onclick="downloadClickedData()" class="w-full text-left px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition flex items-center gap-2">
+                  <i data-lucide="mouse-pointer-click" class="size-4"></i>
+                  <span>Data yang Diklik</span>
+                </button>
+                <button onclick="downloadAllHistoricalData()" class="w-full text-left px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition flex items-center gap-2 border-t border-black/10 dark:border-white/10">
+                  <i data-lucide="database" class="size-4"></i>
+                  <span>Data Historis Lengkap</span>
+                </button>
+              </div>
             </div>
           </div>
           
           <!-- Map Container -->
-          <div class="relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-gray-200 dark:bg-gray-800 border border-black/10 dark:border-white/10">
+          <div class="index-map-container">
             <div id="sunda-strait-map" class="w-full h-full"></div>
             
             <!-- Map Interaction Info -->
-            <div class="absolute bottom-4 left-4 bg-white/90 dark:bg-background-dark/90 backdrop-blur-sm p-2 px-3 rounded-lg shadow-md border border-gray-200 dark:border-gray-800 z-[999] text-xs text-gray-600 dark:text-gray-400">
+            <div class="legend-box absolute bottom-4 left-4 z-[999] text-xs">
               💡 Klik pada peta untuk melihat detail data di dashboard
             </div>
             
             <!-- Legend -->
-            <div class="absolute top-4 right-4 bg-white/90 dark:bg-background-dark/90 backdrop-blur-sm p-3 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 z-[1000] min-w-[180px] max-w-[220px]">
-              <h3 class="text-xs font-bold text-gray-800 dark:text-gray-200 mb-2" id="legend-title">HSI Legend</h3>
+            <div class="legend-box absolute top-4 right-4 z-[1000] min-w-[180px] max-w-[220px]">
+              <h3 class="text-xs font-bold mb-2" id="legend-title">HSI Legend</h3>
               <div id="legend-content">
                 <!-- Gradient legend will be generated here -->
                 <div class="flex flex-col space-y-2">
-                  <div class="relative h-32 w-full rounded border border-gray-300 dark:border-gray-600" id="legend-gradient"></div>
-                  <div class="flex justify-between text-xs text-gray-600 dark:text-gray-400">
+                  <div class="relative h-32 w-full rounded" id="legend-gradient"></div>
+                  <div class="flex justify-between text-xs muted">
                     <span id="legend-min">0.0</span>
                     <span id="legend-max">1.0</span>
                   </div>
-                  <div class="text-xs text-gray-500 dark:text-gray-400 mt-1" id="legend-unit">(Index 0-1)</div>
+                  <div class="text-xs muted mt-1" id="legend-unit">(Index 0-1)</div>
                   <!-- Interpretation guide -->
-                  <div class="border-t border-gray-200 dark:border-gray-700 pt-2 mt-2" id="legend-interpretation">
-                    <div class="text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1.5">Interpretasi:</div>
+                  <div class="border-t border-black/10 dark:border-white/10 pt-2 mt-2" id="legend-interpretation">
+                    <div class="text-xs font-semibold mb-1.5">Interpretasi:</div>
                     <div class="space-y-1" id="legend-categories"></div>
                   </div>
                 </div>
@@ -180,50 +203,50 @@
 
       <!-- OLAP Dashboard Below Map -->
       <div class="container mx-auto px-4 pt-6">
-        <div class="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-6">
-          <h3 class="text-primary text-xl font-bold leading-tight mb-4">📊 Dashboard Analisis OLAP</h3>
+        <div class="card">
+          <h3 class="text-primary text-xl font-bold leading-tight mb-4">Dashboard Analisis OLAP</h3>
           
           <!-- OLAP Controls -->
           <div class="mb-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
             <div>
-              <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Dimensi Waktu</label>
-              <select id="olap-time-dimension" class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label class="block text-xs font-bold mb-2">Dimensi Waktu</label>
+              <select id="olap-time-dimension" class="w-full form-control">
                 <option value="monthly">Bulanan</option>
                 <option value="yearly">Tahunan</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Pilih Layer</label>
-              <select id="olap-layer-select" class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
-                <option value="hsi">HSI (Habitat Suitability)</option>
-                <option value="sst">SST (Sea Surface Temp)</option>
-                <option value="chlor_a">Chlorophyll-a</option>
-                <option value="salinity">Salinity</option>
+              <label class="block text-xs font-bold mb-2">Pilih Parameter</label>
+              <select id="olap-layer-select" class="w-full form-control">
+                <option value="hsi">Habitat Suitability Index (HSI)</option>
+                <option value="sst">Suhu Permukaan Laut (SST)</option>
+                <option value="chlor_a">Klorofil-a</option>
+                <option value="salinity">Salinitas</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Agregasi</label>
-              <select id="olap-aggregation" class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label class="block text-xs font-bold mb-2">Agregasi</label>
+              <select id="olap-aggregation" class="w-full form-control">
                 <option value="mean">Rata-rata</option>
                 <option value="min">Minimum</option>
                 <option value="max">Maksimum</option>
-                <option value="std">Std Dev</option>
+                <option value="std">Standart Deviasi</option>
               </select>
             </div>
             <div>
-              <label class="block text-xs font-bold text-gray-700 dark:text-gray-300 mb-2">Jenis Visualisasi</label>
-              <select id="olap-visualization" class="w-full px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-primary">
+              <label class="block text-xs font-bold mb-2">Jenis Visualisasi</label>
+              <select id="olap-visualization" class="w-full form-control">
                 <option value="overview">Overview</option>
                 <option value="timeseries">Time Series</option>
-                <option value="comparison">Perbandingan Layer</option>
+                <option value="comparison">Perbandingan Parameter</option>
                 <option value="statistics">Statistik</option>
               </select>
             </div>
           </div>
           
           <!-- OLAP Content Area -->
-          <div id="olap-dashboard-content" class="min-h-[300px] bg-gray-50 dark:bg-gray-800/50 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-            <div class="flex items-center justify-center h-full text-gray-500 dark:text-gray-400">
+          <div id="olap-dashboard-content" class="min-h-[300px] bg-background-light dark:bg-gray-800/50 rounded-lg p-6 border border-black/10 dark:border-white/10">
+            <div class="flex items-center justify-center h-full text-text-muted-light dark:text-text-muted-dark">
               <p>Pilih lokasi pada peta untuk memulai analisis OLAP...</p>
             </div>
           </div>
@@ -231,42 +254,42 @@
       </div>
 
       <div class="container mx-auto p-4">
-        <div class="rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-6">
-          <h3 class="text-primary text-xl font-bold leading-tight mb-2">Habitat Suitability &amp; Daya Dukung</h3>
+        <div class="card">
+          <h3 class="text-primary text-xl font-bold leading-tight mb-2">Kesesuaian Habitat & Daya Dukung</h3>
           <p class="text-text-muted-light dark:text-text-muted-dark text-sm leading-relaxed mb-4">
-            Habitat Suitability Index (HSI) adalah alat penting untuk mengevaluasi kualitas habitat laut. Dengan memprediksi daya dukung laut, kita dapat memastikan keberlanjutan sumber daya, mengelola aktivitas perikanan secara efektif, dan melindungi keanekaragaman hayati dari dampak perubahan iklim dan aktivitas manusia.
+            Habitat Suitability Index (HSI) adalah alat penting untuk mengevaluasi kualitas habitat yang ada di laut. Dengan memprediksi daya dukung ekosistem laut, kita dapat memastikan keberlanjutan sumber daya dalam mengelola aktivitas perikanan secara efektif dan melindungi keanekaragaman hayati dari dampak perubahan iklim dan aktivitas manusia.
           </p>
-          <button class="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-secondary/10 text-secondary text-sm font-semibold leading-normal hover:bg-secondary/20 transition-colors">
+          <a href="help.html" class="flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-secondary/10 text-secondary text-sm font-semibold leading-normal hover:bg-secondary/20 transition-colors">
             <span class="truncate">Pelajari Lebih Lanjut</span>
-          </button>
+          </a>
         </div>
       </div>
 
       <div class="container mx-auto px-4 pb-3 pt-8">
-        <h2 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-tight">Core Features</h2>
+        <h2 class="text-text-light dark:text-text-dark text-2xl font-bold leading-tight tracking-tight">Fitur Utama</h2>
       </div>
 
       <div class="container mx-auto px-4">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="flex flex-1 flex-col gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-4">
+          <div class="card flex flex-col gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-line-chart h-8 w-8 text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
             <div class="flex flex-col gap-1">
-              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Real-time Data Analysis</h3>
-              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">Process live marine data from various sources to provide the most current ecological insights.</p>
+              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Analisis Data Real-Time</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">Proses data laut secara real-time dari berbagai sumber untuk memberikan wawasan ekologis yang aktual dan akurat.</p>
             </div>
           </div>
-          <div class="flex flex-1 flex-col gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-4">
+          <div class="card flex flex-col gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-bot h-8 w-8 text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"></path><rect width="16" height="12" x="4" y="8" rx="2"></rect><path d="M2 14h2"></path><path d="M20 14h2"></path><path d="M15 13v2"></path><path d="M9 13v2"></path></svg>
             <div class="flex flex-col gap-1">
-              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Predictive Modeling</h3>
-              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">Utilize advanced algorithms and machine learning to forecast future ecosystem changes.</p>
+              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Pemodelan Prediktif</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">Memanfaatkan algoritma regresi dari machine learning untuk memprediksi perubahan ekosistem di tahun berikutnya.</p>
             </div>
           </div>
-          <div class="flex flex-1 flex-col gap-3 rounded-lg border border-black/10 dark:border-white/10 bg-white dark:bg-background-dark p-4">
+          <div class="card flex flex-col gap-3">
             <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-shield-check h-8 w-8 text-primary" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
             <div class="flex flex-col gap-1">
-              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Ecosystem Health Index</h3>
-              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">A simplified scoring system for easy interpretation and monitoring of marine environmental health.</p>
+              <h3 class="text-text-light dark:text-text-dark text-base font-semibold leading-tight">Indeks Kesehatan Ekosistem</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">Sistem penilaian untuk interpretasi dan monitoring kesehatan lingkungan laut.</p>
             </div>
           </div>
         </div>
@@ -275,54 +298,32 @@
 
     <footer class="w-full mt-16 bg-white dark:bg-gray-900 border-t border-black/10 dark:border-white/10">
       <div class="container mx-auto max-w-screen-xl p-4 py-6 lg:py-8">
-        <div class="md:flex md:justify-between">
-          <div class="mb-6 md:mb-0">
-            <a href="#" class="flex items-center gap-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-8 w-8" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
-              <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">MarineEcoPredict</span>
-            </a>
-          </div>
-          <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-            <div>
-              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Sumber Daya</h2>
+        <div class="text-center mb-8">
+          <a href="index.html" class="flex items-center justify-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-8 w-8" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-2xl font-semibold text-text-light dark:text-white">MarineEcoPredict</span>
+          </a>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark">Memprediksi masa depan lautan kami melalui analisis ekosistem laut tingkat lanjut.</p>
+        </div>
+        <div class="flex justify-center mb-8">
+          <div class="grid grid-cols-2 gap-12 sm:gap-20">
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Sumber Daya</h2>
               <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
-                <li class="mb-4"><a href="#" class="hover:underline">Dokumentasi</a></li>
-                <li><a href="#" class="hover:underline">API</a></li>
+                <li><a href="help.html" class="hover:underline">Dokumentasi</a></li>
               </ul>
             </div>
-            <div>
-              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
               <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
-                <li class="mb-4"><a href="#" class="hover:underline">Github</a></li>
-                <li><a href="#" class="hover:underline">Discord</a></li>
-              </ul>
-            </div>
-            <div>
-              <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
-              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
-                <li class="mb-4"><a href="#" class="hover:underline">Privacy Policy</a></li>
-                <li><a href="#" class="hover:underline">Terms &amp; Conditions</a></li>
+                <li><a href="https://github.com/faiqmuammar4" class="hover:underline">Github</a></li>
               </ul>
             </div>
           </div>
         </div>
         <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
-        <div class="sm:flex sm:items-center sm:justify-between">
-          <span class="text-sm text-text-muted-light sm:text-center dark:text-text-muted-dark">© 2024 <a href="#" class="hover:underline">MarineEcoPredict™</a>. All Rights Reserved.</span>
-          <div class="flex mt-4 sm:justify-center sm:mt-0">
-            <a href="#" class="text-text-muted-light hover:text-gray-900 dark:hover:text-white">
-              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-facebook w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
-              <span class="sr-only">Facebook page</span>
-            </a>
-            <a href="#" class="text-text-muted-light hover:text-gray-900 dark:hover:text-white ms-5">
-              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-twitter w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 1.4 2.8 3.2 3 5.2-9.7 1.2-12.4-6.2-16-11.2C2.7 2.7-1 6.1 1 10.6c-1.3-.4-2.5-1-3.5-2 0 4.1 2.5 6.4 5.5 7.5-.6.5-1.5.8-2.5.8C3 16.1 2 15.6 1 15s2 3.6 5 4.3c-2.3 1.8-5.3 2.7-8.5 2.7-1.1 0-2.1-.1-3.1-.4 3.8 2.5 8.3 4.1 13.5 4.1 11.5 0 17.5-9.5 17.5-17.5 0-.3 0-.5-.1-.8.9-.7 1.8-1.5 2.5-2.5Z"></path></svg>
-              <span class="sr-only">Twitter page</span>
-            </a>
-            <a href="#" class="text-text-muted-light hover:text-gray-900 dark:hover:text-white ms-5">
-              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-github w-5 h-5" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-              <span class="sr-only">GitHub account</span>
-            </a>
-          </div>
+        <div class="text-center">
+          <span class="text-sm text-text-muted-light dark:text-text-muted-dark">© 2024 MarineEcoPredict™. All Rights Reserved.</span>
         </div>
       </div>
     </footer>
@@ -387,6 +388,9 @@
   <script src="js/map.js"></script>
   <script src="js/olap-dashboard.js"></script>
   <script src="js/index-interactive.js"></script>
+  <!-- SheetJS for Excel export -->
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+  <script src="js/data-export.js"></script>
   <script>
     // Initialize map and controls for historical analysis
     document.addEventListener('DOMContentLoaded', async () => {

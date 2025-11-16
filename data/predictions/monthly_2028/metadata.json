@@ -1,0 +1,272 @@
+{
+  "title": "HSI Monthly Prediction 2028",
+  "description": "Predicted Habitat Suitability Index for 12 months of 2028 using ARIMA with oceanographic parameters",
+  "date_created": "2025-11-13 18:08:48",
+  "model_type": "arima_with_oceanography",
+  "prediction_year": 2028,
+  "prediction_months": 12,
+  "training_data": {
+    "start": "2021-01",
+    "end": "2024-12",
+    "total_months": 48
+  },
+  "oceanographic_parameters": {
+    "sst": {
+      "name": "Sea Surface Temperature",
+      "unit": "Kelvin",
+      "source": "OSTIA L4"
+    },
+    "so": {
+      "name": "Salinity",
+      "unit": "1e-3 (PSU)",
+      "source": "GLORYS12V1",
+      "depth": "Surface layer"
+    },
+    "chl": {
+      "name": "Chlorophyll-a",
+      "unit": "mg/m3",
+      "source": "GlobColour"
+    }
+  },
+  "regression_model": {
+    "type": "random_forest",
+    "r2_score": 0.8780209541337338,
+    "mae": 0.023728446864391534
+  },
+  "models_trained": 1030,
+  "grid_info": {
+    "lat_count": 32,
+    "lon_count": 34,
+    "total_points": 1088,
+    "lat_range": [
+      -6.770833492279053,
+      -5.4791669845581055
+    ],
+    "lon_range": [
+      104.5625,
+      105.9375
+    ]
+  },
+  "monthly_statistics": {
+    "1": {
+      "month": 1,
+      "year": 2028,
+      "mean": 0.6992124891792464,
+      "std": 0.025821341582369924,
+      "min": 0.627351943717684,
+      "max": 0.7986843596540443,
+      "q25": 0.6835083803561732,
+      "median": 0.6961544573916636,
+      "q75": 0.7129614145792184,
+      "valid_points": 1030
+    },
+    "2": {
+      "month": 2,
+      "year": 2028,
+      "mean": 0.6991524936748709,
+      "std": 0.025845104042377585,
+      "min": 0.627351943717684,
+      "max": 0.7986843596304476,
+      "q25": 0.6833955991381457,
+      "median": 0.6959727070672599,
+      "q75": 0.7129068469388513,
+      "valid_points": 1030
+    },
+    "3": {
+      "month": 3,
+      "year": 2028,
+      "mean": 0.6991632586846287,
+      "std": 0.02584858190284101,
+      "min": 0.627351943717684,
+      "max": 0.7986843596167201,
+      "q25": 0.6832969432326025,
+      "median": 0.6959558747987644,
+      "q75": 0.7129068469385129,
+      "valid_points": 1030
+    },
+    "4": {
+      "month": 4,
+      "year": 2028,
+      "mean": 0.6992289504616938,
+      "std": 0.02583502666074574,
+      "min": 0.627351943717684,
+      "max": 0.7986843596087343,
+      "q25": 0.6833798457262071,
+      "median": 0.6959754974989661,
+      "q75": 0.7129068469383326,
+      "valid_points": 1030
+    },
+    "5": {
+      "month": 5,
+      "year": 2028,
+      "mean": 0.699324786192614,
+      "std": 0.025808252719125322,
+      "min": 0.627351943717684,
+      "max": 0.7986843596040885,
+      "q25": 0.6834154550420386,
+      "median": 0.6963429412416111,
+      "q75": 0.7130019785004408,
+      "valid_points": 1030
+    },
+    "6": {
+      "month": 6,
+      "year": 2028,
+      "mean": 0.6994242680478026,
+      "std": 0.025772814015465377,
+      "min": 0.627351943717684,
+      "max": 0.7986843596013857,
+      "q25": 0.6835704000585865,
+      "median": 0.696476723512905,
+      "q75": 0.7129865012821479,
+      "valid_points": 1030
+    },
+    "7": {
+      "month": 7,
+      "year": 2028,
+      "mean": 0.6995055884062785,
+      "std": 0.02573523683366524,
+      "min": 0.627351943717684,
+      "max": 0.7986843595998134,
+      "q25": 0.683902243576866,
+      "median": 0.6964212448135458,
+      "q75": 0.7129047281417614,
+      "valid_points": 1030
+    },
+    "8": {
+      "month": 8,
+      "year": 2028,
+      "mean": 0.6995557371389683,
+      "std": 0.025703334499730893,
+      "min": 0.627351943717684,
+      "max": 0.7986843595988988,
+      "q25": 0.6840325557577215,
+      "median": 0.6965928009861779,
+      "q75": 0.7127828037698949,
+      "valid_points": 1030
+    },
+    "9": {
+      "month": 9,
+      "year": 2028,
+      "mean": 0.699571682651639,
+      "std": 0.025683296432138,
+      "min": 0.627351943717684,
+      "max": 0.7986843595983667,
+      "q25": 0.6841470394445605,
+      "median": 0.6966500299906084,
+      "q75": 0.7128078115211862,
+      "valid_points": 1030
+    },
+    "10": {
+      "month": 10,
+      "year": 2028,
+      "mean": 0.6995588717621081,
+      "std": 0.02567709422369174,
+      "min": 0.627351943717684,
+      "max": 0.7986843595980571,
+      "q25": 0.6841588319279086,
+      "median": 0.6966074420651153,
+      "q75": 0.7128226030145177,
+      "valid_points": 1030
+    },
+    "11": {
+      "month": 11,
+      "year": 2028,
+      "mean": 0.6995279530958177,
+      "std": 0.02568251446299231,
+      "min": 0.627351943717684,
+      "max": 0.798684359597877,
+      "q25": 0.684070434854486,
+      "median": 0.6966491645728855,
+      "q75": 0.7128906066492909,
+      "valid_points": 1030
+    },
+    "12": {
+      "month": 12,
+      "year": 2028,
+      "mean": 0.6994909280675498,
+      "std": 0.025695413257652885,
+      "min": 0.627351943717684,
+      "max": 0.7986843595977722,
+      "q25": 0.6838988187205316,
+      "median": 0.6966164941613812,
+      "q75": 0.7129643700140308,
+      "valid_points": 1030
+    }
+  },
+  "available_predictions": [
+    {
+      "month": 1,
+      "year": 2028,
+      "file": "hsi_prediction_2028_01.geojson",
+      "features": 1030
+    },
+    {
+      "month": 2,
+      "year": 2028,
+      "file": "hsi_prediction_2028_02.geojson",
+      "features": 1030
+    },
+    {
+      "month": 3,
+      "year": 2028,
+      "file": "hsi_prediction_2028_03.geojson",
+      "features": 1030
+    },
+    {
+      "month": 4,
+      "year": 2028,
+      "file": "hsi_prediction_2028_04.geojson",
+      "features": 1030
+    },
+    {
+      "month": 5,
+      "year": 2028,
+      "file": "hsi_prediction_2028_05.geojson",
+      "features": 1030
+    },
+    {
+      "month": 6,
+      "year": 2028,
+      "file": "hsi_prediction_2028_06.geojson",
+      "features": 1030
+    },
+    {
+      "month": 7,
+      "year": 2028,
+      "file": "hsi_prediction_2028_07.geojson",
+      "features": 1030
+    },
+    {
+      "month": 8,
+      "year": 2028,
+      "file": "hsi_prediction_2028_08.geojson",
+      "features": 1030
+    },
+    {
+      "month": 9,
+      "year": 2028,
+      "file": "hsi_prediction_2028_09.geojson",
+      "features": 1030
+    },
+    {
+      "month": 10,
+      "year": 2028,
+      "file": "hsi_prediction_2028_10.geojson",
+      "features": 1030
+    },
+    {
+      "month": 11,
+      "year": 2028,
+      "file": "hsi_prediction_2028_11.geojson",
+      "features": 1030
+    },
+    {
+      "month": 12,
+      "year": 2028,
+      "file": "hsi_prediction_2028_12.geojson",
+      "features": 1030
+    }
+  ],
+  "total_predictions": 12,
+  "note": "Predictions based on ARIMA models trained on historical data (2021-2024) with oceanographic parameters."
+}

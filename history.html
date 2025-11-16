@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0077b6" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>MarineEcoPredict - Riwayat Prediksi</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#0077b6",
+            "secondary": "#00b4d8",
+            "light-accent": "#caf0f8",
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+            "text-light": "#111618",
+            "text-dark": "#f0f8ff",
+            "text-muted-light": "#617f89",
+            "text-muted-dark": "#94a3b8"
+          },
+          fontFamily: {
+            "sans": ["Poppins", "sans-serif"]
+          },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-light dark:text-text-dark" data-page="history">
+  <div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
+      <div class="container mx-auto px-4">
+        <div class="flex h-16 items-center gap-4 border-b border-black/10 dark:border-white/10">
+          <a href="index.html" class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-lg font-bold text-text-light dark:text-text-dark">MarineEcoPredict</span>
+          </a>
+          <nav class="hidden lg:flex lg:items-center lg:gap-6 site-nav">
+            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium site-nav-link">Beranda</a>
+            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium site-nav-link">Analisis</a>
+            <a href="comparison.html" data-nav="comparison" data-nav-link class="text-sm font-medium site-nav-link">Perbandingan</a>
+            <a href="history.html" data-nav="history" data-nav-link class="text-sm font-medium site-nav-link">Riwayat</a>
+            <a href="biogeography.html" data-nav="biogeography" data-nav-link class="text-sm font-medium site-nav-link">Biogeografi</a>
+            <a href="help.html" data-nav="help" data-nav-link class="text-sm font-medium site-nav-link">Bantuan</a>
+            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium site-nav-link">Tentang</a>
+          </nav>
+          <div class="ml-auto flex items-center gap-2">
+            <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text-muted-light transition hover:bg-white dark:border-white/10 dark:bg-background-dark/80 dark:text-text-muted-dark">
+              <span class="sr-only">Toggle theme</span>
+              <span data-theme-icon="sun" class="hidden">
+                <i data-lucide="sun" class="size-5"></i>
+              </span>
+              <span data-theme-icon="moon">
+                <i data-lucide="moon" class="size-5"></i>
+              </span>
+            </button>
+            <button class="flex items-center justify-center rounded-md p-2 lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-menu h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+              <span class="sr-only">Open menu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-text-light dark:text-text-dark mb-2">Riwayat Prediksi</h1>
+        <p class="text-text-muted-light dark:text-text-muted-dark">Lihat dan kelola semua prediksi HSI yang telah Anda buat</p>
+      </div>
+
+      <div class="mb-6 flex flex-col sm:flex-row gap-4 items-center justify-between">
+        <div class="flex items-center gap-2">
+          <button type="button" data-clear-history class="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2 text-red-600 text-sm font-medium transition hover:bg-red-100 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400 dark:hover:bg-red-900/30">
+            <i data-lucide="trash-2" class="size-4"></i>
+            Hapus Semua
+          </button>
+        </div>
+        <div class="text-sm text-text-muted-light dark:text-text-muted-dark" data-history-count>
+          Total: 0 prediksi
+        </div>
+      </div>
+
+      <div id="historyList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- History items will be inserted here -->
+      </div>
+
+      <div id="emptyState" class="hidden text-center py-16">
+        <i data-lucide="inbox" class="size-16 mx-auto text-text-muted-light dark:text-text-muted-dark mb-4 opacity-50"></i>
+        <h3 class="text-lg font-semibold text-text-light dark:text-text-dark mb-2">Belum ada riwayat</h3>
+        <p class="text-text-muted-light dark:text-text-muted-dark mb-6">Mulai perbandingan skenario untuk menyimpan riwayat</p>
+        <a href="comparison.html" class="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-white text-sm font-semibold transition hover:bg-primary/90">
+          <i data-lucide="git-compare" class="size-5"></i>
+          Mulai Bandingkan
+        </a>
+      </div>
+    </main>
+
+    <footer class="w-full mt-16 bg-white dark:bg-gray-900 border-t border-black/10 dark:border-white/10">
+      <div class="container mx-auto max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="text-center mb-8">
+          <a href="index.html" class="flex items-center justify-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-8 w-8" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-2xl font-semibold text-text-light dark:text-white">MarineEcoPredict</span>
+          </a>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark">Memprediksi masa depan lautan kami melalui analisis ekosistem laut tingkat lanjut.</p>
+        </div>
+        <div class="flex justify-center mb-8">
+          <div class="grid grid-cols-2 gap-12 sm:gap-20">
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Sumber Daya</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li><a href="help.html" class="hover:underline">Dokumentasi</a></li>
+              </ul>
+            </div>
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li><a href="https://github.com/faiqmuammar4" class="hover:underline">Github</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div class="text-center">
+          <span class="text-sm text-text-muted-light dark:text-text-muted-dark">© 2024 MarineEcoPredict™. All Rights Reserved.</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const toggleBtn = document.querySelector('[data-theme-toggle]');
+      const sunWrapper = toggleBtn?.querySelector('[data-theme-icon="sun"]');
+      const moonWrapper = toggleBtn?.querySelector('[data-theme-icon="moon"]');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+      const storedTheme = localStorage.getItem('theme');
+      const initialDark = storedTheme ? storedTheme === 'dark' : prefersDark?.matches;
+      applyTheme(initialDark);
+
+      toggleBtn?.addEventListener('click', () => {
+        const nextIsDark = !root.classList.contains('dark');
+        applyTheme(nextIsDark);
+        localStorage.setItem('theme', nextIsDark ? 'dark' : 'light');
+      });
+
+      prefersDark?.addEventListener?.('change', (event) => {
+        if (!localStorage.getItem('theme')) {
+          applyTheme(event.matches);
+        }
+      });
+
+      function applyTheme(isDark) {
+        root.classList.toggle('dark', isDark);
+        toggleBtn?.setAttribute('aria-pressed', String(isDark));
+        toggleBtn?.setAttribute('aria-label', isDark ? 'Aktifkan mode terang' : 'Aktifkan mode gelap');
+        if (isDark) {
+          sunWrapper?.classList.remove('hidden');
+          moonWrapper?.classList.add('hidden');
+        } else {
+          sunWrapper?.classList.add('hidden');
+          moonWrapper?.classList.remove('hidden');
+        }
+      }
+    })();
+
+    (function () {
+      const currentPage = document.body.dataset.page;
+      if (!currentPage) return;
+      document.querySelectorAll('[data-nav-link]').forEach((link) => {
+        if (link.dataset.nav === currentPage) {
+          link.classList.add('nav-link-active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('nav-link-active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    })();
+
+    // History management
+    function getHistory() {
+      try {
+        return JSON.parse(localStorage.getItem('hsiHistory') || '[]');
+      } catch (error) {
+        console.error('Error reading history:', error);
+        return [];
+      }
+    }
+
+    function deleteHistoryItem(id) {
+      const history = getHistory();
+      const filtered = history.filter(item => item.id !== id);
+      localStorage.setItem('hsiHistory', JSON.stringify(filtered));
+      renderHistory();
+    }
+
+    function clearAllHistory() {
+      if (confirm('Apakah Anda yakin ingin menghapus semua riwayat?')) {
+        localStorage.removeItem('hsiHistory');
+        renderHistory();
+      }
+    }
+
+    function getHSIColor(score) {
+      if (score >= 0.75) return 'text-green-600 dark:text-green-400';
+      if (score >= 0.45) return 'text-yellow-500 dark:text-yellow-400';
+      return 'text-red-500 dark:text-red-400';
+    }
+
+    function getHSIBadge(score) {
+      if (score >= 0.75) return 'bg-green-100 text-green-800 dark:bg-green-500/20 dark:text-green-400';
+      if (score >= 0.45) return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-500/20 dark:text-yellow-400';
+      return 'bg-red-100 text-red-800 dark:bg-red-500/20 dark:text-red-400';
+    }
+
+    function renderHistory() {
+      const history = getHistory();
+      const historyList = document.getElementById('historyList');
+      const emptyState = document.getElementById('emptyState');
+      const historyCount = document.querySelector('[data-history-count]');
+
+      if (historyCount) {
+        const singleCount = history.filter(h => h.type !== 'comparison').length;
+        const comparisonCount = history.filter(h => h.type === 'comparison').length;
+        historyCount.textContent = `Total: ${history.length} item (${singleCount} prediksi, ${comparisonCount} perbandingan)`;
+      }
+
+      if (history.length === 0) {
+        if (historyList) historyList.classList.add('hidden');
+        if (emptyState) emptyState.classList.remove('hidden');
+        return;
+      }
+
+      if (historyList) historyList.classList.remove('hidden');
+      if (emptyState) emptyState.classList.add('hidden');
+
+      if (!historyList) return;
+
+      historyList.innerHTML = history.map(item => {
+        const date = new Date(item.timestamp);
+        const dateStr = date.toLocaleDateString('id-ID', {
+          day: 'numeric',
+          month: 'short',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        // Check if this is a comparison result
+        if (item.type === 'comparison' && item.scenarios) {
+          const bestScore = item.bestScenario?.hsiScore || 0;
+          return `
+            <div class="bg-white dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 p-4 shadow-sm hover:shadow-md transition-shadow">
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex-1">
+                  <div class="flex items-center gap-2 mb-2">
+                    <i data-lucide="git-compare" class="size-4 text-primary"></i>
+                    <span class="text-sm font-semibold text-text-light dark:text-text-dark">Perbandingan ${item.totalScenarios} Skenario</span>
+                    <span class="px-2 py-1 rounded text-xs font-semibold bg-blue-100 text-blue-800 dark:bg-blue-500/20 dark:text-blue-400">Perbandingan</span>
+                  </div>
+                  <p class="text-xs text-text-muted-light dark:text-text-muted-dark mb-2">${dateStr}</p>
+                  <div class="flex items-center gap-2">
+                    <span class="text-xs text-text-muted-light dark:text-text-muted-dark">Terbaik:</span>
+                    <span class="text-sm font-bold ${getHSIColor(bestScore)}">${item.bestScenario?.name || 'N/A'} (${bestScore.toFixed(2)})</span>
+                  </div>
+                </div>
+                <button type="button" onclick="deleteHistoryItem('${item.id}')" class="text-text-muted-light hover:text-red-500 dark:text-text-muted-dark dark:hover:text-red-400 transition">
+                  <i data-lucide="x" class="size-4"></i>
+                </button>
+              </div>
+              <div class="space-y-2 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
+                ${item.scenarios.map((scenario, idx) => `
+                  <div class="flex items-center justify-between text-sm">
+                    <div class="flex items-center gap-2">
+                      <span class="text-xs font-medium text-text-muted-light dark:text-text-muted-dark">${scenario.name}:</span>
+                      <span class="text-sm font-bold ${getHSIColor(scenario.hsiScore)}">${scenario.hsiScore.toFixed(2)}</span>
+                      <span class="px-1.5 py-0.5 rounded text-xs ${getHSIBadge(scenario.hsiScore)}">${scenario.interpretation?.label || ''}</span>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          `;
+        }
+
+        // Single scenario result (existing format)
+        return `
+          <div class="bg-white dark:bg-gray-900/50 rounded-xl border border-gray-200 dark:border-gray-800 p-4 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex-1">
+                <div class="flex items-center gap-2 mb-2">
+                  <span class="text-2xl font-bold ${getHSIColor(item.hsiScore)}">${item.hsiScore.toFixed(2)}</span>
+                  <span class="px-2 py-1 rounded text-xs font-semibold ${getHSIBadge(item.hsiScore)}">${item.label || 'Single'}</span>
+                </div>
+                <p class="text-xs text-text-muted-light dark:text-text-muted-dark">${dateStr}</p>
+              </div>
+              <button type="button" onclick="deleteHistoryItem('${item.id}')" class="text-text-muted-light hover:text-red-500 dark:text-text-muted-dark dark:hover:text-red-400 transition">
+                <i data-lucide="x" class="size-4"></i>
+              </button>
+            </div>
+            <div class="space-y-1 text-sm">
+              <div class="flex justify-between">
+                <span class="text-text-muted-light dark:text-text-muted-dark">Suhu:</span>
+                <span class="text-text-light dark:text-text-dark font-medium">${item.metrics?.['sea-temp'] || item.metrics?.seaTemp || '-'}°C</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-text-muted-light dark:text-text-muted-dark">Chlorophyll:</span>
+                <span class="text-text-light dark:text-text-dark font-medium">${item.metrics?.chlorophyll || '-'} mg/m³</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-text-muted-light dark:text-text-muted-dark">Salinitas:</span>
+                <span class="text-text-light dark:text-text-dark font-medium">${item.metrics?.salinity || '-'} PSU</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-text-muted-light dark:text-text-muted-dark">Kedalaman:</span>
+                <span class="text-text-light dark:text-text-dark font-medium">${item.metrics?.depth || '-'} m</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    // Clear history button
+    document.querySelector('[data-clear-history]')?.addEventListener('click', clearAllHistory);
+
+    // Make deleteHistoryItem available globally
+    window.deleteHistoryItem = deleteHistoryItem;
+
+    // Initial render
+    renderHistory();
+    lucide.createIcons();
+
+    // Trend Chart - HSI over time
+    (function () {
+      const listWrapper = document.getElementById('historyList')?.parentElement;
+      const trendSection = document.createElement('div');
+      trendSection.className = 'bg-white dark:bg-background-dark rounded-xl border border-black/10 dark:border-white/10 p-6 shadow-sm mt-8';
+      trendSection.innerHTML = `
+        <h3 class="text-text-light dark:text-text-dark text-lg font-semibold mb-4">Tren Habitat Suitability Index (HSI)</h3>
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
+          <div class="flex items-center gap-2 text-sm text-text-muted-light dark:text-text-muted-dark">
+            <span>Rentang:</span>
+            <select id="trendRange" class="rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-sm px-2 py-1">
+              <option value="10">10 data terakhir</option>
+              <option value="20">20 data terakhir</option>
+              <option value="50">50 data terakhir</option>
+              <option value="all">Semua data</option>
+            </select>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="trendChart"></canvas>
+        </div>
+      `;
+      const mountTarget = listWrapper || document.querySelector('.container.mx-auto.px-4');
+      mountTarget?.appendChild(trendSection);
+
+      const ctx = document.getElementById('trendChart')?.getContext('2d');
+      if (!ctx || typeof Chart === 'undefined') return;
+
+      let chart = null;
+      function getHistory() {
+        try {
+          return JSON.parse(localStorage.getItem('hsiHistory') || '[]');
+        } catch { return []; }
+      }
+      function formatLabel(ts) {
+        const d = new Date(ts);
+        return d.toLocaleString('id-ID', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+      }
+      function buildData(range) {
+        const hist = getHistory();
+        const data = (range === 'all') ? hist.slice().reverse() : hist.slice(0, Number(range)).reverse();
+        return {
+          labels: data.map(d => formatLabel(d.timestamp)),
+          values: data.map(d => d.hsiScore)
+        };
+      }
+      function render(range) {
+        const isDark = document.documentElement.classList.contains('dark');
+        const { labels, values } = buildData(range);
+        if (chart) chart.destroy();
+        chart = new Chart(ctx, {
+          type: 'line',
+          data: {
+            labels,
+            datasets: [{
+              label: 'HSI',
+              data: values,
+              fill: false,
+              borderColor: isDark ? 'rgba(0, 180, 216, 1)' : 'rgba(0, 119, 182, 1)',
+              backgroundColor: isDark ? 'rgba(0, 180, 216, 0.3)' : 'rgba(0, 119, 182, 0.3)',
+              tension: 0.25,
+              borderWidth: 2,
+              pointRadius: 3,
+              pointBackgroundColor: isDark ? 'rgba(0, 180, 216, 1)' : 'rgba(0, 119, 182, 1)'
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                suggestedMax: 1,
+                ticks: { stepSize: 0.1, color: isDark ? '#9ca3af' : '#6b7280' },
+                grid: { color: isDark ? 'rgba(75, 85, 99, 0.3)' : 'rgba(229, 231, 235, 0.8)' }
+              },
+              x: {
+                ticks: { color: isDark ? '#9ca3af' : '#6b7280' },
+                grid: { display: false }
+              }
+            },
+            plugins: {
+              legend: { display: false }
+            }
+          }
+        });
+      }
+
+      const rangeEl = document.getElementById('trendRange');
+      rangeEl?.addEventListener('change', (e) => render(e.target.value));
+      render('10');
+    })();
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
+  </script>
+</body>
+</html>
+

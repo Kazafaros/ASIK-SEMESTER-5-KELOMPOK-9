@@ -112,19 +112,16 @@ class HSIMapManager {
                     }
                 });
                 
-                // Add popup with data
-                const props = feature.properties;
-                const content = `
-                    <div style="min-width: 150px;">
-                        <strong>${layerName}</strong><br>
-                        ${property === 'hsi' ? `HSI: ${props.hsi !== null ? props.hsi.toFixed(3) : 'N/A'}<br>` : ''}
-                        ${property === 'sst' ? `SST: ${props.sst !== null ? props.sst.toFixed(2) + '°C' : 'N/A'}<br>` : ''}
-                        ${property === 'chl' ? `CHL: ${props.chl !== null ? props.chl.toFixed(3) + ' mg/m³' : 'N/A'}<br>` : ''}
-                        ${property === 'salinity' ? `Salinity: ${props.salinity !== null ? props.salinity.toFixed(2) + ' PSU' : 'N/A'}<br>` : ''}
-                        <small>${props.year}-${String(props.month).padStart(2, '0')}</small>
-                    </div>
-                `;
-                circle.bindPopup(content);
+                // Store feature data for unified popup (will be handled by click handler)
+                circle.featureData = {
+                    properties: feature.properties,
+                    layer: layer,
+                    property: property,
+                    layerName: layerName,
+                    latlng: latlng
+                };
+                
+                // Don't bind popup here - let the unified click handler manage it
                 
                 layerGroup.addLayer(circle);
             });

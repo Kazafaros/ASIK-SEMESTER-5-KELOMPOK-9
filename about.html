@@ -3,6 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0077b6" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>About MarineEcoPredict</title>
 
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -18,188 +22,581 @@
       theme: {
         extend: {
           colors: {
-            primary: '#0077b6',
-            secondary: '#00b4d8',
-            'light-accent': '#caf0f8',
-            'background-light': '#FFFFFF',
-            'background-dark': '#101d22',
-            'text-light-primary': '#023047',
-            'text-light-secondary': '#6c757d',
-            'text-dark-primary': '#f8f9fa',
-            'text-dark-secondary': '#adb5bd',
-            'border-light': '#e9ecef',
-            'border-dark': '#343a40',
+            "primary": "#0077b6",
+            "secondary": "#00b4d8",
+            "light-accent": "#caf0f8",
+            "background-light": "#f6f8f8",
+            "background-dark": "#101d22",
+            "text-light": "#111618",
+            "text-dark": "#f0f8ff",
+            "text-muted-light": "#617f89",
+            "text-muted-dark": "#94a3b8"
           },
           fontFamily: {
-            sans: ["Poppins", "sans-serif"]
+            "sans": ["Poppins", "sans-serif"]
           },
-          borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px" },
+          borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
         },
       },
     }
   </script>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-sans text-text-light-primary dark:text-text-dark-primary" data-page="about">
+<body class="bg-background-light dark:bg-background-dark font-sans text-text-light dark:text-text-dark" data-page="about">
   <div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
-    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark">
+    <header class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-lg">
       <div class="container mx-auto px-4">
-        <div class="flex h-16 items-center gap-4">
+        <div class="flex h-16 items-center gap-4 border-b border-black/10 dark:border-white/10">
           <a href="index.html" class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 12c-3 0-5 2.5-5 5s2.5 5 5 5c2.5 0 5-2.5 5-5s-2.5-5-5-5z"></path><path d="M12 2c3.5 0 6 3 6 6s-2.5 6-6 6c-3.5 0-6-3-6-6s2.5-6 6-6z"></path></svg>
-            <span class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">MarineEcoPredict</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-lg font-bold text-text-light dark:text-text-dark">MarineEcoPredict</span>
           </a>
-          <nav class="hidden md:flex items-center gap-6">
-            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary transition-colors hover:text-primary dark:hover:text-secondary">Home</a>
-            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium text-primary dark:text-secondary">About</a>
-            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary transition-colors hover:text-primary dark:hover:text-secondary">Predictions</a>
-            <a href="#" class="text-sm font-medium text-text-light-secondary dark:text-text-dark-secondary transition-colors hover:text-primary dark:hover:text-secondary">Contact</a>
+          <nav class="hidden lg:flex lg:items-center lg:gap-6 site-nav">
+            <a href="index.html" data-nav="index" data-nav-link class="text-sm font-medium site-nav-link">Beranda</a>
+            <a href="analysis.html" data-nav="analysis" data-nav-link class="text-sm font-medium site-nav-link">Analisis</a>
+            <a href="comparison.html" data-nav="comparison" data-nav-link class="text-sm font-medium site-nav-link">Perbandingan</a>
+            <a href="history.html" data-nav="history" data-nav-link class="text-sm font-medium site-nav-link">Riwayat</a>
+            <a href="biogeography.html" data-nav="biogeography" data-nav-link class="text-sm font-medium site-nav-link">Biogeografi</a>
+            <a href="help.html" data-nav="help" data-nav-link class="text-sm font-medium site-nav-link">Bantuan</a>
+            <a href="about.html" data-nav="about" data-nav-link class="text-sm font-medium site-nav-link">Tentang</a>
           </nav>
           <div class="ml-auto flex items-center gap-2">
-            <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-border-light bg-white text-text-light-secondary transition hover:bg-light-accent/60 dark:border-border-dark dark:bg-background-dark/80 dark:text-text-dark-secondary">
+            <button type="button" data-theme-toggle aria-pressed="false" aria-label="Aktifkan mode gelap" class="flex size-10 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text-muted-light transition hover:bg-white dark:border-white/10 dark:bg-background-dark/80 dark:text-text-muted-dark">
               <span class="sr-only">Toggle theme</span>
               <span data-theme-icon="sun" class="hidden">
-                <i data-lucide="sun" class="h-5 w-5"></i>
+                <i data-lucide="sun" class="size-5"></i>
               </span>
               <span data-theme-icon="moon">
-                <i data-lucide="moon" class="h-5 w-5"></i>
+                <i data-lucide="moon" class="size-5"></i>
               </span>
             </button>
-            <button class="md:hidden rounded-md p-2">
-              <i data-lucide="menu" class="h-6 w-6 text-text-light-primary dark:text-text-dark-primary"></i>
-              <span class="sr-only">Toggle menu</span>
+            <button class="flex items-center justify-center rounded-md p-2 lg:hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-menu h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"></line><line x1="4" x2="20" y1="6" y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg>
+              <span class="sr-only">Open menu</span>
             </button>
           </div>
         </div>
       </div>
     </header>
 
-    <main class="flex-1">
-      <div class="@container">
-        <div class="@[480px]:px-4 @[480px]:py-3 p-4">
-          <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden @[480px]:rounded-lg min-h-[218px] rounded-lg" data-alt="A vibrant underwater coral reef teeming with colorful fish and marine life." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDPhdWfZI0_dR5-6Ryt_pvhswHNtz7bFqQFm7GL9CjcOy3_Gw2ndg0L2pTLZIsGjuQkybA0ioPb7-VAaCJEcKpKELdaA3-AYs1L3dMjhtNErYXBXX3ulDcyHCLUW9IVlwQfLspdKFZl0Nl_nCwvNAL_2sZebuw_SpYjjbS7xcySIeoo8bb8dN6D0JyEmBOC5gNf4kL1ke7AZHg2ZqCEKXYzu-5ry78iGYuX3GWKVJVyj4UkMeAGSJPEt3iVwOdB7KP5DScOMwm0fLcX");'></div>
+    <main class="flex-grow">
+      <div class="container mx-auto px-4 py-8">
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-text-light dark:text-text-dark mb-2">Tentang MarineEcoPredict</h1>
+          <p class="text-text-muted-light dark:text-text-muted-dark">Memahami tujuan dan fungsi platform prediksi ekosistem laut.</p>  
         </div>
-      </div>
 
-      <div class="flex flex-col p-4 gap-4">
-        <div class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-background-dark shadow-sm">
-          <details class="group" open>
-            <summary class="flex cursor-pointer list-none items-center justify-between p-4">
-              <h3 class="text-base font-semibold leading-normal text-text-light-primary dark:text-text-dark-primary">Our Purpose</h3>
-              <div class="text-text-light-primary dark:text-text-dark-primary transition-transform group-open:rotate-180">
-                <i data-lucide="chevron-down" class="h-5 w-5"></i>
-              </div>
-            </summary>
-            <div class="px-4 pb-4">
-              <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-relaxed">
-                Our mission is to predict the carrying capacity of marine ecosystems to support conservation efforts and ensure the long-term health of our oceans. We aim to provide actionable insights for sustainable marine resource management.
-              </p>
+        <article class="card p-8 mb-12">
+          <div class="max-w-4xl mx-auto">
+            <div class="mb-6 pb-4 border-b border-black/10 dark:border-white/10">
+              <h2 class="text-3xl font-bold text-text-light dark:text-text-dark leading-tight">Mengapa Kita Perlu Memprediksi Masa Depan Ekosistem Laut?</h2>
             </div>
-          </details>
-        </div>
 
-        <div class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-white dark:bg-background-dark shadow-sm">
-          <details class="group">
-            <summary class="flex cursor-pointer list-none items-center justify-between p-4">
-              <h3 class="text-base font-semibold leading-normal text-text-light-primary dark:text-text-dark-primary">Our Methodology</h3>
-              <div class="text-text-light-primary dark:text-text-dark-primary transition-transform group-open:rotate-180">
-                <i data-lucide="chevron-down" class="h-5 w-5"></i>
-              </div>
-            </summary>
-            <div class="px-4 pb-4">
-              <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-relaxed">
-                We utilize a robust scientific approach, integrating the Habitat Suitability Index (HSI) with advanced machine learning models. By analyzing satellite data, we can accurately assess environmental factors and predict ecosystem health and capacity.
+            <div class="prose prose-lg max-w-none dark:prose-invert">
+              <p class="text-lg text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6 font-medium">
+                Lautan Indonesia yang membentang seluas 6,4 juta kilometer persegi menyimpan kekayaan hayati yang luar biasa. Namun, di balik keindahannya, ekosistem laut kita menghadapi ancaman serius. Perubahan iklim, polusi, dan eksploitasi berlebihan telah mengubah wajah perairan kita secara dramatis. Dalam situasi ini, muncul pertanyaan: <em class="text-text-light dark:text-text-dark">Bagaimana kita bisa melindungi apa yang tidak sepenuhnya kita pahami?</em>
               </p>
+
+              <div class="bg-primary/5 dark:bg-primary/10 rounded-lg p-6 mb-8 border-l-4 border-primary">
+                <p class="text-text-light dark:text-text-dark font-semibold text-lg mb-2">MarineEcoPredict sebagai Solusi untuk Konservasi Laut</p>
+                <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Platform <strong class="text-text-light dark:text-text-dark">MarineEcoPredict</strong> hadir sebagai jawaban atas tantangan ini. Dengan memanfaatkan teknologi prediksi berbasis <strong class="text-text-light dark:text-text-dark">Habitat Suitability Index (HSI)</strong>, platform ini dirancang untuk memberikan wawasan mendalam tentang kondisi dan daya dukung ekosistem laut, memungkinkan pengambil keputusan untuk bertindak lebih cepat dan lebih tepat.
+                </p>
+              </div>
+
+              <h3 class="text-2xl font-bold text-text-light dark:text-text-dark mt-8 mb-4">Tujuan Utama</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                Tujuan utama MarineEcoPredict adalah memberikan prediksi akurat tentang <strong class="text-text-light dark:text-text-dark">daya dukung ekosistem laut</strong>. Daya dukung ini mengacu pada kemampuan suatu habitat untuk mendukung kehidupan laut dalam jangka panjang. Dengan memahami daya dukung, kita dapat menentukan berapa banyak aktivitas manusia yang dapat ditoleransi oleh ekosistem tanpa merusaknya.
+              </p>
+
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                Platform ini menganalisis empat parameter kunci yang menjadi indikator kesehatan ekosistem laut:
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div class="card card--info">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="thermometer" class="size-6 text-primary"></i>
+                  <h4 class="font-bold text-text-light dark:text-text-dark">Suhu Permukaan Laut</h4>
+                </div>
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Suhu mempengaruhi metabolisme, reproduksi, dan distribusi spesies laut. Perubahan suhu yang drastis dapat mengganggu keseimbangan ekosistem.
+                </p>
+              </div>
+
+              <div class="card card--positive">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="leaf" class="size-6 text-secondary"></i>
+                  <h4 class="font-bold text-text-light dark:text-text-dark">Konsentrasi Klorofil-a</h4>
+                </div>
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Indikator produktivitas primer ekosistem. Klorofil-a menunjukkan kelimpahan fitoplankton yang menjadi dasar rantai makanan laut.
+                </p>
+              </div>
+
+              <div class="card card--info">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="droplets" class="size-6 text-primary"></i>
+                  <h4 class="font-bold text-text-light dark:text-text-dark">Salinitas</h4>
+                </div>
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Kadar garam dalam air mempengaruhi osmoregulasi organisme laut. Perubahan salinitas dapat menyebabkan stres fisiologis pada biota laut.
+                </p>
+              </div>
+
+              <div class="card card--positive">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="layers" class="size-6 text-secondary"></i>
+                  <h4 class="font-bold text-text-light dark:text-text-dark">Kedalaman</h4>
+                </div>
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Kedalaman menentukan penetrasi cahaya matahari dan tekanan air, yang mempengaruhi distribusi spesies dan produktivitas ekosistem.
+                </p>
+              </div>
+              </div>
+
+              <h3 class="text-2xl font-bold text-text-light dark:text-text-dark mt-8 mb-4">Bagaimana cara platform ini bekerja?</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                Prediksi menggunakan pemodelan machine learning dengan algoritma regresi yang mengintegrasikan keempat parameter tersebut. Setiap parameter memiliki bobot tertentu berdasarkan pengaruhnya terhadap kesehatan ekosistem. Misalnya, suhu permukaan laut memiliki bobot 30%, sementara klorofil-a, salinitas, dan kedalaman masing-masing memiliki bobot 25%, 25%, dan 20%.
+              </p>
+
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                Sistem ini tidak hanya menghasilkan skor HSI (nilai antara 0-1), tetapi juga memberikan analisis mendalam tentang kontribusi masing-masing parameter. Skor HSI dikategorikan menjadi tiga tingkat:
+              </p>
+
+              <div class="space-y-3 mb-8">
+                <div class="flex items-start gap-4 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg border border-green-200 dark:border-green-800">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-full bg-green-100 dark:bg-green-500/20 flex items-center justify-center">
+                    <i data-lucide="check-circle" class="size-6 text-green-600 dark:text-green-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-green-800 dark:text-green-300 mb-1">High (≥0.75) - Daya Dukung Tinggi</h4>
+                    <p class="text-sm text-green-700 dark:text-green-400">Ekosistem dalam kondisi optimal dan dapat mendukung aktivitas manusia dengan baik.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-500/20 flex items-center justify-center">
+                    <i data-lucide="alert-circle" class="size-6 text-yellow-600 dark:text-yellow-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-yellow-800 dark:text-yellow-300 mb-1">Medium (0.45-0.75) - Daya Dukung Sedang</h4>
+                    <p class="text-sm text-yellow-700 dark:text-yellow-400">Ekosistem masih dapat mendukung aktivitas, namun memerlukan monitoring dan perhatian lebih.</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg border border-red-200 dark:border-red-800">
+                  <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-100 dark:bg-red-500/20 flex items-center justify-center">
+                    <i data-lucide="alert-triangle" class="size-6 text-red-600 dark:text-red-400"></i>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-red-800 dark:text-red-300 mb-1">Low (&lt;0.45) - Daya Dukung Rendah</h4>
+                    <p class="text-sm text-red-700 dark:text-red-400">Ekosistem dalam kondisi kritis dan memerlukan intervensi segera untuk pemulihan.</p>
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="text-2xl font-bold text-text-light dark:text-text-dark mt-8 mb-4">Siapa saja yang dapat menggunakan MarineEcoPredict?</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                MarineEcoPredict dirancang untuk berbagai pengguna dengan kebutuhan berbeda:
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+              <div class="card card--info">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="graduation-cap" class="size-5 text-primary"></i>
+                  <h4 class="font-semibold text-text-light dark:text-text-dark">Peneliti & Akademisi</h4>
+                </div>
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Menganalisis data ekosistem laut untuk penelitian, publikasi ilmiah dan pengembangan model prediksi yang lebih akurat.
+                </p>
+              </div>
+
+              <div class="card card--positive">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="briefcase" class="size-5 text-secondary"></i>
+                  <h4 class="font-semibold text-text-light dark:text-text-dark">Pengelola Sumber Daya</h4>
+                </div>
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Membantu pengambilan keputusan dalam pengelolaan perikanan berkelanjutan, penentuan kuota tangkapan dan zonasi kawasan konservasi.
+                </p>
+              </div>
+
+              <div class="card card--info">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="building-2" class="size-5 text-primary"></i>
+                  <h4 class="font-semibold text-text-light dark:text-text-dark">Pemerintah & Lembaga</h4>
+                </div>
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Memonitor kondisi ekosistem untuk perencanaan kebijakan lingkungan dan evaluasi program konservasi.
+                </p>
+              </div>
+
+              <div class="card card--positive">
+                <div class="flex items-center gap-3 mb-3">
+                  <i data-lucide="users" class="size-5 text-secondary"></i>
+                  <h4 class="font-semibold text-text-light dark:text-text-dark">Komunitas & Aktivis</h4>
+                </div>
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  Memahami kondisi laut untuk kampanye konservasi, edukasi publik dan advokasi kebijakan lingkungan yang lebih baik.
+                </p>
+              </div>
+              </div>
+
+              <h3 class="text-2xl font-bold text-text-light dark:text-text-dark mt-8 mb-4">Visi dan Komitmen Kami</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                MarineEcoPredict bukan hanya sekadar platform konservasi, melainkan komitmen nyata untuk melindungi lautan Indonesia. Setiap langkah kecil yang dihasilkan menuju pemahaman yang lebih baik tentang ekosistem laut kita. Dengan data yang akurat dan mudah diakses, kami berharap dapat memberdayakan lebih banyak orang untuk mengambil tindakan nyata dalam melestarikan keanekaragaman hayati laut.
+              </p>
+
+              <div class="bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 dark:from-primary/20 dark:via-secondary/20 dark:to-primary/20 rounded-lg p-6 mt-8 border border-primary/20">
+                <p class="text-text-light dark:text-text-dark font-bold text-xl mb-3">Visi Kami</p>
+                <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed text-base">
+                  Menjadi platform terdepan dalam prediksi dan analisis ekosistem laut di Indonesia, yang dapat diakses oleh semua kalangan untuk mendukung upaya konservasi dan pengelolaan sumber daya laut yang berkelanjutan. Kami berkomitmen untuk terus mengembangkan teknologi ini agar dapat memberikan kontribusi dalam melindungi lautan kita untuk generasi mendatang.
+                </p>
+              </div>
+
+              <h3 class="text-2xl font-bold text-text-light dark:text-text-dark mt-10 mb-4">Kontribusi terhadap tujuan pembangunan berkelanjutan (SDGs)</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                MarineEcoPredict secara langsung berkontribusi terhadap <strong class="text-text-light dark:text-text-dark">Sustainable Development Goals (SDGs)</strong> yang ditetapkan oleh PBB. Platform ini dirancang untuk mendukung pencapaian beberapa tujuan pembangunan berkelanjutan, terutama yang berkaitan dengan konservasi ekosistem laut dan perubahan iklim.
+              </p>
+
+              <div class="space-y-4 mb-8">
+                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 border-l-4 border-blue-500">
+                  <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-blue-100 dark:bg-blue-500/20 flex items-center justify-center">
+                      <span class="text-2xl font-bold text-blue-600 dark:text-blue-400">14</span>
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="font-bold text-blue-800 dark:text-blue-300 text-lg mb-2">SDG 14: Life Below Water</h4>
+                      <p class="text-blue-700 dark:text-blue-400 text-sm leading-relaxed mb-3">
+                        <strong>Konservasi dan pemanfaatan secara berkelanjutan sumber daya kelautan dan samudera untuk pembangunan berkelanjutan</strong>
+                      </p>
+                      <p class="text-blue-600 dark:text-blue-400 text-sm leading-relaxed mb-3">
+                        MarineEcoPredict berkontribusi langsung terhadap SDG 14 dengan:
+                      </p>
+                      <ul class="list-disc list-inside text-blue-600 dark:text-blue-400 text-sm space-y-1 ml-4">
+                        <li>Menyediakan alat prediksi untuk menilai kesehatan ekosistem laut</li>
+                        <li>Membantu identifikasi area dengan daya dukung tinggi untuk konservasi</li>
+                        <li>Mendukung pengelolaan perikanan berkelanjutan melalui data HSI</li>
+                        <li>Memfasilitasi monitoring kondisi ekosistem laut secara berkala</li>
+                        <li>Mengurangi dampak negatif aktivitas manusia terhadap ekosistem laut</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border-l-4 border-green-500">
+                  <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-green-100 dark:bg-green-500/20 flex items-center justify-center">
+                      <span class="text-2xl font-bold text-green-600 dark:text-green-400">13</span>
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="font-bold text-green-800 dark:text-green-300 text-lg mb-2">SDG 13: Climate Action</h4>
+                      <p class="text-green-700 dark:text-green-400 text-sm leading-relaxed mb-3">
+                        <strong>Mengambil tindakan mendesak untuk memerangi perubahan iklim dan dampaknya</strong>
+                      </p>
+                      <p class="text-green-600 dark:text-green-400 text-sm leading-relaxed">
+                        Platform ini membantu mengidentifikasi dampak perubahan iklim terhadap ekosistem laut melalui analisis parameter lingkungan seperti suhu permukaan laut. Data yang dihasilkan dapat digunakan untuk mengembangkan strategi adaptasi dan mitigasi perubahan iklim di sektor kelautan.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-6 border-l-4 border-purple-500">
+                  <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-purple-100 dark:bg-purple-500/20 flex items-center justify-center">
+                      <span class="text-2xl font-bold text-purple-600 dark:text-purple-400">15</span>
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="font-bold text-purple-800 dark:text-purple-300 text-lg mb-2">SDG 15: Life on Land</h4>
+                      <p class="text-purple-700 dark:text-purple-400 text-sm leading-relaxed mb-3">
+                        <strong>Melindungi, memulihkan dan mempromosikan penggunaan berkelanjutan ekosistem darat</strong>
+                      </p>
+                      <p class="text-purple-600 dark:text-purple-400 text-sm leading-relaxed">
+                        Meskipun fokus utama pada ekosistem laut, platform ini juga berkontribusi terhadap SDG 15 dengan menyediakan data yang dapat digunakan untuk memahami interaksi antara ekosistem darat dan laut, terutama dalam konteks konservasi keanekaragaman hayati.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-teal-50 dark:bg-teal-900/20 rounded-lg p-6 border-l-4 border-teal-500">
+                  <div class="flex items-start gap-4">
+                    <div class="flex-shrink-0 w-16 h-16 rounded-lg bg-teal-100 dark:bg-teal-500/20 flex items-center justify-center">
+                      <span class="text-2xl font-bold text-teal-600 dark:text-teal-400">17</span>
+                    </div>
+                    <div class="flex-1">
+                      <h4 class="font-bold text-teal-800 dark:text-teal-400 text-lg mb-2">SDG 17: Partnerships for the Goals</h4>
+                      <p class="text-teal-700 dark:text-teal-400 text-sm leading-relaxed mb-3">
+                        <strong>Memperkuat sarana pelaksanaan dan merevitalisasi kemitraan global untuk pembangunan berkelanjutan</strong>
+                      </p>
+                      <p class="text-teal-600 dark:text-teal-400 text-sm leading-relaxed">
+                        MarineEcoPredict mempromosikan kemitraan melalui aksesibilitas platform yang gratis dan terbuka. Platform ini memungkinkan kolaborasi antara peneliti, pemerintah, dan komunitas untuk bersama-sama melindungi ekosistem laut, mendukung pencapaian SDGs secara kolektif.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-gradient-to-r from-blue-50 to-green-50 dark:from-blue-900/20 dark:to-green-900/20 rounded-lg p-6 mt-6 border border-blue-200 dark:border-blue-800">
+                <p class="text-text-light dark:text-text-dark font-semibold text-lg mb-3 flex items-center gap-2">
+                  <i data-lucide="target" class="size-5 text-primary"></i>
+                  Komitmen terhadap SDGs
+                </p>
+                <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed text-sm">
+                  Setiap analisis yang dilakukan melalui MarineEcoPredict adalah langkah kecil menuju pencapaian SDGs. Dengan menyediakan data yang akurat dan dapat diakses, kami berharap dapat memberdayakan berbagai pihak untuk mengambil tindakan nyata dalam melindungi ekosistem laut, yang pada akhirnya akan berkontribusi terhadap pembangunan berkelanjutan di Indonesia dan dunia.
+                </p>
+              </div>
+
+              <div class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+                <p class="text-sm text-text-muted-light dark:text-text-muted-dark italic">
+                  Platform MarineEcoPredict tersedia secara gratis dan dapat diakses oleh siapa saja yang peduli terhadap masa depan ekosistem laut Indonesia.
+                </p>
+              </div>
             </div>
-          </details>
-        </div>
-      </div>
+          </div>
+        </article>
 
-      <h2 class="text-text-light-primary dark:text-text-dark-primary text-2xl font-bold leading-tight px-4 pb-3 pt-5">Meet the Team</h2>
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4">
-        <div class="flex flex-col gap-3 text-center items-center">
-          <div class="w-full max-w-[120px]">
-            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Headshot of Dr. Anya Sharma" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBSSC98aWxyTnBAhY7pFUD8h4mhrYq4XOy2Lh6ZW_P8fIpXXxcVcmMLYQgYv8azIR7uNLULcsu8PG3WQ4H8ncKdadVMKCtssjPzD5P7bVCY77mK6KOsGlL2kN99UsjrZsTWI9-4NEEpSyKfgQmKm3YcSfOHcOWLXDHpv1XxElZ8aVFMJmraUPM1WENyiwFAvFaMfjDqDqCpyGwz2gD_cnqFEC898prQ-hkE3xk1SeA1dKXQQ1EQfr7J0-50yU7ooeZ6SCSUbB8z9vW9");'></div>
+        <article class="card p-8 mb-12">
+          <div class="max-w-4xl mx-auto">
+            <div class="mb-6 pb-4 border-b border-black/10 dark:border-white/10">
+              <h2 class="text-3xl font-bold text-text-light dark:text-text-dark leading-tight flex items-center gap-3">
+                <i data-lucide="scale" class="size-8 text-primary"></i>
+                Korelasi Hukum Laut dengan Habitat Suitability Index
+              </h2>
+            </div>
+
+            <div class="prose prose-lg max-w-none dark:prose-invert">
+              <h3 class="text-2xl font-bold text-text-light dark:text-text-dark mt-6 mb-4">Kerangka Hukum Laut</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                Indonesia sebagai negara maritim terbesar di dunia memiliki kewajiban internasional dalam mengelola sumber daya laut. Beberapa kerangka hukum yang menjadi dasar:
+              </p>
+
+              <div class="space-y-4 mb-8">
+                <div class="card card--info p-4">
+                  <div class="flex items-start gap-3">
+                    <i data-lucide="book-open" class="size-6 text-primary flex-shrink-0 mt-1"></i>
+                    <div>
+                      <h4 class="font-bold text-text-light dark:text-text-dark mb-2">United Nations Convention on the Law of the Sea (UNCLOS 1982)</h4>
+                      <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        Konvensi internasional yang mengatur wilayah laut, hak pengelolaan sumber daya, dan kewajiban negara dalam melindungi lingkungan laut. Indonesia ratified UNCLOS tahun 1986.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card card--info p-4">
+                  <div class="flex items-start gap-3">
+                    <i data-lucide="book-open" class="size-6 text-primary flex-shrink-0 mt-1"></i>
+                    <div>
+                      <h4 class="font-bold text-text-light dark:text-text-dark mb-2">Convention on Biological Diversity (CBD)</h4>
+                      <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        Konvensi untuk menjaga keanekaragaman hayati laut dan ekosistem pesisir. Indonesia berkomitmen melindungi 10% laut Indonesia sebagai area konservasi.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card card--info p-4">
+                  <div class="flex items-start gap-3">
+                    <i data-lucide="book-open" class="size-6 text-primary flex-shrink-0 mt-1"></i>
+                    <div>
+                      <h4 class="font-bold text-text-light dark:text-text-dark mb-2">Hukum Nasional: Undang-Undang No. 6 Tahun 1996</h4>
+                      <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        UU tentang Perairan Perikanan Indonesia yang mengatur pengelolaan, konservasi, dan pemanfaatan berkelanjutan sumber daya perikanan di perairan Indonesia.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card card--info p-4">
+                  <div class="flex items-start gap-3">
+                    <i data-lucide="book-open" class="size-6 text-primary flex-shrink-0 mt-1"></i>
+                    <div>
+                      <h4 class="font-bold text-text-light dark:text-text-dark mb-2">Undang-Undang No. 32 Tahun 2009</h4>
+                      <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        UU Perlindungan dan Pengelolaan Lingkungan Hidup yang mewajibkan penilaian lingkungan dan monitoring kualitas air laut untuk menjaga kelestarian ekosistem.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 class="text-2xl font-bold text-text-light dark:text-text-dark mt-8 mb-4">Korelasi HSI dengan Hukum Laut</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                <strong class="text-text-light dark:text-text-dark">Habitat Suitability Index (HSI)</strong> yang digunakan dalam MarineEcoPredict memiliki korelasi langsung dengan berbagai prinsip hukum laut:
+              </p>
+
+              <div class="space-y-4 mb-8">
+                <div class="border-l-4 border-green-500 bg-green-50 dark:bg-green-900/10 p-4 rounded">
+                  <h4 class="font-bold text-text-light dark:text-text-dark mb-2 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="size-5 text-green-600"></i>
+                    Prinsip Pembangunan Berkelanjutan (Sustainable Development)
+                  </h4>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                    HSI membantu menentukan daya dukung maksimal ekosistem, memastikan aktivitas perikanan, pariwisata, dan industri lainnya dapat berjalan tanpa melampaui kapasitas pemulihan ekosistem. Ini sejalan dengan prinsip UNCLOS yang menekankan pemanfaatan berkelanjutan.
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/10 p-4 rounded">
+                  <h4 class="font-bold text-text-light dark:text-text-dark mb-2 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="size-5 text-blue-600"></i>
+                    Kewajiban Melindungi Lingkungan Laut (Marine Environmental Protection)
+                  </h4>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                    Monitoring HSI secara berkala memenuhi kewajiban negara dalam UU No. 32 Tahun 2009 untuk melindungi lingkungan laut. HSI Score yang menurun menjadi sinyal peringatan untuk intervasi pemerintah.
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-900/10 p-4 rounded">
+                  <h4 class="font-bold text-text-light dark:text-text-dark mb-2 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="size-5 text-purple-600"></i>
+                    Konservasi Keanekaragaman Hayati (Biodiversity Conservation)
+                  </h4>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                    HSI yang tinggi (≥0.75) mengindikasikan habitat optimal untuk berbagai spesies laut. Ini mendukung Target Aichi CBD untuk menjaga minimal 10% wilayah pesisir dalam status konservasi dan mencegah kepunahan spesies.
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-amber-500 bg-amber-50 dark:bg-amber-900/10 p-4 rounded">
+                  <h4 class="font-bold text-text-light dark:text-text-dark mb-2 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="size-5 text-amber-600"></i>
+                    Penentuan Kuota Penangkapan Ikan (Fisheries Management)
+                  </h4>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                    Dalam UU No. 6 Tahun 1996, penentuan kuota tangkapan harus mempertimbangkan daya dukung ekosistem. HSI memberikan data kuantitatif untuk menentukan kuota yang berkelanjutan dan mencegah overfishing.
+                  </p>
+                </div>
+
+                <div class="border-l-4 border-cyan-500 bg-cyan-50 dark:bg-cyan-900/10 p-4 rounded">
+                  <h4 class="font-bold text-text-light dark:text-text-dark mb-2 flex items-center gap-2">
+                    <i data-lucide="check-circle" class="size-5 text-cyan-600"></i>
+                    Tanggung Jawab Negara dalam Mitigasi Perubahan Iklim
+                  </h4>
+                  <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                    Dengan memonitor dampak perubahan parameter laut (SST, salinitas, kedalaman) terhadap HSI, Indonesia dapat mengidentifikasi area yang paling rentan terhadap perubahan iklim dan merencanakan adaptasi strategis sesuai komitmen Paris Agreement.
+                  </p>
+                </div>
+              </div>
+
+              <h3 class="text-2xl font-bold text-text-light dark:text-text-dark mt-8 mb-4">Implementasi Kebijakan Berbasis Data HSI</h3>
+              <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed mb-6">
+                MarineEcoPredict mendukung implementasi kebijakan hukum laut dengan memberikan data ilmiah yang akurat:
+              </p>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div class="card card--positive p-4">
+                  <div class="flex items-start gap-3">
+                    <i data-lucide="map-pin" class="size-6 text-secondary flex-shrink-0 mt-1"></i>
+                    <div>
+                      <h4 class="font-bold text-text-light dark:text-text-dark mb-1">Penzonasiaan Laut (Marine Zoning)</h4>
+                      <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        Menentukan zona konservasi, zona perikanan berkelanjutan, dan zona lain berdasarkan HSI Score untuk optimasi manfaat ekonomi dan ekologi.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card card--positive p-4">
+                  <div class="flex items-start gap-3">
+                    <i data-lucide="bar-chart-3" class="size-6 text-secondary flex-shrink-0 mt-1"></i>
+                    <div>
+                      <h4 class="font-bold text-text-light dark:text-text-dark mb-1">Monitoring Berkelanjutan</h4>
+                      <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        Tracking perubahan HSI seiring waktu untuk early warning system terhadap degradasi ekosistem dan trigger intervensi kebijakan.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card card--positive p-4">
+                  <div class="flex items-start gap-3">
+                    <i data-lucide="users" class="size-6 text-secondary flex-shrink-0 mt-1"></i>
+                    <div>
+                      <h4 class="font-bold text-text-light dark:text-text-dark mb-1">Stakeholder Engagement</h4>
+                      <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        Transparansi data memudahkan komunikasi antara pemerintah, nelayan, dan masyarakat untuk pengambilan keputusan bersama yang berkelanjutan.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card card--positive p-4">
+                  <div class="flex items-start gap-3">
+                    <i data-lucide="target" class="size-6 text-secondary flex-shrink-0 mt-1"></i>
+                    <div>
+                      <h4 class="font-bold text-text-light dark:text-text-dark mb-1">Target SDGs</h4>
+                      <p class="text-sm text-text-muted-light dark:text-text-muted-dark">
+                        Mendukung pencapaian SDG 14 (Life Below Water) dengan data ilmiah yang dapat diukur untuk tracking progress dan akuntabilitas.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-primary/10 dark:bg-primary/20 rounded-lg p-6 border-l-4 border-primary mt-8">
+                <h4 class="font-bold text-text-light dark:text-text-dark mb-3 flex items-center gap-2">
+                  <i data-lucide="lightbulb" class="size-6 text-primary"></i>
+                  Kesimpulan
+                </h4>
+                <p class="text-text-muted-light dark:text-text-muted-dark leading-relaxed">
+                  <strong class="text-text-light dark:text-text-dark">MarineEcoPredict</strong> bukan hanya alat analisis ekosistem, tetapi juga instrumen untuk mendukung implementasi hukum laut internasional dan nasional. Dengan menyediakan data HSI yang terukur, platform ini membantu memastikan bahwa setiap keputusan pengelolaan laut didasarkan pada bukti ilmiah yang solid, mendorong Indonesia menuju pembangunan perikanan dan pariwisata laut yang berkelanjutan sambil memenuhi kewajiban hukum internasional.
+                </p>
+              </div>
+            </div>
           </div>
-          <div>
-            <p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Dr. Anya Sharma</p>
-            <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Lead Scientist</p>
-          </div>
+        </article>
+
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold text-text-light dark:text-text-dark mb-2">Sumber Data</h2>
+          <p class="text-text-muted-light dark:text-text-muted-dark mb-6">Kami menggunakan data dari berbagai sumber terpercaya untuk analisis yang akurat</p>
         </div>
 
-        <div class="flex flex-col gap-3 text-center items-center">
-          <div class="w-full max-w-[120px]">
-            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Headshot of Ben Carter" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCk-zYZlao8gNv2907UVy3l7nOGr1ifBTixaS0HsuXhOnU3PkaNOqXnuaxN973IiW4GZsDdV24XGxxbg6AjQLs7vmxHW-7u4819ClnjnSFiRSEjwlIrJ4GQfG5PkGPytRGHkGpFQosKy5B__t8G7j_LIYg9vKiCNUKfGNbxqhjkz6Gj8Hcd7zANUc0UKP5wazST3er-6iNs1xCUO32P0GMIuRh8V-zzzm6_MfMvqk4GvTf0PBtNjZqJiPmv4CaA6Z-fuP4_EwhQgNmc");'></div>
-          </div>
-          <div>
-            <p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Ben Carter</p>
-            <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Data Engineer</p>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-3 text-center items-center">
-          <div class="w-full max-w-[120px]">
-            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Headshot of Chloe Davis" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDURKwSE2VNbU6pBKxOARbEoef99IovP7UGrFsL9IF-CaAQvOGQOUcjhbANnt752rASNJFI3sGwQk-GrtYwacfSpzvMNE4VOd37aPDc9GE87WVOBu9Z2bmjhsGK6GQGXNDDClVd4c6yTsXDU1-H2t5lG3aonUp9pfJPsSDRA-3UULq_za3sYVN41-eVcJRXwmCwJJigPlAYaZgewbwAmfuwqsjrTZwSKUb-EvO4G0UTL6vTzBaRCc1dLIjTbOuo5pHjMgMGCNgdGLwk");'></div>
-          </div>
-          <div>
-            <p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Chloe Davis</p>
-            <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">UX/UI Designer</p>
+        <div class="card p-8">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 items-center justify-items-center">
+            <a href="#" class="flex flex-col items-center gap-3 p-4 rounded-lg transition-all hover:bg-primary/5 dark:hover:bg-primary/10 hover:scale-105">
+              <img src="Logo Copernicus.jpg" class="h-12 object-contain dark:brightness-0 dark:invert" data-alt="Copernicus logo" />
+              <span class="text-sm text-text-muted-light dark:text-text-muted-dark font-medium">Copernicus</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-3 p-4 rounded-lg transition-all hover:bg-primary/5 dark:hover:bg-primary/10 hover:scale-105">
+              <img src="Logo BMKG.png" class="h-14 object-contain dark:brightness-0 dark:invert" data-alt="BMKG logo" />
+              <span class="text-sm text-text-muted-light dark:text-text-muted-dark font-medium">BMKG</span>
+            </a>
+            <a href="#" class="flex flex-col items-center gap-3 p-4 rounded-lg transition-all hover:bg-primary/5 dark:hover:bg-primary/10 hover:scale-105">
+              <img src="Logo NOAA.png" class="h-14 object-contain" data-alt="NASA OceanColor logo" />
+              <span class="text-sm text-text-muted-light dark:text-text-muted-dark font-medium">NASA OceanColor</span>
+            </a>
           </div>
         </div>
-
-        <div class="flex flex-col gap-3 text-center items-center">
-          <div class="w-full max-w-[120px]">
-            <div class="w-full bg-center bg-no-repeat aspect-square bg-cover rounded-full" data-alt="Headshot of Leo Martinez" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAy1IcxFtVKhZI8owViQSVDFHS5__Zf03BE62Zls4Sr5JXiHujNRjRdsIEXbZlXBPSABjY-ib4jRspHdJJnPAi14lui4EHBCIQMGeHiZwEEQgxZt4KHl7BOuSN1SdMXhFV98fiovbfCsJowHi5cMJgRWNBWVZfTSprlxLAZC4biWQ_Vj35eW8My5jz-Qs0BlaDPzz-tolCTi0LLXNeyhFmseFlU799ZfijzNwaV1SZugTlbCb3HDbXcNJrCXaC1cQSJq2-372fbc4qq");'></div>
-          </div>
-          <div>
-            <p class="text-text-light-primary dark:text-text-dark-primary text-base font-medium leading-normal">Leo Martinez</p>
-            <p class="text-text-light-secondary dark:text-text-dark-secondary text-sm font-normal leading-normal">Marine Biologist</p>
-          </div>
-        </div>
-      </div>
-
-      <h2 class="text-text-light-primary dark:text-text-dark-primary text-2xl font-bold leading-tight px-4 pb-3 pt-5">Data Sources</h2>
-      <div class="grid grid-cols-3 gap-4 p-4 items-center">
-        <a href="#" class="flex justify-center p-2 rounded-lg transition-colors hover:bg-light-accent/50">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQWbJprQqS7t_ZphKLgxCYYIGF3sJU6rDDPrM2XQhcoe9mEQzTlcEK4zQvM1JsAlp9px2aeatA1YQN3P0ILDumltgCIlbu8GHtDXFJvL3Ndbodsdy87MBJMMd6w1eR4e6P2q_F3Gmcd9fL4oHKmuZplslVy02v9nTrDvT41WpVzvuckcODs3UYEX9n1z2Nj7ufkUl_UxZYf9rP79pLfM_tsokzLSY4oBcrnysR0qiFdzGtpB0AXS8VmvXeYp80nGXqR2jOsr1polTG" class="h-10 object-contain dark:brightness-0 dark:invert" data-alt="Copernicus logo" />
-        </a>
-        <a href="#" class="flex justify-center p-2 rounded-lg transition-colors hover:bg-light-accent/50">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXcmSdzVKZBeuzLD1DcEqT36lTjp7XZt878SuoIXtg4X0RdweZ7eke2I2D1IFENI0C_b6RPgbbWxTr3t_hgDY4m6qU3EZTgykmC0XXxIN4HRJW5S5BZxrlwJCsuBorpW1ER5Rs2dGXK0v-0rpXbioGzcsIcPjzW_7ya-VnvuByiQtR3qbsRB-i_EvhzyaYMuTrv5yjuFlcKIf_TiA20s4nVj0aPE3DMnX0X-e0Tw9_ja1CN3NyycE841v5xbHPCHxZn26wdaCzRYFa" class="h-12 object-contain dark:brightness-0 dark:invert" data-alt="BMKG logo" />
-        </a>
-        <a href="#" class="flex justify-center p-2 rounded-lg transition-colors hover:bg-light-accent/50">
-          <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfGl2BNoTy7y7gIA1bOfX0pIoFQfY3r50ZfzXEXg4tvOquSp_SPLCMG6pkG_-JuEbg52lAucLOPs-kG52wsXDhiP7ndeJX1_TmuYJSFTYtBkSDo9mLF6aa6vf3DiF7Gd1NUjmulPQ8rfZVtMQtBXU0CPoKWWUYyshjR2ZT8e2YJxD3HekxTSdWsSY9ibqU0I_V8xGaCP7Z_5YxsHyoc_wubPoBIpqFRReWmF8xzGvCk9ohg3ceRTe7vhPZAT68MInx_M9mCMhXAe_q" class="h-12 object-contain" data-alt="NASA OceanColor logo" />
-        </a>
       </div>
     </main>
 
-    <footer class="bg-light-accent dark:bg-gray-900 mt-10">
-      <div class="container mx-auto px-4 py-8">
-        <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-6 md:space-y-0">
-          <div class="flex flex-col items-center md:items-start">
-            <div class="flex items-center gap-2 mb-2">
-              <svg xmlns="http://www.w3.org/2000/svg" class="text-primary h-6 w-6" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 12c-3 0-5 2.5-5 5s2.5 5 5 5c2.5 0 5-2.5 5-5s-2.5-5-5-5z"></path><path d="M12 2c3.5 0 6 3 6 6s-2.5 6-6 6c-3.5 0-6-3-6-6s2.5-6 6-6z"></path></svg>
-              <span class="text-lg font-bold text-text-light-primary dark:text-text-dark-primary">MarineEcoPredict</span>
+    <footer class="w-full mt-16 bg-white dark:bg-gray-900 border-t border-black/10 dark:border-white/10">
+      <div class="container mx-auto max-w-screen-xl p-4 py-6 lg:py-8">
+        <div class="text-center mb-8">
+          <a href="index.html" class="flex items-center justify-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="lucide lucide-waves text-primary h-8 w-8" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path><path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1"></path></svg>
+            <span class="text-2xl font-semibold text-text-light dark:text-white">MarineEcoPredict</span>
+          </a>
+          <p class="text-sm text-text-muted-light dark:text-text-muted-dark">Memprediksi masa depan lautan kami melalui analisis ekosistem laut tingkat lanjut.</p>
+        </div>
+        <div class="flex justify-center mb-8">
+          <div class="grid grid-cols-2 gap-12 sm:gap-20">
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Sumber Daya</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li><a href="help.html" class="hover:underline">Dokumentasi</a></li>
+              </ul>
             </div>
-            <p class="text-sm text-text-light-secondary dark:text-text-dark-secondary">Predicting the future of our oceans.</p>
-          </div>
-
-          <div class="flex justify-center space-x-4">
-            <a href="#" class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-secondary">
-              <i data-lucide="twitter" class="h-5 w-5"></i>
-              <span class="sr-only">Twitter</span>
-            </a>
-            <a href="#" class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-secondary">
-              <i data-lucide="facebook" class="h-5 w-5"></i>
-              <span class="sr-only">Facebook</span>
-            </a>
-            <a href="#" class="text-text-light-secondary hover:text-primary dark:text-text-dark-secondary dark:hover:text-secondary">
-              <i data-lucide="instagram" class="h-5 w-5"></i>
-              <span class="sr-only">Instagram</span>
-            </a>
+            <div class="text-center">
+              <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Ikuti Kami</h2>
+              <ul class="text-text-muted-light dark:text-text-muted-dark font-medium">
+                <li><a href="https://github.com/faiqmuammar4" class="hover:underline">Github</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-
-        <div class="mt-8 pt-6 border-t border-primary/20 dark:border-secondary/20 text-center text-xs text-text-light-secondary dark:text-text-dark-secondary">
-          <p>© 2024 MarineEcoPredict. All Rights Reserved.</p>
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+        <div class="text-center">
+          <span class="text-sm text-text-muted-light dark:text-text-muted-dark">© 2024 MarineEcoPredict™. All Rights Reserved.</span>
         </div>
       </div>
     </footer>
@@ -256,6 +653,13 @@
     })();
 
     lucide.createIcons();
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
   </script>
 </body>
 </html>

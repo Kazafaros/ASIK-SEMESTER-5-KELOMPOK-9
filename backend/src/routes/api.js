@@ -109,5 +109,78 @@ router.get('/health', (req, res) => {
     });
 });
 
+/**
+ * GET /api/biogeography/data?year=2024&month=1
+ * Get environmental parameters for biogeography prediction
+ * Returns: HSI, SST, CHL, SAL from real GeoJSON data
+ */
+router.get('/biogeography/data', async (req, res) => {
+    try {
+        const { year = 2024, month = 1, lat, lon, radius = 0.5 } = req.query;
+
+        const yearNum = parseInt(year, 10);
+        const monthNum = parseInt(month, 10);
+
+        // Get GeoJSON data
+        const geojson = await geojsonService.getHSIData(yearNum, monthNum);
+
+        if (!geojson || !geojson.features) {
+            return res.status(404).json({
+                success: false,
+                error: 'Data not found'
+            });
+        }
+
+        // Calculate statistics from all features
+        const stats = {
+            hsi: [],
+            sst: [],
+            chlor_a: [],
+            salinity: [],
+            depth: []
+        };
+
+        geojson.features.forEach(feature => {
+            if (feature.properties) {
+                if (feature.properties.hsi !== undefined) stats.hsi.push(feature.properties.hsi);
+                if (feature.properties.sst !== undefined) stats.sst.push(feature.properties.sst);
+                if (feature.properties.chlor_a !== undefined) stats.chlor_a.push(feature.properties.chlor_a);
+                if (feature.properties.salinity !== undefined) stats.salinity.push(feature.properties.salinity);
+                if (feature.properties.depth !== undefined) stats.depth.push(feature.properties.depth);
+            }
+        });
+
+        // Calculate averages
+        const calculateStats = (arr) => {
+            if (arr.length === 0) return { mean: 0, min: 0, max: 0 };
+            const mean = arr.reduce((a, b) => a + b, 0) / arr.length;
+            const min = Math.min(...arr);
+            const max = Math.max(...arr);
+            return { mean: parseFloat(mean.toFixed(2)), min: parseFloat(min.toFixed(2)), max: parseFloat(max.toFixed(2)) };
+        };
+
+        res.json({
+            success: true,
+            data: {
+                timestamp: new Date().toISOString(),
+                yearMonth: `${yearNum}-${String(monthNum).padStart(2, '0')}`,
+                parameters: {
+                    hsi: calculateStats(stats.hsi),
+                    sst: calculateStats(stats.sst),
+                    chlor_a: calculateStats(stats.chlor_a),
+                    salinity: calculateStats(stats.salinity),
+                    depth: calculateStats(stats.depth)
+                },
+                dataPoints: geojson.features.length
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 module.exports = router;
 

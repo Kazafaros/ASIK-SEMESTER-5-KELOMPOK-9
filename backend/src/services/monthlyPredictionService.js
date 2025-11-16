@@ -6,45 +6,87 @@ const path = require('path');
  */
 class MonthlyPredictionService {
     constructor() {
-        this.predictionsDir = path.join(__dirname, '../../../data/predictions/monthly_2025');
-        this.metadataFile = path.join(this.predictionsDir, 'metadata.json');
+        this.basePredictionsDir = path.join(__dirname, '../../../data/predictions');
         this.metadata = null;
-        this.predictions = {};
+        this.predictions = {}; // {year: {month: filepath}}
+        this.allMetadata = {}; // {year: metadata}
+        this.availableYears = [];
     }
 
     /**
-     * Initialize service - load metadata dan predictions
+     * Initialize service - load metadata dan predictions for all available years
      */
     async initialize() {
         try {
             // Check if predictions directory exists
-            if (!await fs.pathExists(this.predictionsDir)) {
-                console.warn(`⚠️  Predictions directory not found: ${this.predictionsDir}`);
+            if (!await fs.pathExists(this.basePredictionsDir)) {
+                console.warn(`⚠️  Predictions directory not found: ${this.basePredictionsDir}`);
                 return false;
             }
 
-            // Load metadata
-            if (await fs.pathExists(this.metadataFile)) {
-                this.metadata = await fs.readJson(this.metadataFile);
-                console.log(`✅ Monthly prediction metadata loaded`);
+            // Find all monthly_YYYY directories
+            const dirs = await fs.readdir(this.basePredictionsDir);
+            const monthlyDirs = dirs.filter(d => d.match(/^monthly_\d{4}$/));
+            
+            if (monthlyDirs.length === 0) {
+                console.warn(`⚠️  No monthly prediction directories found in ${this.basePredictionsDir}`);
+                return false;
             }
 
-            // Load available predictions
-            const files = await fs.readdir(this.predictionsDir);
-            const geojsonFiles = files.filter(f => f.endsWith('.geojson'));
-            
-            for (const file of geojsonFiles) {
-                const match = file.match(/hsi_prediction_(\d{4})_(\d{2})\.geojson/);
-                if (match) {
-                    const year = parseInt(match[1]);
-                    const month = parseInt(match[2]);
-                    const key = `${year}-${String(month).padStart(2, '0')}`;
-                    const filePath = path.join(this.predictionsDir, file);
-                    this.predictions[key] = filePath;
+            // Load each year's predictions
+            for (const dir of monthlyDirs) {
+                const yearMatch = dir.match(/monthly_(\d{4})/);
+                if (!yearMatch) continue;
+
+                const year = parseInt(yearMatch[1]);
+                const yearDir = path.join(this.basePredictionsDir, dir);
+                const metadataFile = path.join(yearDir, 'metadata.json');
+
+                // Load metadata if available
+                if (await fs.pathExists(metadataFile)) {
+                    const metadata = await fs.readJson(metadataFile);
+                    this.allMetadata[year] = metadata;
+                }
+
+                // Load available predictions for this year
+                const yearPredictions = {};
+                const files = await fs.readdir(yearDir);
+                const geojsonFiles = files.filter(f => f.endsWith('.geojson'));
+
+                for (const file of geojsonFiles) {
+                    const match = file.match(/hsi_prediction_(\d{4})_(\d{2})\.geojson/);
+                    if (match) {
+                        const predictYear = parseInt(match[1]);
+                        const month = parseInt(match[2]);
+                        
+                        if (predictYear === year) {
+                            yearPredictions[month] = path.join(yearDir, file);
+                        }
+                    }
+                }
+
+                if (Object.keys(yearPredictions).length > 0) {
+                    this.predictions[year] = yearPredictions;
+                    this.availableYears.push(year);
                 }
             }
 
-            console.log(`✅ Loaded ${Object.keys(this.predictions).length} monthly predictions`);
+            this.availableYears.sort((a, b) => a - b);
+
+            // Set metadata to the first available year (or latest)
+            if (this.availableYears.length > 0) {
+                const lastYear = this.availableYears[this.availableYears.length - 1];
+                this.metadata = this.allMetadata[lastYear] || {};
+            }
+
+            console.log(`✅ Monthly prediction service initialized`);
+            console.log(`   Available years: ${this.availableYears.join(', ')}`);
+            
+            for (const year of this.availableYears) {
+                const monthCount = Object.keys(this.predictions[year]).length;
+                console.log(`   ${year}: ${monthCount} months loaded`);
+            }
+
             return true;
         } catch (error) {
             console.error('Error initializing MonthlyPredictionService:', error);
@@ -66,21 +108,41 @@ class MonthlyPredictionService {
      * Get available months
      */
     async getAvailableMonths() {
-        if (!this.metadata) {
+        if (this.availableYears.length === 0) {
             throw new Error('Monthly predictions not initialized');
         }
 
+        // Return months for all available years
+        const monthsByYear = {};
+        
+        for (const year of this.availableYears) {
+            const yearMonths = [];
+            const monthPaths = this.predictions[year] || {};
+            
+            for (const month of Object.keys(monthPaths).map(Number).sort((a, b) => a - b)) {
+                yearMonths.push({
+                    year: year,
+                    month: month,
+                    key: `${year}-${String(month).padStart(2, '0')}`
+                });
+            }
+            
+            monthsByYear[year] = yearMonths;
+        }
+
+        // For backward compatibility, also return old format
+        const firstYear = this.availableYears[0];
+        const oldFormatMonths = monthsByYear[firstYear] || [];
+
         return {
-            year: this.metadata.prediction_year,
-            months: Object.keys(this.predictions).map(key => {
-                const [year, month] = key.split('-');
-                return {
-                    year: parseInt(year),
-                    month: parseInt(month),
-                    key: key
-                };
-            }).sort((a, b) => a.month - b.month),
-            total: Object.keys(this.predictions).length,
+            // New format for multi-year
+            available_years: this.availableYears,
+            months_by_year: monthsByYear,
+            total_months: Object.values(this.predictions).reduce((sum, months) => sum + Object.keys(months).length, 0),
+            // Old format for backward compatibility
+            year: firstYear,
+            months: oldFormatMonths,
+            total: oldFormatMonths.length,
             model_info: {
                 type: this.metadata.model_type,
                 r2_score: this.metadata.regression_model?.r2_score,
@@ -93,14 +155,17 @@ class MonthlyPredictionService {
      * Get prediction for specific month
      */
     async getPrediction(year, month) {
-        const key = `${year}-${String(month).padStart(2, '0')}`;
-        
-        if (!this.predictions[key]) {
-            throw new Error(`Prediction not found for ${key}`);
+        if (!this.predictions[year]) {
+            throw new Error(`No predictions available for year ${year}`);
         }
 
-        const filePath = this.predictions[key];
-        const geojson = await fs.readJson(filePath);
+        const monthPath = this.predictions[year][month];
+        if (!monthPath) {
+            throw new Error(`Prediction not found for ${year}-${String(month).padStart(2, '0')}`);
+        }
+
+        const geojson = await fs.readJson(monthPath);
+        const yearMetadata = this.allMetadata[year] || {};
         
         return {
             year: year,
@@ -109,7 +174,7 @@ class MonthlyPredictionService {
             data: geojson,
             metadata: {
                 features_count: geojson.features.length,
-                model_type: this.metadata.model_type
+                model_type: yearMetadata.model_type
             }
         };
     }
@@ -181,8 +246,12 @@ class MonthlyPredictionService {
      * Get all statistics for a year
      */
     async getYearlyStats(year) {
+        if (!this.predictions[year]) {
+            throw new Error(`No predictions available for year ${year}`);
+        }
+
         const months = await this.getAvailableMonths();
-        const yearMonths = months.months.filter(m => m.year === year);
+        const yearMonths = months.months_by_year[year] || [];
         
         const stats = {};
         for (const m of yearMonths) {
@@ -237,8 +306,12 @@ class MonthlyPredictionService {
      * Get trend for a location across all months
      */
     async getTrendAtPoint(lat, lon, year) {
+        if (!this.predictions[year]) {
+            throw new Error(`No predictions available for year ${year}`);
+        }
+
         const months = await this.getAvailableMonths();
-        const yearMonths = months.months.filter(m => m.year === year);
+        const yearMonths = months.months_by_year[year] || [];
         
         const trend = [];
         for (const m of yearMonths) {
