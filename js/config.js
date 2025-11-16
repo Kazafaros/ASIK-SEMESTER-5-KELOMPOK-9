@@ -1,6 +1,6 @@
-// API Configuration
+// API Configuration - Dynamically get base URL from current location
 const API_CONFIG = {
-    baseURL: 'http://localhost:3000/api',
+    baseURL: `${window.location.protocol}//${window.location.host}/api`,
     endpoints: {
         health: '/health',
         available: '/hsi/available',

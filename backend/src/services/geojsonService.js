@@ -3,13 +3,15 @@ const path = require('path');
 
 class GeoJSONService {
     constructor(dataDir = 'data/geojson') {
-        // Resolve path relative to project root (Asoy/)
-        // __dirname is backend/src/services/
-        // Go up 3 levels: services -> src -> backend -> Asoy/
+        // Resolve path relative to project root
+        // __dirname is backend/src/services/ (e.g., D:\...\backend\src\services)
+        // Go up 3 levels: services -> src -> backend -> root/
         // Then to data/geojson
         const projectRoot = path.resolve(__dirname, '../../..');
-        this.dataDir = path.join(projectRoot, dataDir);
+        this.dataDir = path.join(projectRoot, 'data', 'geojson');
         this.metadataPath = path.join(this.dataDir, 'metadata.json');
+        
+        console.log(`📁 Data directory: ${this.dataDir}`);
     }
 
     /**

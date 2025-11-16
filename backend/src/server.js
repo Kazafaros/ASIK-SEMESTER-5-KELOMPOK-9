@@ -13,6 +13,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static files from parent directory (frontend)
+app.use(express.static(path.join(__dirname, '../../')));
+
 // Request logging
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
@@ -23,16 +26,20 @@ app.use((req, res, next) => {
 app.use('/api', apiRoutes);
 app.use('/api/monthly-predictions', monthlyPredictionsRoutes);
 
-// Root endpoint
+// Root endpoint - serve index.html for SPA routing
 app.get('/', (req, res) => {
-    res.json({
-        message: 'HSI API Server',
-        version: '1.0.0',
-        endpoints: {
-            health: '/api/health',
-            available: '/api/hsi/available',
-            hsi: '/api/hsi?year=2021&month=1',
-            metadata: '/api/metadata'
+    res.sendFile(path.join(__dirname, '../../index.html'));
+});
+
+// SPA fallback - serve HTML files
+app.get(/^\/[a-zA-Z0-9\-_]+\.html$/, (req, res) => {
+    const filePath = path.join(__dirname, '../../', req.path);
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            res.status(404).json({
+                success: false,
+                error: 'Page not found'
+            });
         }
     });
 });
@@ -65,24 +72,15 @@ async function startServer() {
         console.log(`✅ Loaded metadata: ${metadata.total_months} months available`);
         console.log(`   Date range: ${metadata.data_range.start} to ${metadata.data_range.end}`);
 
-        app.listen(PORT, async () => {
+        app.listen(PORT, '0.0.0.0', () => {
             console.log(`\n🚀 Server running on http://localhost:${PORT}`);
+            console.log(`🌐 Website: http://localhost:${PORT}/index.html`);
             console.log(`📊 API endpoints available:`);
             console.log(`   GET /api/health`);
             console.log(`   GET /api/hsi/available`);
             console.log(`   GET /api/hsi?year=2021&month=1`);
             console.log(`   GET /api/metadata`);
-            
-            // Open index.html in default browser
-            try {
-                const { default: open } = await import('open');
-                const indexPath = path.join(__dirname, '../../index.html');
-                console.log(`\n🌐 Opening browser to index.html...`);
-                await open(`file://${indexPath}`);
-            } catch (err) {
-                const indexPath = path.join(__dirname, '../../index.html');
-                console.log(`⚠️  Could not open browser automatically. Please open: file://${indexPath}`);
-            }
+            console.log(`\n✅ Static files being served from frontend directory`);
         });
     } catch (error) {
         console.error('❌ Failed to start server:', error.message);

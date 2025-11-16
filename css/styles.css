@@ -229,7 +229,21 @@ input[data-invalid="true"] {
 .dark .footer-link { color: var(--muted-dark); }
 
 /* Legend box */
-.legend-box { background: rgba(255,255,255,0.9); border-radius: .75rem; padding: .6rem; border: 1px solid var(--border); }
+.legend-box { 
+  background: rgba(255,255,255,0.9); 
+  border-radius: .75rem; 
+  padding: .5rem; 
+  border: 1px solid var(--border); 
+  font-size: 0.75rem;
+}
+
+@media (min-width: 768px) {
+  .legend-box {
+    padding: .6rem;
+    font-size: 0.875rem;
+  }
+}
+
 .dark .legend-box { background: rgba(16,29,34,0.9); border-color: rgba(255,255,255,0.06); }
 
 /* Card modifiers & stat helpers */
@@ -253,7 +267,21 @@ input[data-invalid="true"] {
 .dark .info-panel { background: rgba(0,119,182,0.02); border-color: rgba(0,180,216,0.06); }
 
 /* Form controls */
-.form-control { padding: 0.5rem 0.75rem; border-radius: 0.5rem; border: 1px solid var(--border); background: white; color: var(--text-light); font-size: 0.875rem; }
+.form-control { 
+  padding: 0.5rem 0.75rem; 
+  border-radius: 0.5rem; 
+  border: 1px solid var(--border); 
+  background: white; 
+  color: var(--text-light); 
+  font-size: 0.875rem;
+  min-height: 44px; /* Better touch target for mobile */
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .form-control {
+    min-height: auto;
+  }
+}
 .dark .form-control { background: var(--bg-dark); border-color: rgba(255,255,255,0.06); color: var(--text-dark); }
 .form-control:focus { outline: none; box-shadow: 0 0 0 2px rgba(0, 119, 182, 0.2); }
 .dark .form-control:focus { box-shadow: 0 0 0 2px rgba(0, 180, 216, 0.2); }
@@ -262,23 +290,37 @@ input[data-invalid="true"] {
 .analysis-map-container {
   position: relative;
   width: 100%;
-  height: 400px; /* Original height for analysis page */
+  height: 300px; /* Mobile height */
   border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding-bottom: 30px;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .analysis-map-container {
+    height: 400px;
+    padding-bottom: 30px;
+  }
 }
 
 .index-map-container {
   position: relative;
   width: 100%;
-  height: 550px; /* Medium size for home page - better popup visibility */
+  height: 300px; /* Mobile height */
   border-radius: 0.75rem;
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  padding-bottom: 40px;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .index-map-container {
+    height: 550px;
+    padding-bottom: 40px;
+  }
 }
 
 .dark .analysis-map-container,
@@ -309,8 +351,14 @@ input[data-invalid="true"] {
 .chart-container {
   position: relative;
   width: 100%;
-  height: 300px;
+  height: 200px; /* Reduced for mobile */
   margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .chart-container {
+    height: 300px;
+  }
 }
 
 .chart-container canvas {
@@ -318,11 +366,23 @@ input[data-invalid="true"] {
 }
 
 .chart-container-sm {
-  height: 200px;
+  height: 150px; /* Reduced for mobile */
+}
+
+@media (min-width: 768px) {
+  .chart-container-sm {
+    height: 200px;
+  }
 }
 
 .chart-container-lg {
-  height: 400px;
+  height: 250px; /* Reduced for mobile */
+}
+
+@media (min-width: 768px) {
+  .chart-container-lg {
+    height: 400px;
+  }
 }
 
 /* Prediction statistics grid */
@@ -336,16 +396,29 @@ input[data-invalid="true"] {
 /* Compact map legend for analysis page */
 .analysis-legend {
   position: absolute;
-  top: 1rem;
+  bottom: 1rem; /* Move to bottom on mobile to avoid overlapping header */
   right: 1rem;
   z-index: 1000;
-  min-width: 160px;
-  max-width: 200px;
+  min-width: 130px;
+  max-width: 150px;
   background: rgba(255, 255, 255, 0.95);
   border-radius: 0.75rem;
-  padding: 0.75rem;
+  padding: 0.5rem;
   border: 1px solid var(--border);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-size: 0.7rem;
+}
+
+/* Responsive legend for tablet+ */
+@media (min-width: 768px) {
+  .analysis-legend {
+    top: 1rem;
+    bottom: auto;
+    min-width: 160px;
+    max-width: 200px;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
 }
 
 .dark .analysis-legend {
